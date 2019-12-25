@@ -1,0 +1,19 @@
+- name: Install haproxy
+  yum:
+    name: haproxy
+    state: present
+  become: True
+
+- name: Start haproxy
+  service:
+    name: haproxy
+    state: started
+  become: True
+
+- name: Add OpenShift nodes to the load balancer
+  blockinfile:
+    block: '{{ lookup("template", "haproxy.cfg") }}'
+    dest: /etc/haproxy/haproxy.cfg
+    backup: True
+  notify: Restart haproxy
+  become: True

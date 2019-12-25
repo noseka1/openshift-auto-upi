@@ -1,0 +1,9 @@
+- name: Add OpenShift DNS records
+  template:
+    src: '{{ item.src }}'
+    dest:  '{{ item.dest }}'
+  with_items:
+    - { src: dnsmasq.openshift_install.dns.conf, dest: /etc/dnsmasq.d }
+    - { src: dnsmasq.openshift_install.addnhosts, dest: /etc }
+  notify: Restart dnsmasq
+  become: True

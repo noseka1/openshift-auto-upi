@@ -1,0 +1,66 @@
+- set_fact:
+    query_server: ''
+
+- set_fact:
+    query_server: '@{{ dns_verify.query_server }}'
+  when: dns_verify.query_server is defined
+
+- name: Look up A records
+  set_fact:
+    a_records: >
+      {{ a_records | default({}) | combine({ item: query('dig', '{{ query_server }}', '{{ item }}') }) }}
+  loop: >
+    {{
+      (
+        (openshift_cluster_hosts | json_query('[*].hostname')) +
+        (openshift_cluster_hosts | json_query('[*].etcd_hostname')) +
+        ['api', 'api-int', '*.apps']
+      )
+      | map('regex_replace', '^(.*)$', '\1.{{ openshift_install_config.cluster_domain }}')
+      | list
+    }}
+
+- name: Look up PTR records
+  set_fact:
+    ptr_records: >
+      {{ ptr_records | default({}) | combine({ item: query('dig', '{{ query_server }}', '{{ item }}/PTR') }) }}
+  loop: >
+    {{
+      (
+        (openshift_cluster_hosts | json_query("[?role=='master'].ipaddr")) +
+        (openshift_cluster_hosts | json_query("[?role=='infra'].ipaddr")) +
+        (openshift_cluster_hosts | json_query("[?role=='app'].ipaddr"))
+      )
+      | list
+    }}
+
+- name: Look up SRV records
+  set_fact:
+    srv_records: >
+      {{ srv_records | default({}) | combine({ item: query('dig', '{{ query_server }}', '{{ item }}/SRV') }) }}
+  loop:
+    - '_etcd-server-ssl._tcp.{{ openshift_install_config.cluster_domain }}'
+
+- set_fact:
+    msg: |
+      *** DNS INFO ***
+
+      A Records:
+
+      {% for item in a_records %}
+      {{ "%64s"| format(item) }} = {{ a_records[item] }}
+      {% endfor %}
+
+      PTR Records:
+
+      {% for item in ptr_records %}
+      {{ "%15s"| format(item) }} = {{ ptr_records[item] }}
+      {% endfor %}
+
+      SRV Records:
+
+      {% for item in srv_records %}
+      {{ "%64s"| format(item) }} = {{ srv_records[item] }}
+      {% endfor %}
+
+- debug: msg="{{ msg.split('\n') }}"

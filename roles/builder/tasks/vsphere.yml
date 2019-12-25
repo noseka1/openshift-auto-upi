@@ -1,0 +1,5 @@
+- name: Install vSphere Python SDK used by Ansible to talk to vSphere
+  yum:
+    name: python-pyvmomi
+    state: present
+  become: True

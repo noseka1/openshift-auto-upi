@@ -1,0 +1,21 @@
+- name: Install dnsmasq server
+  yum:
+    name: dnsmasq
+    state: present
+  become: True
+
+- name: Enable dnsmasq on boot and start it
+  service:
+    name: dnsmasq
+    state: started
+    enabled: True
+  become: True
+
+- name: Dnsmasq common configuration
+  template:
+    src: '{{ item.src }}'
+    dest:  '{{ item.dest }}'
+  with_items:
+    - { src: dnsmasq.openshift_install.common.conf, dest: /etc/dnsmasq.d }
+  notify: Restart dnsmasq
+  become: True

@@ -1,0 +1,7 @@
+openshift_client_version: 4.2.0
+
+openshift_client:
+  version: '{{ openshift_client_version }}'
+  archive_url: 'https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{{ openshift_client_version }}/openshift-client-linux-{{ openshift_client_version }}.tar.gz'
+  archive_name: 'openshift-client-linux-{{ openshift_client_version }}.tar.gz'
+  archive_sha256: 1a1870f0b8961df8d7826fc9560e7f4c431fb07c9fda26efdff1a01e607cfe3a

@@ -1,0 +1,50 @@
+- name: Create directory {{ builder.install_dir }}
+  file:
+    path: '{{ builder.install_dir }}'
+    state: directory
+
+- name: Create directory {{ builder.install_cluster_dir }}
+  file:
+    path: '{{ builder.install_cluster_dir }}'
+    state: directory
+
+- name: Create directory {{ builder.install_bin_dir }}
+  file:
+    path: '{{ builder.install_bin_dir }}'
+    state: directory
+
+- name: Download openshift-install archive
+  include_tasks: download_file.yml
+  vars:
+    name: openshift-install
+    url: '{{ openshift_installer.archive_url }}'
+    dest: '{{ builder.install_bin_dir }}/{{ openshift_installer.archive_name }}'
+    checksum: '{{ openshift_installer.archive_sha256 }}'
+
+- name: Extract openshift-install
+  unarchive:
+    src: '{{ builder.install_bin_dir }}/{{ openshift_installer.archive_name }}'
+    dest: '{{ builder.install_bin_dir }}'
+    creates: '{{ builder.install_bin_dir }}/openshift-install'
+
+- name: Download oc client archive
+  include_tasks: download_file.yml
+  vars:
+    name: oc client
+    url: '{{ openshift_client.archive_url }}'
+    dest: '{{ builder.install_bin_dir }}/{{ openshift_client.archive_name }}'
+    checksum: '{{ openshift_client.archive_sha256 }}'
+
+- name: Extract oc client
+  unarchive:
+    src: '{{ builder.install_bin_dir }}/{{ openshift_client.archive_name }}'
+    dest: '{{ builder.install_bin_dir }}'
+    creates: '{{ builder.install_bin_dir }}/oc'
+
+- name: Create a web dir '{{ builder.web_cluster_dir }}'
+  file:
+    path: '{{ builder.web_cluster_dir }}'
+    owner: '{{ ansible_real_user_id | int }}'
+    group: '{{ ansible_real_group_id | int }}'
+    state: directory
+  become: True

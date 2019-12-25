@@ -1,0 +1,4 @@
+- hosts: localhost
+  tasks:
+    - include_role:
+        name: openshift_vsphere

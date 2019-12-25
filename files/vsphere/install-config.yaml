@@ -1,0 +1,22 @@
+# {{ ansible_managed }}
+apiVersion: v1
+baseDomain: {{ openshift_install_config.base_domain }}
+compute:
+- hyperthreading: Enabled
+  name: worker
+  replicas: {{ openshift_install_config.worker_replicas }}
+controlPlane:
+  hyperthreading: Enabled
+  name: master
+  replicas: {{ openshift_install_config.master_replicas }}
+metadata:
+  name: {{ openshift_install_config.name }}
+platform:
+  vsphere:
+    vcenter: {{ vsphere.vcenter_hostname }}
+    username: {{ vsphere.vcenter_username  }}
+    password: {{ vsphere.vcenter_password  }}
+    datacenter: {{ vsphere.datacenter_name }}
+    defaultDatastore: {{ vsphere.datastore_name }}
+pullSecret: '{{ openshift_install_config.pull_secret }}'
+sshKey: '{{ openshift_install_config.ssh_key }}'

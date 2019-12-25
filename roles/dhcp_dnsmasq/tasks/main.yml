@@ -1,0 +1,9 @@
+- name: Add OpenShift DHCP records
+  template:
+    src: '{{ item.src }}'
+    dest:  '{{ item.dest }}'
+  with_items:
+    - { src: dnsmasq.openshift_install.dhcp.conf, dest: /etc/dnsmasq.d }
+    - { src: dnsmasq.openshift_install.hostsfile, dest: /etc }
+  notify: Restart dnsmasq
+  become: True

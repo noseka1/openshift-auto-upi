@@ -1,0 +1,18 @@
+{
+  "ignition": {
+    "config": {
+      "append": [
+        {
+          "source": "{{ ignition_url_prefix }}/bootstrap.ign",
+          "verification": {}
+        }
+      ]
+    },
+    "timeouts": {},
+    "version": "2.1.0"
+  },
+  "networkd": {},
+  "passwd": {},
+  "storage": {},
+  "systemd": {}
+}

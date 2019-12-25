@@ -1,0 +1,12 @@
+- name: Install Apache httpd web server
+  yum:
+    name: httpd
+    state: present
+  become: True
+
+- name: Enable httpd server on boot and start it
+  service:
+    name: httpd
+    state: started
+    enabled: True
+  become: yes

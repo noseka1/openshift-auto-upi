@@ -1,0 +1,8 @@
+builder:
+  install_dir:         '{{ ansible_env["HOME"] }}/openshift_install'
+  install_cluster_dir: '{{ ansible_env["HOME"] }}/openshift_install/{{ openshift_install_config.name }}'
+  install_bin_dir:     '{{ ansible_env["HOME"] }}/openshift_install/{{ openshift_install_config.name }}/bin'
+  install_exe:         '{{ ansible_env["HOME"] }}/openshift_install/{{ openshift_install_config.name }}/bin/openshift-install'
+  oc_exe:              '{{ ansible_env["HOME"] }}/openshift_install/{{ openshift_install_config.name }}/bin/oc'
+  web_dir:         '/var/www/html'
+  web_cluster_dir: '/var/www/html/{{ openshift_install_config.name }}'

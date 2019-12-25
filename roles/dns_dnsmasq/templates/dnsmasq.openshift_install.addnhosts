@@ -1,0 +1,12 @@
+{% for item in openshift_cluster_hosts %}
+{{ item.ipaddr }} {{ item.hostname }}.{{ dns.cluster_domain }}
+{% endfor %}
+
+{% for item in openshift_cluster_hosts %}
+{% if item.role == 'master' %}
+{{ item.ipaddr }} {{ item.etcd_hostname }}.{{ dns.cluster_domain }}
+{% endif %}
+{% endfor %}
+
+{{ dns.loadbalancer_api }} api.{{ dns.cluster_domain }}
+{{ dns.loadbalancer_api_int }} api-int.{{ dns.cluster_domain }}

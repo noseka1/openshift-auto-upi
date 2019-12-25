@@ -1,0 +1,7 @@
+- hosts: localhost
+  tasks:
+    - include_role:
+        name: dnsmasq
+
+    - include_role:
+        name: dns_dnsmasq

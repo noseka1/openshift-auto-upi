@@ -1,0 +1,7 @@
+- include: common.yml
+
+- include: aws.yml
+  when: aws is defined
+
+- include: vsphere.yml
+  when: vsphere is defined

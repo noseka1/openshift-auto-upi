@@ -1,0 +1,3 @@
+{% for item in openshift_cluster_hosts %}
+{{ item.macaddr }},{{ item.ipaddr }},{{ item.hostname }}.{{ dns.cluster_domain }}
+{% endfor %}

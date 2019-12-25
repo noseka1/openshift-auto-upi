@@ -1,0 +1,38 @@
+openshift_cluster_hosts:
+  - hostname: bootstrap
+    role: bootstrap
+    ipaddr: 192.168.150.10
+    macaddr: 00:1c:14:00:00:01
+    memory_mb: 16384
+    num_cpus: 4
+    disk_gb: 120
+    vsphere:
+      ignition_config: "files/vsphere/append-bootstrap.ign"
+  - hostname: master1
+    etcd_hostname: etcd-0
+    role: master
+    ipaddr: 192.168.150.11
+    macaddr: 00:1c:14:00:00:02
+    memory_mb: 32768
+    num_cpus: 8
+    disk_gb: 120
+    vsphere:
+      ignition_config: "files/vsphere/append-master.ign"
+  - hostname: infra1
+    role: infra
+    ipaddr: 192.168.150.12
+    macaddr: 00:1c:14:00:00:03
+    memory_mb: 32768
+    num_cpus: 8
+    disk_gb: 120
+    vsphere:
+      ignition_config: "files/vsphere/append-worker.ign"
+  - hostname: app1
+    role: app
+    ipaddr: 192.168.150.13
+    macaddr: 00:1c:14:00:00:04
+    memory_mb: 16384
+    num_cpus: 8
+    disk_gb: 120
+    vsphere:
+      ignition_config: "files/vsphere/append-worker.ign"
