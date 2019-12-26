@@ -14,30 +14,26 @@
     state: directory
 
 - name: Download openshift-install archive
-  include_tasks: download_file.yml
-  vars:
-    name: openshift-install
+  get_url:
     url: '{{ openshift_installer.archive_url }}'
-    dest: '{{ builder.install_bin_dir }}/{{ openshift_installer.archive_name }}'
-    checksum: '{{ openshift_installer.archive_sha256 }}'
+    dest: '{{ builder.install_bin_dir }}/{{ openshift_installer.archive_url | basename }}'
+    checksum: 'sha256:{{ openshift_installer.sha256sum_url }}'
 
 - name: Extract openshift-install
   unarchive:
-    src: '{{ builder.install_bin_dir }}/{{ openshift_installer.archive_name }}'
+    src: '{{ builder.install_bin_dir }}/{{ openshift_installer.archive_url | basename }}'
     dest: '{{ builder.install_bin_dir }}'
     creates: '{{ builder.install_bin_dir }}/openshift-install'
 
 - name: Download oc client archive
-  include_tasks: download_file.yml
-  vars:
-    name: oc client
+  get_url:
     url: '{{ openshift_client.archive_url }}'
-    dest: '{{ builder.install_bin_dir }}/{{ openshift_client.archive_name }}'
-    checksum: '{{ openshift_client.archive_sha256 }}'
+    dest: '{{ builder.install_bin_dir }}/{{ openshift_client.archive_url | basename }}'
+    checksum: 'sha256:{{ openshift_client.sha256sum_url }}'
 
 - name: Extract oc client
   unarchive:
-    src: '{{ builder.install_bin_dir }}/{{ openshift_client.archive_name }}'
+    src: '{{ builder.install_bin_dir }}/{{ openshift_client.archive_url | basename }}'
     dest: '{{ builder.install_bin_dir }}'
     creates: '{{ builder.install_bin_dir }}/oc'
 

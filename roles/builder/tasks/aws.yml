@@ -1,14 +1,11 @@
 - name: Download aws client archive file
-  include_tasks: download_file.yml
-  vars:
-    name: aws client installer
+  get_url:
     url: '{{ aws_client.archive_url }}'
-    dest: '{{ builder.install_bin_dir }}/{{ aws_client.archive_name }}'
-    checksum: ''
+    dest: '{{ builder.install_bin_dir }}/{{ aws_client.archive_url | basename }}'
 
 - name: Extract aws client installer
   unarchive:
-    src: '{{ builder.install_bin_dir }}/{{ aws_client.archive_name }}'
+    src: '{{ builder.install_bin_dir }}/{{ aws_client.archive_url | basename }}'
     dest: '{{ builder.install_bin_dir }}'
     creates: '{{ builder.install_bin_dir }}/awscli-bundle/install'
 
