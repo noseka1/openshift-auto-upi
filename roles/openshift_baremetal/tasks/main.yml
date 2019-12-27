@@ -25,6 +25,6 @@
 
 - name: Create pxelinux.cfg configs
   template:
-    src: '{{ item.baremetal.pxelinux_config }}'
+    src: files/baremetal/pxelinux.cfg/menu.cfg
     dest: '{{ builder.tftp_cluster_dir }}/pxelinux.cfg/01-{{ item.macaddr | regex_replace(":", "-") }}'
   with_items: '{{ openshift_cluster_hosts }}'

@@ -8,8 +8,7 @@ openshift_cluster_hosts:
     disk_gb: 120
     vsphere:
       ignition_config: "files/vsphere/append-bootstrap.ign"
-    baremetal:
-      pxelinux_config: "files/baremetal/pxelinux.cfg/bootstrap.cfg"
+    ignition_config: "bootstrap.ign"
   - hostname: master1
     etcd_hostname: etcd-0
     role: master
@@ -20,8 +19,7 @@ openshift_cluster_hosts:
     disk_gb: 120
     vsphere:
       ignition_config: "files/vsphere/append-master.ign"
-    baremetal:
-      pxelinux_config: "files/baremetal/pxelinux.cfg/master.cfg"
+    ignition_config: "master.ign"
   - hostname: infra1
     role: infra
     ipaddr: 192.168.150.12
@@ -31,8 +29,7 @@ openshift_cluster_hosts:
     disk_gb: 120
     vsphere:
       ignition_config: "files/vsphere/append-worker.ign"
-    baremetal:
-      pxelinux_config: "files/baremetal/pxelinux.cfg/worker.cfg"
+    ignition_config: "worker.ign"
   - hostname: app1
     role: app
     ipaddr: 192.168.150.13
@@ -42,5 +39,4 @@ openshift_cluster_hosts:
     disk_gb: 120
     vsphere:
       ignition_config: "files/vsphere/append-worker.ign"
-    baremetal:
-      pxelinux_config: "files/baremetal/pxelinux.cfg/worker.cfg"
+    ignition_config: "worker.ign"
