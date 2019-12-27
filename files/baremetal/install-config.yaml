@@ -1,0 +1,24 @@
+# {{ ansible_managed }}
+apiVersion: v1
+baseDomain: {{ openshift_install_config.base_domain }}
+compute:
+- hyperthreading: Enabled
+  name: worker
+  replicas: {{ openshift_install_config.worker_replicas }}
+controlPlane:
+  hyperthreading: Enabled
+  name: master
+  replicas: {{ openshift_install_config.master_replicas }}
+metadata:
+  name: {{ openshift_install_config.name }}
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  networkType: OpenShiftSDN
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  none: {}
+pullSecret: '{{ openshift_install_config.pull_secret }}'
+sshKey: '{{ openshift_install_config.ssh_key }}'

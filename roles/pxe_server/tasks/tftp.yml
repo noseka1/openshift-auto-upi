@@ -1,0 +1,36 @@
+- name: Install tftp-server and syslinux
+  yum:
+    name:
+      - tftp-server
+      - syslinux
+    state: present
+  become: True
+
+- name: Enable tftp on boot and start it
+  service:
+    name: tftp
+    state: started
+    enabled: True
+  become: True
+
+- name: Create {{ builder.tftp_cluster_dir }} directory
+  file:
+    dest: '{{ builder.tftp_cluster_dir }}'
+    owner: '{{ ansible_real_user_id | int }}'
+    group: '{{ ansible_real_group_id | int }}'
+    state: directory
+  become: True
+
+- name: Copy pxelinux.0 to the {{ builder.tftp_cluster_dir }} dir
+  copy:
+    src: '{{ item }}'
+    dest: '{{ builder.tftp_cluster_dir }}'
+    remote_src: True
+  with_items:
+    - /usr/share/syslinux/pxelinux.0
+    - /usr/share/syslinux/ldlinux.c32
+
+- name: Create {{ builder.tftp_cluster_dir }}/pxelinux.cfg directory
+  file:
+    dest: '{{ builder.tftp_cluster_dir }}/pxelinux.cfg'
+    state: directory

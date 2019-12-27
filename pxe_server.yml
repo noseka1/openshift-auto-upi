@@ -1,0 +1,10 @@
+- hosts: localhost
+  tasks:
+    - include_role:
+        name: dnsmasq
+
+    - include_role:
+        name: webserver_httpd
+
+    - include_role:
+        name: pxe_server

@@ -10,3 +10,11 @@
     state: started
     enabled: True
   become: yes
+
+- name: Create a web dir '{{ builder.web_cluster_dir }}'
+  file:
+    path: '{{ builder.web_cluster_dir }}'
+    owner: '{{ ansible_real_user_id | int }}'
+    group: '{{ ansible_real_group_id | int }}'
+    state: directory
+  become: True

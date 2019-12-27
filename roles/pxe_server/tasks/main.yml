@@ -1,0 +1,8 @@
+- name: Congigure dhcp server
+  include: dhcp.yml
+
+- name: Configure tftp server
+  include: tftp.yml
+
+- name: Configure web server
+  include: webserver.yml
