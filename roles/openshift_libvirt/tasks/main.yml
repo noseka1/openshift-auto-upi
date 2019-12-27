@@ -1,0 +1,32 @@
+- name: Create a volume
+  shell: |
+    VOLUME_NAME="{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}"
+    virsh vol-info \
+      --pool "{{ libvirt.pool_name }}" \
+      "$VOLUME_NAME"
+    if [ $? -ne 0 ]; then
+      virsh vol-create-as \
+        --pool "{{ libvirt.pool_name }}" \
+        --name "$VOLUME_NAME" \
+        --capacity {{ item.disk_gb }}G \
+        --allocation 0 || exit 1
+      echo CHANGED
+    fi
+  register: volume
+  changed_when: volume is failed or volume.stdout.find("CHANGED")
+  with_items: '{{ openshift_cluster_hosts }}'
+  become: True
+
+- name: Create a virtual machine from a template
+  virt:
+    command: define
+    xml: '{{ lookup("template", libvirt.domain_template) }}'
+  with_items: '{{ openshift_cluster_hosts }}'
+  become: True
+
+- name: Power on virtual machine
+  virt:
+    name: '{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
+    state: running
+  with_items: '{{ openshift_cluster_hosts }}'
+  become: True

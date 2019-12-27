@@ -1,0 +1,39 @@
+<domain type='kvm'>
+  <name>{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}</name>
+  <memory unit='MB'>{{ item.memory_mb }}</memory>
+  <vcpu>{{ item.num_cpus }}</vcpu>
+  <os>
+    <type>hvm</type>
+    <bootmenu enable="yes"/>
+  </os>
+  <features>
+    <acpi/>
+    <apic/>
+  </features>
+  <clock offset="utc">
+    <timer name="pit" tickpolicy="delay"/>
+    <timer name="rtc" tickpolicy="catchup"/>
+    <timer name="hpet" present="no"/>
+  </clock>
+  <devices>
+    <disk type='volume' device='disk'>
+      <driver name='qemu' type='raw'/>
+      <source pool='{{ libvirt.pool_name }}' volume='{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}' />
+      <target bus="sata" dev="sda"/>
+      <boot order='1'/>
+    </disk>
+    <interface type='network'>
+      <mac address='{{ item.macaddr }}'/>
+      <source network='{{ libvirt.network_name }}'/>
+      <model type='virtio'/>
+      <boot order='2'/>
+    </interface>
+    <input type='mouse' bus='ps2'/>
+    <input type='keyboard' bus='ps2'/>
+    <serial type="pty"/>
+    <graphics type="vnc" autoport="yes" keymap="en-us" listen="127.0.0.1"/>
+    <video>
+      <model type="cirrus"/>
+    </video>
+  </devices>
+</domain>
