@@ -7,6 +7,7 @@
 - name: Start haproxy
   service:
     name: haproxy
+    enabled: True
     state: started
   become: True
 
