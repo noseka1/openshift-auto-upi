@@ -17,6 +17,7 @@
   copy:
     src: '{{ item.src }}'
     dest: '{{ item.dest }}'
+    remote_src: True
     backup: True
   with_items:
     - { src: '{{ builder.install_cluster_dir }}/bootstrap.ign', dest: '{{ builder.web_cluster_dir }}' }
