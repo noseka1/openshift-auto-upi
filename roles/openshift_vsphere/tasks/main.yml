@@ -25,7 +25,7 @@
 
 - name: Check that ignition data is a valid JSON
   set_fact:
-    dummy: '{{ lookup("template", item.vsphere.ignition_config, convert_data=False) | from_json }}'
+    dummy: '{{ lookup("template", "files/vsphere/append.ign", convert_data=False) | from_json }}'
   with_items: '{{ openshift_cluster_hosts }}'
 
 - name: Create a virtual machine from a template
@@ -42,7 +42,7 @@
       - key: guestinfo.ignition.config.data.encoding
         value: base64
       - key: guestinfo.ignition.config.data
-        value: '{{ lookup("template", item.vsphere.ignition_config, convert_data=False) | b64encode }}'
+        value: '{{ lookup("template", "files/vsphere/append.ign", convert_data=False) | b64encode }}'
       - key: disk.EnableUUID
         value: 'TRUE'
     disk:
@@ -66,7 +66,6 @@
     wait_for_ip_address: no
     validate_certs: no
     state: present
-  register: deploy
   with_items: '{{ openshift_cluster_hosts }}'
 
 - name: Power on virtual machine

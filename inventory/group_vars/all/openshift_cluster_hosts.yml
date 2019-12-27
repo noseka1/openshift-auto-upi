@@ -6,8 +6,6 @@ openshift_cluster_hosts:
     memory_mb: 16384
     num_cpus: 4
     disk_gb: 120
-    vsphere:
-      ignition_config: "files/vsphere/append-bootstrap.ign"
     ignition_config: "bootstrap.ign"
   - hostname: master1
     etcd_hostname: etcd-0
@@ -17,8 +15,6 @@ openshift_cluster_hosts:
     memory_mb: 32768
     num_cpus: 8
     disk_gb: 120
-    vsphere:
-      ignition_config: "files/vsphere/append-master.ign"
     ignition_config: "master.ign"
   - hostname: infra1
     role: infra
@@ -27,8 +23,6 @@ openshift_cluster_hosts:
     memory_mb: 32768
     num_cpus: 8
     disk_gb: 120
-    vsphere:
-      ignition_config: "files/vsphere/append-worker.ign"
     ignition_config: "worker.ign"
   - hostname: app1
     role: app
@@ -37,6 +31,4 @@ openshift_cluster_hosts:
     memory_mb: 16384
     num_cpus: 8
     disk_gb: 120
-    vsphere:
-      ignition_config: "files/vsphere/append-worker.ign"
     ignition_config: "worker.ign"

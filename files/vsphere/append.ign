@@ -3,7 +3,7 @@
     "config": {
       "append": [
         {
-          "source": "{{ ignition_url_prefix }}/bootstrap.ign",
+          "source": "{{ ignition_url_prefix }}/{{ item.ignition_config }}",
           "verification": {}
         }
       ]
