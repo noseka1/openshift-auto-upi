@@ -3,7 +3,7 @@
     "config": {
       "append": [
         {
-          "source": "{{ ignition_url_prefix }}/{{ item.ignition_config }}",
+          "source": "{{ openshift_install_config.ignition_url_prefix }}/{{ item.ignition_config }}",
           "verification": {}
         }
       ]

@@ -1,8 +1,9 @@
 openshift_install_config:
+  version: 4.2.0
   name: mycluster
   base_domain: example.com
   cluster_domain: mycluster.example.com
-  version: 4.2.0
+  ignition_url_prefix: 'http://192.168.150.1:81/mycluster'
   master_replicas: 1
   worker_replicas: 0
   ssh_key: ''
