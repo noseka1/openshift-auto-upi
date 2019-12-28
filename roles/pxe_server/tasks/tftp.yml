@@ -38,8 +38,9 @@
   become: True
 
 - name: Copy syslinux files to the {{ builder.tftp_cluster_dir }} dir
-  command:
-    cmd: cp -ar /usr/share/syslinux/* '{{ builder.tftp_cluster_dir }}'
+  shell: |
+    cp -ar /usr/share/syslinux/* '{{ builder.tftp_cluster_dir }}'
+  args:
     creates: '{{ builder.tftp_cluster_dir }}/pxelinux.0'
 
 - name: Create {{ builder.tftp_cluster_dir }}/pxelinux.cfg directory
