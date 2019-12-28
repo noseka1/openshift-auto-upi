@@ -1,3 +1,19 @@
+- name: Check the status of firewalld
+  command: firewall-cmd --state
+  changed_when: False
+  failed_when: False
+  register: firewalld
+  become: True
+
+- name: Enable dns service on firewall
+  firewalld:
+    service: dns
+    permanent: True
+    immediate: True
+    state: enabled
+  when: firewalld.rc == 0
+  become: True
+
 - name: Add OpenShift DNS records
   template:
     src: '{{ item.src }}'

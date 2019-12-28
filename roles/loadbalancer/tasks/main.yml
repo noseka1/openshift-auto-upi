@@ -4,6 +4,35 @@
     state: present
   become: True
 
+- name: Allow HAProxy to listen on ports
+  seport:
+    ports: 6443, 22623
+    proto: tcp
+    setype: http_port_t
+    state: present
+  become: yes
+
+- name: Check the status of firewalld
+  command: firewall-cmd --state
+  changed_when: False
+  failed_when: False
+  register: firewalld
+  become: True
+
+- name: Enable ports on firewall
+  firewalld:
+    port: '{{ item }}/tcp'
+    permanent: True
+    immediate: True
+    state: enabled
+  when: firewalld.rc == 0
+  with_items:
+    - 6443
+    - 22623
+    - 443
+    - 80
+  become: True
+
 - name: Start haproxy
   service:
     name: haproxy

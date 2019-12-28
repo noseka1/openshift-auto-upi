@@ -13,6 +13,22 @@
     enabled: True
   become: True
 
+- name: Check the status of firewalld
+  command: firewall-cmd --state
+  changed_when: False
+  failed_when: False
+  register: firewalld
+  become: True
+
+- name: Enable tftp service on firewall
+  firewalld:
+    service: tftp
+    permanent: True
+    immediate: True
+    state: enabled
+  when: firewalld.rc == 0
+  become: True
+
 - name: Create {{ builder.tftp_cluster_dir }} directory
   file:
     dest: '{{ builder.tftp_cluster_dir }}'
