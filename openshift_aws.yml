@@ -1,0 +1,4 @@
+- hosts: builder
+  tasks:
+    - include_role:
+        name: openshift_aws

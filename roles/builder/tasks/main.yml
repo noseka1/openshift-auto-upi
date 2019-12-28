@@ -1,4 +1,38 @@
-- include: common.yml
+- name: Create directory {{ builder.install_dir }}
+  file:
+    path: '{{ builder.install_dir }}'
+    state: directory
 
-- include: aws.yml
-  when: aws is defined
+- name: Create directory {{ builder.install_cluster_dir }}
+  file:
+    path: '{{ builder.install_cluster_dir }}'
+    state: directory
+
+- name: Create directory {{ builder.install_bin_dir }}
+  file:
+    path: '{{ builder.install_bin_dir }}'
+    state: directory
+
+- name: Download openshift-install archive
+  get_url:
+    url: '{{ openshift_installer.archive_url }}'
+    dest: '{{ builder.install_bin_dir }}/{{ openshift_installer.archive_url | basename }}'
+    checksum: 'sha256:{{ openshift_installer.sha256sum_url }}'
+
+- name: Extract openshift-install
+  unarchive:
+    src: '{{ builder.install_bin_dir }}/{{ openshift_installer.archive_url | basename }}'
+    dest: '{{ builder.install_bin_dir }}'
+    creates: '{{ builder.install_bin_dir }}/openshift-install'
+
+- name: Download oc client archive
+  get_url:
+    url: '{{ openshift_client.archive_url }}'
+    dest: '{{ builder.install_bin_dir }}/{{ openshift_client.archive_url | basename }}'
+    checksum: 'sha256:{{ openshift_client.sha256sum_url }}'
+
+- name: Extract oc client
+  unarchive:
+    src: '{{ builder.install_bin_dir }}/{{ openshift_client.archive_url | basename }}'
+    dest: '{{ builder.install_bin_dir }}'
+    creates: '{{ builder.install_bin_dir }}/oc'
