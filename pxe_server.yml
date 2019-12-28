@@ -4,7 +4,7 @@
         name: dnsmasq
 
     - include_role:
-        name: webserver_httpd
+        name: web_server
 
     - include_role:
         name: pxe_server
