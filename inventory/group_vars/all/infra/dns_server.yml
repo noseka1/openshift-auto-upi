@@ -1,5 +1,4 @@
-dns:
-  cluster_domain: '{{ openshift_install_config.cluster_domain }}'
+dns_server:
   loadbalancer_wildcard: 192.168.150.1
   loadbalancer_api: 192.168.150.1
   loadbalancer_api_int: 192.168.150.1
