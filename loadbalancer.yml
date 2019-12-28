@@ -1,4 +1,4 @@
-- hosts: localhost
+- hosts: builder
   tasks:
     - include_role:
         name: loadbalancer
