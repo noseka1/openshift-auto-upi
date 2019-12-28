@@ -9,7 +9,31 @@
     name: httpd
     state: started
     enabled: True
-  become: yes
+  become: True
+
+- name: Listen on port 81 to avoid conflict with the load balancer
+  lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^Listen '
+    line: Listen 81
+  notify: Restart httpd
+  become: True
+
+- name: Check the status of firewalld
+  command: firewall-cmd --state
+  changed_when: False
+  failed_when: False
+  register: firewalld
+  become: True
+
+- name: Open port 82/tcp on firewall
+  firewalld:
+    port: 81/tcp
+    permanent: True
+    immediate: True
+    state: enabled
+  when: firewalld.rc == 0
+  become: True
 
 - name: Create a web dir '{{ builder.web_cluster_dir }}'
   file:
