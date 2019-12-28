@@ -2,9 +2,9 @@ openshift_installer_url_prefix: 'https://mirror.openshift.com/pub/openshift-v4/c
 
 openshift_installer_versions:
   4.2.0:
-    archive_url: '{{ openshift_installer_url_prefix }}/4.2.0/openshift-install-linux-4.2.0.tar.gz'
+    archive_url:   '{{ openshift_installer_url_prefix }}/4.2.0/openshift-install-linux-4.2.0.tar.gz'
     sha256sum_url: '{{ openshift_installer_url_prefix }}/4.2.0/sha256sum.txt'
 
 openshift_installer:
-  archive_url:   '{{ openshift_installer_versions.{{ openshift_install_config.version }}.archive_url }}'
-  sha256sum_url: '{{ openshift_installer_versions.{{ openshift_install_config.version }}.sha256sum_url }}'
+  archive_url:   '{{ openshift_installer_versions[openshift_install_config.version].archive_url }}'
+  sha256sum_url: '{{ openshift_installer_versions[openshift_install_config.version].sha256sum_url }}'
