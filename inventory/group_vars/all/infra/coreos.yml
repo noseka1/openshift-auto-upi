@@ -1,9 +1,8 @@
-coreos_version: 4.2.0
-coreos_url_prefix: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.2/4.2.0
+coreos_url_prefix: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos
 
 coreos:
-  version: '{{ coreos_version }}'
-  installer_initramfs_url: '{{ coreos_url_prefix }}/rhcos-{{ coreos_version }}-x86_64-installer-initramfs.img'
-  installer_kernel_url:    '{{ coreos_url_prefix }}/rhcos-{{ coreos_version }}-x86_64-installer-kernel'
-  metal_bios_url:          '{{ coreos_url_prefix }}/rhcos-{{ coreos_version }}-x86_64-metal-bios.raw.gz'
-  sha256sum_url:           '{{ coreos_url_prefix }}/sha256sum.txt'
+  4.2.0:
+    installer_initramfs_url: '{{ coreos_url_prefix }}/4.2/4.2.0/rhcos-4.2.0-x86_64-installer-initramfs.img'
+    installer_kernel_url:    '{{ coreos_url_prefix }}/4.2/4.2.0/rhcos-4.2.0-x86_64-installer-kernel'
+    metal_bios_url:          '{{ coreos_url_prefix }}/4.2/4.2.0/rhcos-4.2.0-x86_64-metal-bios.raw.gz'
+    sha256sum_url:           '{{ coreos_url_prefix }}/4.2/4.2.0/sha256sum.txt'
