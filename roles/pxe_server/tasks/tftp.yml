@@ -37,16 +37,10 @@
     state: directory
   become: True
 
-- name: Copy pxelinux.0 to the {{ builder.tftp_cluster_dir }} dir
-  copy:
-    src: '{{ item }}'
-    dest: '{{ builder.tftp_cluster_dir }}'
-    remote_src: True
-  with_items:
-    - /usr/share/syslinux/pxelinux.0
-    - /usr/share/syslinux/ldlinux.c32
-    - /usr/share/syslinux/menu.c32
-    - /usr/share/syslinux/libutil.c32
+- name: Copy syslinux files to the {{ builder.tftp_cluster_dir }} dir
+  command:
+    cmd: cp -ar /usr/share/syslinux/* '{{ builder.tftp_cluster_dir }}'
+    creates: '{{ builder.tftp_cluster_dir }}/pxelinux.0'
 
 - name: Create {{ builder.tftp_cluster_dir }}/pxelinux.cfg directory
   file:
