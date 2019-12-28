@@ -4,6 +4,7 @@ builder:
   install_bin_dir:     '{{ ansible_env["HOME"] }}/openshift_install/{{ openshift_install_config.name }}/bin'
   install_exe:         '{{ ansible_env["HOME"] }}/openshift_install/{{ openshift_install_config.name }}/bin/openshift-install'
   oc_exe:              '{{ ansible_env["HOME"] }}/openshift_install/{{ openshift_install_config.name }}/bin/oc'
+  aws_exe:             '{{ ansible_env["HOME"] }}/openshift_install/{{ openshift_install_config.name }}/bin/aws'
   web_dir:          '/var/www/html'
   web_cluster_dir:  '/var/www/html/{{ openshift_install_config.name }}'
   tftp_dir:         '/var/lib/tftpboot'
