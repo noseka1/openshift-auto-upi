@@ -13,36 +13,26 @@
     path: '{{ builder.install_bin_dir }}'
     state: directory
 
-- name: Set openshift-install download url
-  set_fact:
-    archive_url:   '{{ openshift_installer.{{ openshift_install_config.version }}.archive_url }}'
-    sha256sum_url: '{{ openshift_installer.{{ openshift_install_config.version }}.sha256sum_url }}'
-
 - name: Download openshift-install archive
   get_url:
-    url: '{{ archive_url }}'
-    dest: '{{ builder.install_bin_dir }}/{{ archive_url | basename }}'
-    checksum: 'sha256:{{ sha256sum_url }}'
+    url: '{{ openshift_installer.archive_url }}'
+    dest: '{{ builder.install_bin_dir }}/{{ openshift_installer.archive_url | basename }}'
+    checksum: 'sha256:{{ openshift_installer.sha256sum_url }}'
 
 - name: Extract openshift-install
   unarchive:
-    src: '{{ builder.install_bin_dir }}/{{ archive_url | basename }}'
+    src: '{{ builder.install_bin_dir }}/{{ openshift_installer.archive_url | basename }}'
     dest: '{{ builder.install_bin_dir }}'
     creates: '{{ builder.install_bin_dir }}/openshift-install'
 
-- name: Set oc client download url
-  set_fact:
-    archive_url:   '{{ openshift_client.{{ openshift_install_config.version }}.archive_url }}'
-    sha256sum_url: '{{ openshift_client.{{ openshift_install_config.version }}.sha256sum_url }}'
-
 - name: Download oc client archive
   get_url:
-    url: '{{ archive_url }}'
-    dest: '{{ builder.install_bin_dir }}/{{ archive_url | basename }}'
-    checksum: 'sha256:{{ sha256sum_url }}'
+    url: '{{ openshift_client.archive_url }}'
+    dest: '{{ builder.install_bin_dir }}/{{ openshift_client.archive_url | basename }}'
+    checksum: 'sha256:{{ openshift_client.sha256sum_url }}'
 
 - name: Extract oc client
   unarchive:
-    src: '{{ builder.install_bin_dir }}/{{ archive_url | basename }}'
+    src: '{{ builder.install_bin_dir }}/{{ openshift_client.archive_url | basename }}'
     dest: '{{ builder.install_bin_dir }}'
     creates: '{{ builder.install_bin_dir }}/oc'
