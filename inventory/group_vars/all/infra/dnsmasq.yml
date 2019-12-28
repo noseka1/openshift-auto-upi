@@ -1,3 +1,2 @@
 dnsmasq:
   interface: virbr-osh
-  dhcp_range: 192.168.150.20,192.168.150.254,255.255.255.0
