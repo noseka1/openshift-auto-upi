@@ -4,4 +4,4 @@
         name: dnsmasq
 
     - include_role:
-        name: dns_dnsmasq
+        name: dns_server

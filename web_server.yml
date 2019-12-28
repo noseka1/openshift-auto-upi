@@ -1,4 +1,4 @@
 - hosts: localhost
   tasks:
     - include_role:
-        name: loadbalancer_haproxy
+        name: web_server

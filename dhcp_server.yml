@@ -4,4 +4,4 @@
         name: dnsmasq
 
     - include_role:
-        name: dhcp_dnsmasq
+        name: dhcp_server
