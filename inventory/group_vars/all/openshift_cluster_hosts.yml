@@ -6,7 +6,7 @@ openshift_cluster_hosts:
     memory_mb: 16384
     num_cpus: 4
     disk_gb: 120
-    ignition_config: "bootstrap.ign"
+    ignition_config: bootstrap.ign
   - hostname: master1
     etcd_hostname: etcd-0
     role: master
@@ -15,7 +15,7 @@ openshift_cluster_hosts:
     memory_mb: 32768
     num_cpus: 8
     disk_gb: 120
-    ignition_config: "master.ign"
+    ignition_config: master.ign
   - hostname: infra1
     role: infra
     ipaddr: 192.168.150.22
@@ -23,7 +23,7 @@ openshift_cluster_hosts:
     memory_mb: 32768
     num_cpus: 8
     disk_gb: 120
-    ignition_config: "worker.ign"
+    ignition_config: worker.ign
   - hostname: app1
     role: app
     ipaddr: 192.168.150.23
@@ -31,4 +31,4 @@ openshift_cluster_hosts:
     memory_mb: 16384
     num_cpus: 8
     disk_gb: 120
-    ignition_config: "worker.ign"
+    ignition_config: worker.ign
