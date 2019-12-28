@@ -1,7 +1,0 @@
-openshift_client_version: 4.2.0
-openshift_client_url_prefix: 'https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{{ openshift_client_version }}'
-
-openshift_client:
-  version: '{{ openshift_client_version }}'
-  archive_url: '{{ openshift_client_url_prefix }}/openshift-client-linux-{{ openshift_client_version }}.tar.gz'
-  sha256sum_url:  '{{ openshift_client_url_prefix }}/sha256sum.txt'

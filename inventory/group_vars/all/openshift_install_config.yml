@@ -2,6 +2,7 @@ openshift_install_config:
   name: mycluster
   base_domain: example.com
   cluster_domain: mycluster.example.com
+  version: 4.2.0
   master_replicas: 1
   worker_replicas: 0
   ssh_key: ''
