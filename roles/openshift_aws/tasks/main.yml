@@ -1,3 +1,9 @@
+- name: Ensure unzip is installed
+  yum:
+    name: unzip
+    state: present
+  become: True
+
 - name: Download aws client archive file
   get_url:
     url: '{{ aws_client.archive_url }}'
