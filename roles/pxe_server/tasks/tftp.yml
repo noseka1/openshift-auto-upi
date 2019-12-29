@@ -13,7 +13,7 @@
     enabled: True
   become: True
 
-- name: Check the status of firewalld
+- name: Is firewalld running?
   command: firewall-cmd --state
   changed_when: False
   failed_when: False
