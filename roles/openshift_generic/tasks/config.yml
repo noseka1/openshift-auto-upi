@@ -1,0 +1,31 @@
+- name: Copy install-config.yaml to the {{ builder.install_cluster_dir }} directory
+  template:
+    src: files/generic/install-config.yaml
+    dest: '{{ builder.install_cluster_dir }}'
+
+- name: Create a backup copy of install-config.yaml as the installer deletes the original
+  template:
+    src: files/generic/install-config.yaml
+    dest: '{{ builder.install_cluster_dir }}/install-config.backup.yaml'
+    backup: True
+
+- name: Create ignition configs
+  command: |
+    {{ builder.install_exe }} create ignition-configs --dir "{{ builder.install_cluster_dir }}"
+
+- name: Copy ignition files to the webserver html directory
+  copy:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    remote_src: True
+    backup: True
+  with_items:
+    - { src: '{{ builder.install_cluster_dir }}/bootstrap.ign', dest: '{{ builder.web_cluster_dir }}' }
+    - { src: '{{ builder.install_cluster_dir }}/master.ign',    dest: '{{ builder.web_cluster_dir }}' }
+    - { src: '{{ builder.install_cluster_dir }}/worker.ign',    dest: '{{ builder.web_cluster_dir }}' }
+
+- name: Create pxelinux.cfg configs
+  template:
+    src: files/generic/pxelinux.cfg/menu.cfg
+    dest: '{{ builder.tftp_cluster_dir }}/pxelinux.cfg/01-{{ item.macaddr | regex_replace(":", "-") }}'
+  with_items: '{{ openshift_cluster_hosts }}'

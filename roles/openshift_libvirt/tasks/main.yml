@@ -1,5 +1,8 @@
 - name: Install prerequisities
   include: prereqs.yml
 
+- name: Configure the installer
+  include: config.yml
+
 - name: Run the installation
   include: run.yml
