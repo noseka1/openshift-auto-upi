@@ -2,3 +2,9 @@
   import_role:
     name: openshift_generic
     tasks_from: prereqs.yml
+
+- name: Install pyghmi required by Ansible
+  yum:
+    name: python-pyghmi
+    state: present
+  become: True

@@ -7,6 +7,11 @@ openshift_cluster_hosts:
     num_cpus: 4
     disk_gb: 120
     ignition_config: bootstrap.ign
+    ipmi:
+      username: admin
+      password: ''
+      hostname: 192.168.150.120
+      port: 623
   - hostname: master1
     etcd_hostname: etcd-0
     role: master
@@ -16,6 +21,11 @@ openshift_cluster_hosts:
     num_cpus: 8
     disk_gb: 120
     ignition_config: master.ign
+    ipmi:
+      username: admin
+      password: ''
+      hostname: 192.168.150.121
+      port: 623
   - hostname: infra1
     role: infra
     ipaddr: 192.168.150.22
@@ -24,6 +34,11 @@ openshift_cluster_hosts:
     num_cpus: 8
     disk_gb: 120
     ignition_config: worker.ign
+    ipmi:
+      username: admin
+      password: ''
+      hostname: 192.168.150.122
+      port: 623
   - hostname: app1
     role: app
     ipaddr: 192.168.150.23
@@ -32,3 +47,8 @@ openshift_cluster_hosts:
     num_cpus: 8
     disk_gb: 120
     ignition_config: worker.ign
+    ipmi:
+      username: admin
+      password: ''
+      hostname: 192.168.150.123
+      port: 623
