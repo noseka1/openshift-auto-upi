@@ -1,2 +1,7 @@
 dnsmasq:
-  interface: virbr-osh
+  common_options:
+    - interface: '*'
+    - listen-address: 0.0.0.0
+    - bind-dynamic:
+ #   - log-queries:
+ #   - log-dhcp:
