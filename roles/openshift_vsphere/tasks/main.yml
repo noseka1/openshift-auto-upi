@@ -6,3 +6,6 @@
 
 - name: Run the installation
   include: run.yml
+
+- name: Wait for the bootstrap to complete
+  include: wait.yml
