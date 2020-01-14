@@ -4,8 +4,8 @@ Preparing infrastructure for OpenShift installation by hand is a rather tedious 
 
 *openshift-auto-upi* comes with roles to provision and configure:
 
-* [DHCP Server](roles/dns_server)
-* [DNS Server](roles/dhcp_server)
+* [DHCP Server](roles/dhcp_server)
+* [DNS Server](roles/dns_server)
 * [Web Server](roles/web_server)
 * [PXE Server](roles/pxe_server)
 * [Load Balancer](roles/loadbalancer)
