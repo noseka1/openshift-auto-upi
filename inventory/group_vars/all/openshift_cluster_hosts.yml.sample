@@ -1,3 +1,14 @@
+# Configuration of OpenShift nodes
+#
+# Note that the role specification is required for creation of DNS records in dnsmasq
+# and also for creation of a correct haproxy load balancer configuration. Available roles are:
+# - bootstrap
+# - master
+# - infra
+# - app
+#
+# Note that the IPMI configuration is only needed for bare metal installations. If not installing
+# on bare metal, feel free to remove the ipmi related configuration from this file.
 openshift_cluster_hosts:
   - hostname: bootstrap
     role: bootstrap

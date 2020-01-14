@@ -1,0 +1,30 @@
+# OpenShift Installer configuration
+openshift_install_config:
+  # Version of OpenShift to be installed.
+  version: 4.2.0
+  # Unique name of the OpenShift cluster which also becomes a part of cluster's FQDN.
+  name: mycluster
+  # Base domain which is appended to the cluster's name to form a cluster FQDN.
+  base_domain: example.com
+  # FQDN of the OpenShift cluster. It must be in the format <name>.<base_domain>
+  cluster_domain: mycluster.example.com
+  # Number of master nodes. Set this to 3 to achieve a highly-available control plane.
+  master_replicas: 1
+  # Number of worker nodes equals to the number of infra nodes + the number of app nodes.
+  # Typical production installation will have 3 infra nodes.
+  worker_replicas: 0
+  # This URL will be accessed by the OpenShift nodes during the bootstrap in order
+  # for them to download their ignition files. Make sure that this URL is reachable
+  # from the OpenShift nodes.
+  ignition_url_prefix: 'http://192.168.150.1:81/mycluster'
+  # When you deploy the cluster, this public SSH key is added to the core user’s
+  # ~/.ssh/authorized_keys list. You can use this key to SSH into the OpenShift
+  # nodes as the user core.
+  ssh_key: ''
+  # This is a JSON formatted pull secret that you can obtain at
+  # https://cloud.redhat.com when installing a new OpenShift cluster. There is a
+  # button "Download pull secret" that downloads this pull secret for you.
+  # The secret contains keys for downloading container images from several Red Hat
+  # repositories like quay.io, registry.connect.redhat.com, registry.redhat.io and
+  # also keys for authenticating against the cloud.openshift.com itself.
+  pull_secret: ''
