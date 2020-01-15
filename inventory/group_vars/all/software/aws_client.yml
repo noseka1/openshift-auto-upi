@@ -1,3 +1,0 @@
-aws_client:
-  archive_url: 'https://s3.amazonaws.com/aws-cli/awscli-bundle.zip'
-  archive_name: awscli-bundle.zip
