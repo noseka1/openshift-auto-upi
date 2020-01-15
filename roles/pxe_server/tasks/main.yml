@@ -29,6 +29,12 @@
   when: firewalld.rc == 0
   become: True
 
+- name: Ensure {{ builder.tftp_dir }} exists
+  file:
+    dest: '{{ builder.tftp_dir }}'
+    state: directory
+  become: True
+
 - name: Create {{ builder.tftp_cluster_dir }} directory
   file:
     dest: '{{ builder.tftp_cluster_dir }}'
