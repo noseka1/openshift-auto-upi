@@ -1,8 +1,0 @@
-- name: Enable PXE boot on dnsmasq
-  template:
-    src: '{{ item.src }}'
-    dest:  '{{ item.dest }}'
-  with_items:
-    - { src: dnsmasq.openshift_install.pxe.conf, dest: /etc/dnsmasq.d }
-  notify: Restart dnsmasq
-  become: True
