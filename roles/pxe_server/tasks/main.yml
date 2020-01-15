@@ -7,12 +7,6 @@
   notify: Restart dnsmasq
   become: True
 
-- name: Install syslinux
-  yum:
-    name: syslinux
-    state: present
-  become: True
-
 - name: Is firewalld running?
   command: firewall-cmd --state
   changed_when: False
@@ -41,6 +35,12 @@
     owner: '{{ ansible_real_user_id | int }}'
     group: '{{ ansible_real_group_id | int }}'
     state: directory
+  become: True
+
+- name: Install syslinux
+  yum:
+    name: syslinux
+    state: present
   become: True
 
 - name: Copy syslinux files to the {{ builder.tftp_cluster_dir }} dir
