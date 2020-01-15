@@ -87,7 +87,7 @@ $ ansible-playbook builder.yml
 
 ## Installing DHCP Server
 
-Note that *dnsmasq.yml* configuration file is shared between the DHCP and DNS servers.
+Note that *dnsmasq.yml* configuration file is shared between the DHCP, DNS, and PXE servers.
 
 ```
 $ cp inventory/group_vars/all/infra/dnsmasq.yml.sample inventory/group_vars/all/infra/dnsmasq.yml
@@ -107,7 +107,7 @@ $ ansible-playbook dhcp_server.yml
 
 ## Installing DNS Server
 
-Note that *dnsmasq.yml* configuration file is shared between the DHCP and DNS servers.
+Note that *dnsmasq.yml* configuration file is shared between the DHCP, DNS, and PXE servers.
 
 ```
 $ cp inventory/group_vars/all/infra/dnsmasq.yml.sample inventory/group_vars/all/infra/dnsmasq.yml
