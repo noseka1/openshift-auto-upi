@@ -136,11 +136,6 @@ $ cp inventory/group_vars/all/infra/dnsmasq.yml.sample inventory/group_vars/all/
 $ vi inventory/group_vars/all/infra/dnsmasq.yml
 ```
 
-```
-$ cp inventory/group_vars/all/infra/pxe_server.yml.sample inventory/group_vars/all/infra/pxe_server.yml
-$ vi inventory/group_vars/all/infra/pxe_server.yml
-```
-
 Provision PXE server on the Builder host using Ansible:
 
 ```
