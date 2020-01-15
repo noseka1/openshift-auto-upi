@@ -208,6 +208,7 @@ $ ansible-playbook openshift_vsphere.yml
 ## TODO List
 
 * Support oVirt
+* Support RHEL8 on Builder
 * Check that quay.io is reachable (detect firewall issues)
 * Add documentation on the vm boot order: disk and then network
 * Document the needed Builder's DNS client configuration
