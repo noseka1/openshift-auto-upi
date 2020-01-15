@@ -10,7 +10,7 @@ Preparing infrastructure for OpenShift installation by hand is a rather tedious 
 * [PXE Server](roles/pxe_server)
 * [Load Balancer](roles/loadbalancer)
 
-Note that the infrastructure from the above list provisioned using *openshift-auto-upi* is NOT meant for production use. It is meant to be a temporary fill in for your missing production-grade infrastructure. It can also be used for learning purposes as it shows a minimum working configuration. Using *openshift-auto-upi* to provisioning any of the infrastructure from the above list is optional.
+Note that the infrastructure from the above list provisioned using *openshift-auto-upi* is NOT meant for production use. It is meant to be a temporary fill in for your missing production-grade infrastructure. It can also be used for learning purposes as it showcases a minimum working configuration. Using *openshift-auto-upi* to provisioning any of the infrastructure from the above list is optional.
 
 *openshift-auto-upi* comes with roles to provision OpenShift cluster hosts on the following target platforms:
 
