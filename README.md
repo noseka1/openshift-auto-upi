@@ -6,8 +6,8 @@ Preparing infrastructure for OpenShift installation by hand is a rather tedious 
 
 * [DHCP Server](roles/dhcp_server)
 * [DNS Server](roles/dns_server)
-* [Web Server](roles/web_server)
 * [PXE Server](roles/pxe_server)
+* [Web Server](roles/web_server)
 * [Load Balancer](roles/loadbalancer)
 
 Note that the infrastructure from the above list provisioned using *openshift-auto-upi* is NOT meant for production use. It is meant to be a temporary fill in for your missing production-grade infrastructure. It can also be used for learning purposes as it showcases a minimum working configuration. Using *openshift-auto-upi* to provisioning any of the infrastructure from the above list is optional.
@@ -125,14 +125,6 @@ Provision DNS server on the Builder host using Ansible:
 $ ansible-playbook dns_server.yml
 ```
 
-## Installing Web Server
-
-Provision Web server on the Builder host using Ansible:
-
-```
-$ ansible-playbook web_server.yml
-```
-
 ## Installing PXE Server
 
 PXE server can be used for booting OpenShift nodes when installing on bare metal or libvirt target platform. Installation on vSphere doesn't use PXE boot at all.
@@ -153,6 +145,14 @@ Provision PXE server on the Builder host using Ansible:
 
 ```
 $ ansible-playbook pxe_server.yml
+```
+
+## Installing Web Server
+
+Provision Web server on the Builder host using Ansible:
+
+```
+$ ansible-playbook web_server.yml
 ```
 
 ## Installing Load Balancer
