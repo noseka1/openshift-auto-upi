@@ -24,14 +24,14 @@ Note that the infrastructure from the above list provisioned using *openshift-au
 
 Note that in order to use DHCP or PXE server installed on the Builder host, the Builder host and all of the OpenShift nodes have to be provisioned on the same layer 2 network.
 
-# Setting up Builder Host
+# Setting Up Builder Host
 
 Supported operating systems:
 
 * Red Hat Enterprise Linux 7
 * Fedora release 31
 
-## Configuring Builder Host on RHEL7
+## Configuring RHEL7
 
 Enable additional Red Hat repositories:
 
@@ -85,7 +85,7 @@ Configure Builder host using Ansible:
 $ ansible-playbook builder.yml
 ```
 
-# Setting Up DHCP Server
+## Installing DHCP Server
 
 Note that *dnsmasq.yml* configuration file is shared between the DHCP and DNS servers.
 
@@ -105,7 +105,7 @@ Provision DHCP server on the Builder host using Ansible:
 $ ansible-playbook dhcp_server.yml
 ```
 
-# Setting Up DNS Server
+## Installing DNS Server
 
 Note that *dnsmasq.yml* configuration file is shared between the DHCP and DNS servers.
 
@@ -125,7 +125,7 @@ Provision DNS server on the Builder host using Ansible:
 $ ansible-playbook dns_server.yml
 ```
 
-# Setting Up Web Server
+## Installing Web Server
 
 Provision Web server on the Builder host using Ansible:
 
@@ -133,7 +133,7 @@ Provision Web server on the Builder host using Ansible:
 $ ansible-playbook web_server.yml
 ```
 
-# Setting Up PXE Server
+## Installing PXE Server
 
 PXE server can be used for booting OpenShift nodes when installing on bare metal or libvirt target platform. Installation on vSphere doesn't use PXE boot at all.
 
@@ -143,7 +143,7 @@ Provision PXE server on the Builder host using Ansible:
 $ ansible-playbook pxe_server.yml
 ```
 
-# Setting Up Load Balancer
+## Installing Load Balancer
 
 Provision load balancer on the Builder host using Ansible:
 
@@ -151,7 +151,9 @@ Provision load balancer on the Builder host using Ansible:
 $ ansible-playbook loadbalancer.yml
 ```
 
-# Deploying OpenShift on Bare Metal
+# Installing OpenShift
+
+## Installing OpenShift on Bare Metal
 
 Kick off the OpenShift installation by issuing the command:
 
@@ -159,7 +161,7 @@ Kick off the OpenShift installation by issuing the command:
 $ ansible-playbook openshift_baremetal.yml
 ```
 
-# Deploying OpenShift on Libvirt
+## Installing OpenShift on Libvirt
 
 Create custom *libvirt.yml* configuration:
 
@@ -174,7 +176,7 @@ Kick off the OpenShift installation by issuing the command:
 $ ansible-playbook openshift_libvirt.yml
 ```
 
-# Deploying OpenShift on vSphere
+## Installing OpenShift on vSphere
 
 Create custom *vsphere.yml* configuration:
 
