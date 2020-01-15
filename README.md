@@ -24,6 +24,12 @@ Note that the infrastructure from the above list provisioned using *openshift-au
 
 Note that in order to use DHCP or PXE server installed on the Builder host, the Builder host and all of the OpenShift nodes have to be provisioned on the same layer 2 network.
 
+# Dependency Diagram
+
+The dependency diagram below depicts the dependencies between *openshift-auto-upi* Ansible playbooks. You want to execute Ansible playbooks in the dependency order. First, run the *builder* playbook at the top and then continue from top to bottom with the remaining playbooks. Following sections describe the installation prodess in more detail.
+
+![Dependency Diagram](docs/openshift_auto_upi_dependency_graph.svg "Dependency Diagram")
+
 # Setting Up Builder Host
 
 Supported operating systems:
@@ -204,6 +210,7 @@ $ ansible-playbook openshift_vsphere.yml
 * Support oVirt
 * Check that quay.io is reachable (detect firewall issues)
 * Add documentation on the vm boot order: disk and then network
+* Document the needed Builder's DNS client configuration
 
 ## Futher Notes
 
