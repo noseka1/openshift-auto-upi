@@ -1,0 +1,3 @@
+pxe_server:
+  pxe_options:
+    dhcp-boot: pxelinux,server.name,192.168.150.1

@@ -137,6 +137,18 @@ $ ansible-playbook web_server.yml
 
 PXE server can be used for booting OpenShift nodes when installing on bare metal or libvirt target platform. Installation on vSphere doesn't use PXE boot at all.
 
+Note that *dnsmasq.yml* configuration file is shared between the DHCP, DNS, and PXE servers.
+
+```
+$ cp inventory/group_vars/all/infra/dnsmasq.yml.sample inventory/group_vars/all/infra/dnsmasq.yml
+$ vi inventory/group_vars/all/infra/dnsmasq.yml
+```
+
+```
+$ cp inventory/group_vars/all/infra/pxe_server.yml.sample inventory/group_vars/all/infra/pxe_server.yml
+$ vi inventory/group_vars/all/infra/pxe_server.yml
+```
+
 Provision PXE server on the Builder host using Ansible:
 
 ```
