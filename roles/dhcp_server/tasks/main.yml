@@ -19,7 +19,7 @@
     src: '{{ item.src }}'
     dest:  '{{ item.dest }}'
   with_items:
-    - { src: dnsmasq.openshift_install.dhcp.conf, dest: /etc/dnsmasq.d }
-    - { src: dnsmasq.openshift_install.hostsfile, dest: /etc }
+    - { src: dnsmasq.openshift-auto-upi.dhcp.conf, dest: /etc/dnsmasq.d }
+    - { src: dnsmasq.openshift-auto-upi.hostsfile, dest: /etc }
   notify: Restart dnsmasq
   become: True
