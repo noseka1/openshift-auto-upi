@@ -1,4 +1,4 @@
 dns_server:
-  loadbalancer_wildcard: 192.168.150.1
-  loadbalancer_api: 192.168.150.1
-  loadbalancer_api_int: 192.168.150.1
+  loadbalancer_wildcard: 192.168.150.2
+  loadbalancer_api: 192.168.150.2
+  loadbalancer_api_int: 192.168.150.2
