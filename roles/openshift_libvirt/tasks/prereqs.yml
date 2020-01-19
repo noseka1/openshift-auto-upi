@@ -7,6 +7,6 @@
   yum:
     name:
       - libvirt-client
-      - libvirt-python
+      - '{{ rpm_name["libvirt-python"] }}'
     state: present
   become: True

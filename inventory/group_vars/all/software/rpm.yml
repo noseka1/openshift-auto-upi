@@ -1,0 +1,14 @@
+rpm_name_map:
+  default:
+    python-dns: python-dns
+    libvirt-python: libvirt-python
+    python-pyghmi: python-pyghmi
+    python-pyvmomi: python-pyvmomi
+  RedHat:
+    '8':
+      python-dns: python3-dns
+      libvirt-python: libvirt-python3
+      python-pyghmi: python3-pyghmi
+      python-pyvmomi: python3-pyvmomi
+
+rpm_name: '{{ rpm_name_map[ansible_distribution][ansible_distribution_major_version] | default(rpm_name_map.default) }}'

@@ -1,5 +1,5 @@
 - name: Install dnspython library required by Ansible
   yum:
-    name: python-dns
+    name: '{{ rpm_name["python-dns"] }}'
     state: present
   become: True

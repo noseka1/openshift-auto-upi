@@ -5,6 +5,6 @@
 
 - name: Install pyghmi required by Ansible
   yum:
-    name: python-pyghmi
+    name: '{{ rpm_name["python-pyghmi"] }}'
     state: present
   become: True
