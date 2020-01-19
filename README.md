@@ -28,7 +28,7 @@ Note that the infrastructure from the above list provisioned using *openshift-au
 
 Note that in order to use DHCP and/or PXE server installed on the Builder host, the Builder host and all of the OpenShift hosts have to be provisioned on the same layer 2 network. In the opposite case, it is sufficient to have a working IP route between the Builder host and the OpenShift hosts.
 
-Here is a sample libvirt network configuration. It instructs libvirt to not provide DNS and DHCP servers for this network. Instead, DNS and DHCP servers on this network will be installed and managed by *openshift-auto-upi*.
+Here is a sample libvirt network configuration. It instructs libvirt to not provide DNS and DHCP servers for this network. Instead, DNS and DHCP servers on this network will be provided by *openshift-auto-upi*.
 
 ```
 <network>
