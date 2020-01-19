@@ -55,14 +55,33 @@ The dependency diagram below depicts the dependencies between *openshift-auto-up
 
 Supported operating systems:
 
+* Red Hat Enterprise Linux 8
 * Red Hat Enterprise Linux 7
 * Fedora release 31
+
+## Configuring RHEL8
+
+If you use RHEL8 on your Builder host, you will need to apply an additional configuration that is described in this section.
+
+Enable additional Red Hat repositories:
+
+```
+$ subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms
+```
+
+If installing OpenShift on bare metal, the *pyghmi* library is required on Builder host. This library implements the IPMI protocol which is used to control bare metal machines during the OpenShift installation. To enable a yum repository which contains the *python3-pyghmi* rpm package:
+
+```
+$ subscription-manager repos --enable openstack-15-for-rhel-8-x86_64-rpms
+```
+
+If installing OpenShift on vSphere, the *pyvmomi* library is required on Builder host. You can download the *python3-pyvmomi* rpm package from the [Red Hat Customer Portal](https://access.redhat.com).
 
 ## Configuring RHEL7
 
 If you use RHEL7 on your Builder host, you will need to apply an additional configuration that is described in this section.
 
-Add additional Red Hat repositories:
+Enable additional Red Hat repositories:
 
 ```
 $ yum-config-manager --enable rhel-7-server-optional-rpms
@@ -75,11 +94,10 @@ Ansible >= 2.9 is required in order to run *openshift-auto-upi* scripts. Before 
 $ yum-config-manager --enable rhel-7-server-ansible-2.9-rpms
 ```
 
-If installing OpenShift on bare metal, the *python-pyghmi* library is required on Builder host. This library implements the IPMI protocol which is used to control bare metal machines during the OpenShift installation. To install *python-pyghmi*:
+If installing OpenShift on bare metal, the *pyghmi* library is required on Builder host. This library implements the IPMI protocol which is used to control bare metal machines during the OpenShift installation. To enable a yum repository which contains the *python-pyghmi* rpm package:
 
 ```
 $ yum-config-manager --enable rhel-7-server-openstack-14-rpms
-$ yum install python-pyghmi
 ```
 
 ## Configuring Builder Host
@@ -231,7 +249,6 @@ $ ansible-playbook openshift_vsphere.yml
 ## TODO List
 
 * Support oVirt
-* Support RHEL8 on Builder
 * Check that quay.io is reachable (detect firewall issues)
 * Add documentation on the vm boot order: disk and then network
 * Document the needed Builder's DNS client configuration
