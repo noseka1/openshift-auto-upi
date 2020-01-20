@@ -205,6 +205,21 @@ Provision load balancer on the Builder host using Ansible:
 $ ansible-playbook loadbalancer.yml
 ```
 
+## Configuring DNS Client
+
+If you installed a DNS server on the Builder host, you may want to configure the Builder host to resolve OpenShift host names using this DNS server:
+
+```
+$ cp inventory/group_vars/all/infra/dns_client.yml.sample inventory/group_vars/all/infra/dns_client.yml
+$ vi inventory/group_vars/all/infra/dns_client.yml
+```
+
+Configure the NetworkManager on the Builder host to forward OpenShift DNS queries to the local DNS server. Note that this playbook will issue `systemctl NetworkManager restart` to apply the configuration changes.
+
+```
+$ ansible-playbook dns_client.yml
+```
+
 # Installing OpenShift
 
 ## Installing OpenShift on Bare Metal
@@ -251,7 +266,6 @@ $ ansible-playbook openshift_vsphere.yml
 * Support oVirt
 * Check that quay.io is reachable (detect firewall issues)
 * Add documentation on the vm boot order: disk and then network
-* Document the needed Builder's DNS client configuration
 
 ## Futher Notes
 
