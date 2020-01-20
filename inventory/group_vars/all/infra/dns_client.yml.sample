@@ -1,0 +1,2 @@
+dns_client:
+  dns_server: 192.168.150.2
