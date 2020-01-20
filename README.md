@@ -59,6 +59,8 @@ Supported operating systems:
 * Red Hat Enterprise Linux 7
 * Fedora release 31
 
+Recommended memory size for the Builder host is at least 4GB RAM.
+
 ## Configuring RHEL8
 
 If you use RHEL8 on your Builder host, you will need to apply an additional configuration that is described in this section.
