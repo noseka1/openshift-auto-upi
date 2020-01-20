@@ -22,9 +22,8 @@ Note that the infrastructure from the above list provisioned using *openshift-au
 
 ![Deployment Diagram](docs/openshift_auto_upi.svg "Deployment Diagram")
 
-* **Builder Host** is a (virtual) machine that you must provide. It is a "helper" VM from which you will run *openshift-auto-upi* Ansible scripts and which may host part of your OpenShift infrastructure.
+* **Builder Host** is a (virtual) machine that you must provide. It is a "helper" VM from which you will run *openshift-auto-upi* Ansible scripts and which may host part of your OpenShift infrastructure. Note that in order to achieve a minimum virtualized environment, you can install Builder host directly on the Libvirt host.
 * **OpenShift Hosts** will be provisioned for you by *openshift-auto-upi* unless your target platform is bare metal.
-
 
 Note that in order to use DHCP and/or PXE server installed on the Builder host, the Builder host and all of the OpenShift hosts have to be provisioned on the same layer 2 network. In the opposite case, it is sufficient to have a working IP route between the Builder host and the OpenShift hosts.
 
