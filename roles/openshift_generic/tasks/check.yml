@@ -3,7 +3,8 @@
     src: '{{ builder.install_cluster_dir }}/bootstrap.ign'
   register: bootstrap_ign
 
-- set_fact:
+- name: Parse the x509 ca certificate
+  set_fact:
     cert_data: '{{
       ((bootstrap_ign.content | b64decode | from_json).storage.files |
       selectattr("path", "equalto", "/opt/openshift/tls/root-ca.crt") | first )
