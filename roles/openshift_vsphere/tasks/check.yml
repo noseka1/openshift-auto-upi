@@ -1,0 +1,9 @@
+- name: Run some checks before the installation
+  import_role:
+    name: openshift_generic
+    tasks_from: check.yml
+
+- name: Check that ignition data is a valid JSON
+  set_fact:
+    dummy: '{{ lookup("template", "files/vsphere/append.ign", convert_data=False) | from_json }}'
+  with_items: '{{ openshift_cluster_hosts }}'

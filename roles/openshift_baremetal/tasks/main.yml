@@ -4,6 +4,9 @@
 - name: Configure the installer
   include: config.yml
 
+- name: Run some checks before the installation
+  include: check.yml
+
 - name: Run the installation
   include: run.yml
 
