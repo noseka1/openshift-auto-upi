@@ -9,7 +9,7 @@
     dest: '{{ builder.install_cluster_dir }}/install-config.backup.yaml'
     backup: True
 
-- name: Create ignition configs
+- name: Create ignition configs # noqa 301
   command: |
     {{ builder.install_exe }} create ignition-configs --dir "{{ builder.install_cluster_dir }}"
 
