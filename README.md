@@ -267,8 +267,10 @@ $ ansible-playbook openshift_vsphere.yml
 * Support oVirt
 * Check that quay.io is reachable (detect firewall issues)
 * Add documentation on the vm boot order: disk and then network
+* Loadbalancer missing in the picture
 
 ## Futher Notes
 
-IPMI can be tested using [VirtualBMC](https://github.com/openstack/virtualbmc)
+* IPMI can be tested on virtual machines using [VirtualBMC](https://github.com/openstack/virtualbmc)
+* Check Ansible code using `ansible-lint *.yml`
 
