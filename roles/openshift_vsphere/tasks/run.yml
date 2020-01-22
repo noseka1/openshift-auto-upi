@@ -21,12 +21,8 @@
         datastore: '{{ vsphere.datastore_name }}'
     hardware:
       memory_mb: '{{ item.memory_mb }}'
-      mem_reservation: '{{ item.memory_mb }}'
-      mem_reservation: 0
       num_cpus: '{{ item.num_cpus }}'
       scsi: paravirtual
-      memory_reservation_lock: True
-      memory_reservation_lock: False
       hotadd_cpu: False
       hotremove_cpu: False
       hotadd_memory: False
