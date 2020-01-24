@@ -67,20 +67,20 @@ If you use RHEL7 on your Builder host, you will need to apply an additional conf
 Enable additional Red Hat repositories:
 
 ```
-$ yum-config-manager --enable rhel-7-server-optional-rpms
-$ yum-config-manager --enable rhel-7-server-extras-rpms
+$ subscription-manager repos --enable rhel-7-server-optional-rpms
+$ subscription-manager repos --enable rhel-7-server-extras-rpms
 ```
 
 Ansible >= 2.9 is required in order to run *openshift-auto-upi* scripts. Before installing Ansible on RHEL7, enable the Ansible version 2.9 repository:
 
 ```
-$ yum-config-manager --enable rhel-7-server-ansible-2.9-rpms
+$ subscription-manager repos --enable rhel-7-server-ansible-2.9-rpms
 ```
 
 If installing OpenShift on bare metal, the *pyghmi* library is required on Builder host. This library implements the IPMI protocol which is used to control bare metal machines during the OpenShift installation. To enable a yum repository which contains the *python-pyghmi* rpm package:
 
 ```
-$ yum-config-manager --enable rhel-7-server-openstack-14-rpms
+$ subscription-manager repos --enable rhel-7-server-openstack-14-rpms
 ```
 
 ## Configuring RHEL8
