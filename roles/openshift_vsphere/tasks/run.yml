@@ -20,7 +20,7 @@
         type: thin
         datastore: '{{ vsphere.datastore_name }}'
     hardware:
-      memory_mb: '{{ item.memory_mb }}'
+      memory_mb: '{{ item.memory_gb * 1024 }}'
       num_cpus: '{{ item.num_cpus }}'
       scsi: paravirtual
       hotadd_cpu: False

@@ -1,6 +1,6 @@
 <domain type='kvm'>
   <name>{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}</name>
-  <memory unit='MB'>{{ item.memory_mb }}</memory>
+  <memory unit='GiB'>{{ item.memory_gb }}</memory>
   <vcpu>{{ item.num_cpus }}</vcpu>
   <os>
     <type>hvm</type>
