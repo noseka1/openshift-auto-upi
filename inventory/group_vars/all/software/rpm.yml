@@ -14,7 +14,7 @@ rpm_name_map:
   Fedora:
     default:
       python-dns: python3-dns
-      libvirt-python: libvirt-python3
+      libvirt-python: python3-libvirt
       python-pyghmi: python3-pyghmi
       python-pyvmomi: python3-pyvmomi
 
