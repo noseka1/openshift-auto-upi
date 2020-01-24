@@ -4,19 +4,19 @@
     state: present
   become: True
 
-- name: Enable httpd server on boot and start it
-  service:
-    name: httpd
-    state: started
-    enabled: True
-  become: True
-
 - name: Listen on port 81 to avoid conflict with the load balancer
   lineinfile:
     path: /etc/httpd/conf/httpd.conf
     regexp: '^Listen '
     line: Listen 81
   notify: Restart httpd
+  become: True
+
+- name: Enable httpd server on boot and start it
+  service:
+    name: httpd
+    state: started
+    enabled: True
   become: True
 
 - name: Is firewalld running?
