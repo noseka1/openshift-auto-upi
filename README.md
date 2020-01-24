@@ -54,29 +54,11 @@ The dependency diagram below depicts the dependencies between *openshift-auto-up
 
 Supported operating systems:
 
-* Red Hat Enterprise Linux 8
 * Red Hat Enterprise Linux 7
-* Fedora release 31
+* Red Hat Enterprise Linux 8
+* Fedora release >= 31
 
 Recommended memory size for the Builder host is at least 4GB RAM.
-
-## Configuring RHEL8
-
-If you use RHEL8 on your Builder host, you will need to apply an additional configuration that is described in this section.
-
-Enable additional Red Hat repositories:
-
-```
-$ subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms
-```
-
-If installing OpenShift on bare metal, the *pyghmi* library is required on Builder host. This library implements the IPMI protocol which is used to control bare metal machines during the OpenShift installation. To enable a yum repository which contains the *python3-pyghmi* rpm package:
-
-```
-$ subscription-manager repos --enable openstack-15-for-rhel-8-x86_64-rpms
-```
-
-If installing OpenShift on vSphere, the *pyvmomi* library is required on Builder host. You can download the *python3-pyvmomi* rpm package from the [Red Hat Customer Portal](https://access.redhat.com).
 
 ## Configuring RHEL7
 
@@ -100,6 +82,29 @@ If installing OpenShift on bare metal, the *pyghmi* library is required on Build
 ```
 $ yum-config-manager --enable rhel-7-server-openstack-14-rpms
 ```
+
+## Configuring RHEL8
+
+If you use RHEL8 on your Builder host, you will need to apply an additional configuration that is described in this section.
+
+Enable additional Red Hat repositories:
+
+```
+$ subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms
+```
+
+If installing OpenShift on bare metal, the *pyghmi* library is required on Builder host. This library implements the IPMI protocol which is used to control bare metal machines during the OpenShift installation. To enable a yum repository which contains the *python3-pyghmi* rpm package:
+
+```
+$ subscription-manager repos --enable openstack-15-for-rhel-8-x86_64-rpms
+```
+
+If installing OpenShift on vSphere, the *pyvmomi* library is required on Builder host. You can download the *python3-pyvmomi* rpm package from the [Red Hat Customer Portal](https://access.redhat.com).
+
+
+## Configuring Fedora
+
+For Fedora no additional configuration is required.
 
 ## Configuring Builder Host
 
