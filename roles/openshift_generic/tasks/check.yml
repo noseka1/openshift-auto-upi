@@ -7,7 +7,7 @@
   set_fact:
     cert_data: '{{
       ((bootstrap_ign.content | b64decode | from_json).storage.files |
-      selectattr("path", "equalto", "/opt/openshift/tls/root-ca.crt") | first )
+      selectattr("path", "match", "/opt/openshift/tls/root-ca.crt") | first )
       .contents.source.split(",").1 | b64decode }}'
 
 - name: Create a temporary cert file
