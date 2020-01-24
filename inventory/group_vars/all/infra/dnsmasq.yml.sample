@@ -2,7 +2,6 @@ dnsmasq:
   common_options:
     - interface: '*'
     - except-interface: lo
-    - listen-address: 0.0.0.0
     - bind-dynamic:
  #   - log-queries:
  #   - log-dhcp:
