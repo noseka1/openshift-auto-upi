@@ -1,5 +1,6 @@
 *.swp
 /*.retry
+/.project
 
 # user configuration files
 /inventory/group_vars/all/infra/dhcp_server.yml
