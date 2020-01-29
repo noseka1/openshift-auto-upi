@@ -2,11 +2,11 @@
 /*.retry
 
 # user configuration files
-inventory/group_vars/all/infra/dhcp_server.yml
-inventory/group_vars/all/infra/dns_client.yml
-inventory/group_vars/all/infra/dns_server.yml
-inventory/group_vars/all/infra/dnsmasq.yml
-inventory/group_vars/all/infra/libvirt.yml
-inventory/group_vars/all/infra/vsphere.yml
-inventory/group_vars/all/openshift_cluster_hosts.yml
-inventory/group_vars/all/openshift_install_config.yml
+/inventory/group_vars/all/infra/dhcp_server.yml
+/inventory/group_vars/all/infra/dns_client.yml
+/inventory/group_vars/all/infra/dns_server.yml
+/inventory/group_vars/all/infra/dnsmasq.yml
+/inventory/group_vars/all/infra/libvirt.yml
+/inventory/group_vars/all/infra/vsphere.yml
+/inventory/group_vars/all/openshift_cluster_hosts.yml
+/inventory/group_vars/all/openshift_install_config.yml
