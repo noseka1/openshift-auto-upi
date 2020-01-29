@@ -1,14 +1,27 @@
 # Configuration of OpenShift nodes
 #
-# Note that the role specification is required for creation of DNS records in dnsmasq
-# and also for creation of a correct haproxy load balancer configuration. Available roles are:
+# Each OpenShift node is assigned one of the following roles:
 # - bootstrap
 # - master
 # - infra
 # - app
+# The role assignment is required in order to create correct DNS records in dnsmasq
+# and also to configure haproxy load balancer properly.
+#
+# The difference between infra and app nodes:
+# The haproxy load balancer will be configured to forward *.apps ingress traffic to infra nodes
+# but not to app nodes as it is expected that ingress pods are hosted on infra nodes.
+#
+# A typical production deployment has three master nodes, three infra nodes, and a number of
+# app nodes. Master nodes host OpenShift APIs and controllers, infra nodes host ingress load
+# balancer pods and image registry. App nodes run application workloads.
+#
+# A minimum test cluster requires one master node and one infra node.
 #
 # Note that the IPMI configuration is only needed for bare metal installations. If not installing
 # on bare metal, feel free to remove the ipmi related configuration from this file.
+# On the contrary, cpu, memory and disk parameters are used for virtualized installations only.
+# They will be ignored if deploying on bare metal.
 openshift_cluster_hosts:
   - hostname: bootstrap
     role: bootstrap
