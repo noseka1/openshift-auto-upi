@@ -269,10 +269,14 @@ $ ansible-playbook openshift_vsphere.yml
 
 ## TODO List
 
+* Implement Libvirt using [fw_cfg](https://github.com/coreos/coreos-assembler/blob/master/src/cmd-run)
 * Support oVirt
 * Check that quay.io is reachable (detect firewall issues)
 * Add documentation on the vm boot order: disk and then network
 * Loadbalancer missing in the picture
+* Support joining additional worker nodes after the cluster has been bootstrapped
+* Container registry mirror, disconnected install (?)
+* Shut down the bootstrap node and complete the installation process (?)
 
 ## Futher Notes
 
