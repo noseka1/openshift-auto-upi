@@ -235,6 +235,9 @@ $ ansible-playbook openshift_vsphere.yml
 * Support joining additional worker nodes after the cluster has been bootstrapped
 * Container registry mirror, disconnected install (?)
 * Shut down the bootstrap node and complete the installation process (?)
+* Critical: do not run openshift-install create ignition-configs the second time, it will regenerate
+  TLS certs causing the new nodes not be able to join a cluster created using the old certs
+* Don't restart the bootstrap node after the bootstrap is complete
 
 ## Futher Notes
 
