@@ -3,5 +3,5 @@ dnsmasq:
     - interface: '*'
     - except-interface: lo
     - bind-dynamic:
- #   - log-queries:
- #   - log-dhcp:
+    - log-queries:
+    - log-dhcp:
