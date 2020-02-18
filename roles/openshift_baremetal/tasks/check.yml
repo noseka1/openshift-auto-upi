@@ -1,4 +1,0 @@
-- name: Run some checks before the installation
-  import_role:
-    name: openshift_generic
-    tasks_from: check.yml
