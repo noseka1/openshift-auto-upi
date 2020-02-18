@@ -1,4 +1,0 @@
-- name: Configure the installer
-  import_role:
-    name: openshift_generic
-    tasks_from: config.yml

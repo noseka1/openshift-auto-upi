@@ -2,10 +2,14 @@
   include: prereqs.yml
 
 - name: Configure the installer
-  include: config.yml
+  import_role:
+    name: openshift_generic
+    tasks_from: config.yml
 
 - name: Run the installation
   include: run.yml
 
 - name: Wait for the bootstrap to complete
-  include: wait.yml
+  import_role:
+    name: openshift_generic
+    tasks_from: wait.yml

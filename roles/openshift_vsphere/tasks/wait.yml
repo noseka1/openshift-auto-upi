@@ -1,4 +1,0 @@
-- name: Wait for the bootstrap to complete
-  import_role:
-    name: openshift_generic
-    tasks_from: wait.yml
