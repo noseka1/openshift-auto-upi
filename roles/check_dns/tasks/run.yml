@@ -4,8 +4,8 @@
 
 - name: Use custom DNS server configuration
   set_fact:
-    query_server: '@{{ dns_verify.query_server }}'
-  when: dns_verify.query_server is defined
+    query_server: '@{{ check_dns.query_server }}'
+  when: check_dns.query_server is defined
 
 - name: Look up A records
   set_fact:

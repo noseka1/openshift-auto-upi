@@ -1,2 +1,2 @@
-dns_verify:
+check_dns:
   query_server: 192.168.150.2
