@@ -1,4 +1,4 @@
 - hosts: builder
   tasks:
     - include_role:
-        name: dns_verify
+        name: check_dns
