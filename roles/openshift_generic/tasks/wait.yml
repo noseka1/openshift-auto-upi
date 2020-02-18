@@ -18,6 +18,6 @@
 
          KUBECONFIG={{ builder.install_cluster_dir }}/auth/kubeconfig {{ builder.oc_exe }} get clusterversion
 
-         Note that it takes a while for cluster operators to complete the deployment.
+         Note that it will take a while for cluster operators to complete the deployment.
 
 - debug: msg="{{ msg.split('\n') }}"
