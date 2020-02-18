@@ -13,6 +13,11 @@
     path: '{{ builder.install_bin_dir }}'
     state: directory
 
+- name: Create directory {{ builder.timestamp_dir }}
+  file:
+    path: '{{ builder.timestamp_dir }}'
+    state: directory
+
 - name: Download openshift-install archive
   get_url:
     url: '{{ openshift_installer.archive_url }}'
