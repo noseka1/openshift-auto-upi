@@ -230,13 +230,10 @@ $ ansible-playbook openshift_vsphere.yml
 
 * Implement Libvirt using [fw_cfg](https://github.com/coreos/coreos-assembler/blob/master/src/cmd-run)
 * Support oVirt
-* Check that quay.io is reachable (detect firewall issues)
 * Add documentation on the vm boot order: disk and then network
 * Support joining additional worker nodes after the cluster has been bootstrapped
 * Container registry mirror, disconnected install (?)
 * Shut down the bootstrap node and complete the installation process (?)
-* Critical: do not run openshift-install create ignition-configs the second time, it will regenerate
-  TLS certs causing the new nodes not be able to join a cluster created using the old certs
 * Don't restart the bootstrap node after the bootstrap is complete
 
 ## Futher Notes
