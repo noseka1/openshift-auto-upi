@@ -11,4 +11,6 @@
   include: run.yml
 
 - name: Wait for the bootstrap to complete
-  include: wait.yml
+  import_role:
+    name: openshift_generic
+    tasks_from: wait.yml
