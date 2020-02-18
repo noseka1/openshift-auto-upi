@@ -1,0 +1,10 @@
+- name: Check that corporate firewall doesn't filter access to Red Hat web services
+  uri:
+    url: '{{ item }}'
+  register: result
+  with_items:
+    - https://cloud.openshift.com
+    - https://quay.io
+    - https://registry.connect.redhat.com
+    - https://registry.redhat.io
+
