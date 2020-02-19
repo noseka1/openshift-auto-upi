@@ -1,22 +1,13 @@
-- name: Create directory {{ builder.install_dir }}
+- name: Create directory structure
   file:
-    path: '{{ builder.install_dir }}'
+    path: '{{ item }}'
     state: directory
-
-- name: Create directory {{ builder.install_cluster_dir }}
-  file:
-    path: '{{ builder.install_cluster_dir }}'
-    state: directory
-
-- name: Create directory {{ builder.install_bin_dir }}
-  file:
-    path: '{{ builder.install_bin_dir }}'
-    state: directory
-
-- name: Create directory {{ builder.timestamp_dir }}
-  file:
-    path: '{{ builder.timestamp_dir }}'
-    state: directory
+  with_items:
+    - '{{ builder.install_dir }}'
+    - '{{ builder.install_cluster_dir }}'
+    - '{{ builder.install_bin_dir }}'
+    - '{{ builder.install_conf_dir }}'
+    - '{{ builder.timestamp_dir }}'
 
 - name: Download openshift-install archive
   get_url:
