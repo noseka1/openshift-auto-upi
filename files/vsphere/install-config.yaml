@@ -13,10 +13,10 @@ metadata:
   name: {{ openshift_install_config.name }}
 platform:
   vsphere:
-    vcenter: {{ vsphere.vcenter_hostname }}
-    username: {{ vsphere.vcenter_username  }}
-    password: {{ vsphere.vcenter_password  }}
-    datacenter: {{ vsphere.datacenter_name }}
-    defaultDatastore: {{ vsphere.datastore_name }}
+    vcenter: '{{ vsphere.vcenter_hostname }}'
+    username: '{{ vsphere.vcenter_username  }}'
+    password: '{{ vsphere.vcenter_password  }}'
+    datacenter: '{{ vsphere.datacenter_name }}'
+    defaultDatastore: '{{ vsphere.datastore_name }}'
 pullSecret: '{{ openshift_install_config.pull_secret }}'
 sshKey: '{{ openshift_install_config.ssh_key }}'
