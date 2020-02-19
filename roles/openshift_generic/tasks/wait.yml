@@ -1,6 +1,7 @@
 - name: Waiting since {{ ansible_date_time.time }} for the bootstrap to complete
   command: |
     {{ builder.install_exe }} wait-for bootstrap-complete --dir '{{ builder.install_conf_dir }}'
+  changed_when: False
 
 - name: Bootstrap complete
   set_fact:
