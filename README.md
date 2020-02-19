@@ -224,6 +224,11 @@ Kick off the OpenShift installation by issuing the command:
 ```
 $ ansible-playbook openshift_vsphere.yml
 ```
+# FAQ
+
+* *VMware virtual machines were not assigned the MAC addresses that I configured in Ansible?* <br/>
+  Check your RHCOS template. RHCOS template should NOT include a NIC that is attached to the VM Network. Instead, this NIC will be created by Ansible and assigned a proper MAC address. If the NIC already exists, Ansible scripts won't be able to correct the MAC address.
+  
 # openshift-auto-upi Development
 
 ## TODO List
