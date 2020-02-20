@@ -2,6 +2,12 @@
 
 Preparing infrastructure for OpenShift installation by hand is a rather tedious job. In order to save the effort, *openshift-auto-upi* provides a set of Ansible scripts that automate the infrastructure creation.
 
+*openshift-auto-upi* comes with Ansible roles to provision OpenShift cluster hosts on the following target platforms:
+
+* [Bare Metal](roles/openshift_baremetal)
+* [Libvirt](roles/openshift_libvirt)
+* [vSphere](roles/openshift_vsphere)
+
 *openshift-auto-upi* comes with Ansible roles to provision and configure:
 
 * [DHCP Server](roles/dhcp_server)
@@ -11,12 +17,6 @@ Preparing infrastructure for OpenShift installation by hand is a rather tedious 
 * [Load Balancer](roles/loadbalancer)
 
 Note that the infrastructure from the above list provisioned using *openshift-auto-upi* is NOT meant for production use. It is meant to be a temporary fill in for your missing production-grade infrastructure. It can also be used for learning purposes as it showcases a minimum working configuration. Using *openshift-auto-upi* to provision any of the infrastructure from the above list is optional.
-
-*openshift-auto-upi* comes with Ansible roles to provision OpenShift cluster hosts on the following target platforms:
-
-* [Bare Metal](roles/openshift_baremetal)
-* [Libvirt](roles/openshift_libvirt)
-* [vSphere](roles/openshift_vsphere)
 
 # Deployment Overview
 
