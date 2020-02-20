@@ -224,6 +224,33 @@ Kick off the OpenShift installation by issuing the command:
 ```
 $ ansible-playbook openshift_vsphere.yml
 ```
+# Adding Cluster Nodes
+
+Add the new nodes to the list of cluster nodes. At the same time, remove (comment out) the bootstrap node from the list:
+
+```
+$ vi inventory/group_vars/all/openshift_cluster_hosts.yml
+```
+
+If you are adding infra nodes and you use the load balancer managed by openshift-auto-upi, refresh the load balancer configuration by running the Ansible playbook:
+
+```
+$ ansible-playbook loadbalancer.yml
+```
+
+Re-run the the platform-specific playbook to install the new cluster nodes:
+
+```
+$ ansible-playbook openshift_<baremetal|libvirt|vsphere>.yml
+```
+
+To allow the new nodes to join the cluster, you may need to sign their CSRs:
+
+```
+$ oc get csr
+$ oc adm certificate approve <name>
+```
+
 # FAQ
 
 * *VMware virtual machines were not assigned the MAC addresses that I configured in Ansible?* <br/>
