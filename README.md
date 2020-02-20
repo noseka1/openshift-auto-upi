@@ -263,13 +263,11 @@ $ oc adm certificate approve <name>
 * Implement Libvirt using [fw_cfg](https://github.com/coreos/coreos-assembler/blob/master/src/cmd-run)
 * Support oVirt
 * Add documentation on the vm boot order: disk and then network
-* Support joining additional worker nodes after the cluster has been bootstrapped
 * Container registry mirror, disconnected install (?)
-* Shut down the bootstrap node and complete the installation process (?)
-* Don't restart the bootstrap node after the bootstrap is complete
+* Installing python dependencies on RHEL7 (e.g. python-pyvmomi) can be a challenge
+* Rename builder node -> helper node
 
 ## Futher Notes
 
 * IPMI can be tested on virtual machines using [VirtualBMC](https://github.com/openstack/virtualbmc)
 * Check Ansible code using `ansible-lint *.yml`
-
