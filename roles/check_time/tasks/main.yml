@@ -1,0 +1,21 @@
+- name: Current UTC time on the localhost
+  debug:
+    var: ansible_date_time.iso8601
+
+- name: Grab current UTC time
+  uri:
+    url: http://worldtimeapi.org/api/timezone/Etc/UTC
+  register: current_utc_time
+
+- name: Current UTC time from http://worldtimeapi.org
+  debug:
+    var: current_utc_time.json.utc_datetime
+
+- name: Compare the times
+  debug:
+    msg: >
+      Make sure that the current time on the localhost is correct. This time
+      is used for generating certificates for the bootstrap and OpenShift nodes.
+      Incorrect time will cause the certificates to be invalid (either expired or
+      not valid yet). OpenShift nodes will refuse to download their configuration
+      from a bootstrap node that presents an invalid certificate to them.
