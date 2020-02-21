@@ -1,4 +1,4 @@
-- hosts: builder
+- hosts: helper
   tasks:
     - include_role:
         name: check_firewall

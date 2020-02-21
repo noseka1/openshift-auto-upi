@@ -1,0 +1,34 @@
+- name: Create directory structure
+  file:
+    path: '{{ item }}'
+    state: directory
+  with_items:
+    - '{{ helper.install_dir }}'
+    - '{{ helper.install_cluster_dir }}'
+    - '{{ helper.install_bin_dir }}'
+    - '{{ helper.install_conf_dir }}'
+    - '{{ helper.timestamp_dir }}'
+
+- name: Download openshift-install archive
+  get_url:
+    url: '{{ openshift_installer.archive_url }}'
+    dest: '{{ helper.install_bin_dir }}/{{ openshift_installer.archive_url | basename }}'
+    checksum: 'sha256:{{ openshift_installer.sha256sum_url }}'
+
+- name: Extract openshift-install
+  unarchive:
+    src: '{{ helper.install_bin_dir }}/{{ openshift_installer.archive_url | basename }}'
+    dest: '{{ helper.install_bin_dir }}'
+    creates: '{{ helper.install_bin_dir }}/openshift-install'
+
+- name: Download oc client archive
+  get_url:
+    url: '{{ openshift_client.archive_url }}'
+    dest: '{{ helper.install_bin_dir }}/{{ openshift_client.archive_url | basename }}'
+    checksum: 'sha256:{{ openshift_client.sha256sum_url }}'
+
+- name: Extract oc client
+  unarchive:
+    src: '{{ helper.install_bin_dir }}/{{ openshift_client.archive_url | basename }}'
+    dest: '{{ helper.install_bin_dir }}'
+    creates: '{{ helper.install_bin_dir }}/oc'

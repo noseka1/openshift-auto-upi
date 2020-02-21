@@ -1,6 +1,6 @@
 - name: Waiting since {{ ansible_date_time.time }} for the bootstrap to complete
   command: |
-    {{ builder.install_exe }} wait-for bootstrap-complete --dir '{{ builder.install_conf_dir }}'
+    {{ helper.install_exe }} wait-for bootstrap-complete --dir '{{ helper.install_conf_dir }}'
   changed_when: False
 
 - name: Bootstrap complete
@@ -13,11 +13,11 @@
       1. You must remove the bootstrap machine from the load balancer at this point.
       2. You can check the health of your cluster using:
 
-         KUBECONFIG={{ builder.install_conf_dir }}/auth/kubeconfig {{ builder.oc_exe }} get clusteroperator
+         KUBECONFIG={{ helper.install_conf_dir }}/auth/kubeconfig {{ helper.oc_exe }} get clusteroperator
 
          and
 
-         KUBECONFIG={{ builder.install_conf_dir }}/auth/kubeconfig {{ builder.oc_exe }} get clusterversion
+         KUBECONFIG={{ helper.install_conf_dir }}/auth/kubeconfig {{ helper.oc_exe }} get clusterversion
 
          Note that it will take a while for cluster operators to complete the deployment.
 

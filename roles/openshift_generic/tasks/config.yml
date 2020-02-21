@@ -1,20 +1,20 @@
-- name: Check if timestamp {{ builder.timestamp_ignition_created }} exists
+- name: Check if timestamp {{ helper.timestamp_ignition_created }} exists
   stat:
-    path: '{{ builder.timestamp_ignition_created }}'
+    path: '{{ helper.timestamp_ignition_created }}'
   register: timestamp
 
 - name: Create ignition
   import_tasks: ignition.yml
   when: not timestamp.stat.exists
 
-- name: Create timestamp {{ builder.timestamp_ignition_created }}
+- name: Create timestamp {{ helper.timestamp_ignition_created }}
   file:
-    path: '{{ builder.timestamp_ignition_created }}'
+    path: '{{ helper.timestamp_ignition_created }}'
     state: touch
   when: not timestamp.stat.exists
 
 - name: Create pxelinux.cfg configs
   template:
     src: files/generic/pxelinux.cfg/menu.cfg
-    dest: '{{ builder.tftp_cluster_dir }}/pxelinux.cfg/01-{{ item.macaddr | regex_replace(":", "-") }}'
+    dest: '{{ helper.tftp_cluster_dir }}/pxelinux.cfg/01-{{ item.macaddr | regex_replace(":", "-") }}'
   with_items: '{{ openshift_cluster_hosts }}'

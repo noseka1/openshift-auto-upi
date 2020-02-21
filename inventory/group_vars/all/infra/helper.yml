@@ -1,4 +1,4 @@
-builder:
+helper:
   install_dir:                '{{ ansible_env["HOME"] }}/openshift-auto-upi-install'
   install_cluster_dir:        '{{ ansible_env["HOME"] }}/openshift-auto-upi-install/{{ openshift_install_config.name }}'
   install_bin_dir:            '{{ ansible_env["HOME"] }}/openshift-auto-upi-install/{{ openshift_install_config.name }}/bin'

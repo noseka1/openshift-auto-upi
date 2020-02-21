@@ -1,17 +1,17 @@
-- name: Copy install-config.yaml to the {{ builder.install_conf_dir }} directory
+- name: Copy install-config.yaml to the {{ helper.install_conf_dir }} directory
   template:
     src: files/generic/install-config.yaml
-    dest: '{{ builder.install_conf_dir }}'
+    dest: '{{ helper.install_conf_dir }}'
 
 - name: Create a backup copy of install-config.yaml as the installer deletes the original
   template:
     src: files/generic/install-config.yaml
-    dest: '{{ builder.install_conf_dir }}/install-config.backup.yaml'
+    dest: '{{ helper.install_conf_dir }}/install-config.backup.yaml'
     backup: True
 
 - name: Create ignition configs # noqa 301
   command: |
-    {{ builder.install_exe }} create ignition-configs --dir "{{ builder.install_conf_dir }}"
+    {{ helper.install_exe }} create ignition-configs --dir "{{ helper.install_conf_dir }}"
 
 - name: Copy ignition files to the webserver html directory
   copy:
@@ -20,6 +20,6 @@
     remote_src: True
     backup: True
   with_items:
-    - { src: '{{ builder.install_conf_dir }}/bootstrap.ign', dest: '{{ builder.web_cluster_dir }}' }
-    - { src: '{{ builder.install_conf_dir }}/master.ign',    dest: '{{ builder.web_cluster_dir }}' }
-    - { src: '{{ builder.install_conf_dir }}/worker.ign',    dest: '{{ builder.web_cluster_dir }}' }
+    - { src: '{{ helper.install_conf_dir }}/bootstrap.ign', dest: '{{ helper.web_cluster_dir }}' }
+    - { src: '{{ helper.install_conf_dir }}/master.ign',    dest: '{{ helper.web_cluster_dir }}' }
+    - { src: '{{ helper.install_conf_dir }}/worker.ign',    dest: '{{ helper.web_cluster_dir }}' }
