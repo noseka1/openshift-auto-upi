@@ -9,7 +9,7 @@
     - '{{ helper.install_conf_dir }}'
     - '{{ helper.timestamp_dir }}'
 
-- name: Download openshift-install archive
+- name: Download openshift-install archive {{ openshift_installer.archive_url }}
   get_url:
     url: '{{ openshift_installer.archive_url }}'
     dest: '{{ helper.install_bin_dir }}/{{ openshift_installer.archive_url | basename }}'
@@ -21,7 +21,7 @@
     dest: '{{ helper.install_bin_dir }}'
     creates: '{{ helper.install_bin_dir }}/openshift-install'
 
-- name: Download oc client archive
+- name: Download oc client archive {{ openshift_client.archive_url }}
   get_url:
     url: '{{ openshift_client.archive_url }}'
     dest: '{{ helper.install_bin_dir }}/{{ openshift_client.archive_url | basename }}'
