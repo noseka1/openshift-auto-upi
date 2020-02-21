@@ -1,4 +1,4 @@
 - hosts: helper
   tasks:
-    - include_role:
+    - import_role:
         name: check_time
