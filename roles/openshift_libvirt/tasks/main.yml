@@ -1,5 +1,5 @@
 - name: Install prerequisities
-  include: prereqs.yml
+  import_tasks: prereqs.yml
 
 - name: Configure the installer
   import_role:
@@ -7,7 +7,7 @@
     tasks_from: config.yml
 
 - name: Run the installation
-  include: run.yml
+  import_tasks: run.yml
 
 - name: Wait for the bootstrap to complete
   import_role:
