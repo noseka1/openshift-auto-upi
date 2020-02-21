@@ -238,7 +238,7 @@ If you are adding infra nodes and you use the load balancer managed by openshift
 $ ansible-playbook loadbalancer.yml
 ```
 
-Re-run the the platform-specific playbook to install the new cluster nodes:
+Re-run the platform-specific playbook to install the new cluster nodes:
 
 ```
 $ ansible-playbook openshift_<baremetal|libvirt|vsphere>.yml
