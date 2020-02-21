@@ -23,15 +23,15 @@
   when: firewalld.rc == 0
   become: True
 
-- name: Ensure {{ builder.tftp_dir }} exists
+- name: Ensure {{ helper.tftp_dir }} exists
   file:
-    dest: '{{ builder.tftp_dir }}'
+    dest: '{{ helper.tftp_dir }}'
     state: directory
   become: True
 
-- name: Create {{ builder.tftp_cluster_dir }} directory
+- name: Create {{ helper.tftp_cluster_dir }} directory
   file:
-    dest: '{{ builder.tftp_cluster_dir }}'
+    dest: '{{ helper.tftp_cluster_dir }}'
     owner: '{{ ansible_real_user_id | int }}'
     group: '{{ ansible_real_group_id | int }}'
     state: directory
@@ -43,13 +43,13 @@
     state: present
   become: True
 
-- name: Copy syslinux files to the {{ builder.tftp_cluster_dir }} dir
+- name: Copy syslinux files to the {{ helper.tftp_cluster_dir }} dir
   shell: |
-    cp -ar /usr/share/syslinux/* '{{ builder.tftp_cluster_dir }}'
+    cp -ar /usr/share/syslinux/* '{{ helper.tftp_cluster_dir }}'
   args:
-    creates: '{{ builder.tftp_cluster_dir }}/pxelinux.0'
+    creates: '{{ helper.tftp_cluster_dir }}/pxelinux.0'
 
-- name: Create {{ builder.tftp_cluster_dir }}/pxelinux.cfg directory
+- name: Create {{ helper.tftp_cluster_dir }}/pxelinux.cfg directory
   file:
-    dest: '{{ builder.tftp_cluster_dir }}/pxelinux.cfg'
+    dest: '{{ helper.tftp_cluster_dir }}/pxelinux.cfg'
     state: directory

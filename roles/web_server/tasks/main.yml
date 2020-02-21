@@ -35,9 +35,9 @@
   when: firewalld.rc == 0
   become: True
 
-- name: Create a web dir '{{ builder.web_cluster_dir }}'
+- name: Create a web dir '{{ helper.web_cluster_dir }}'
   file:
-    path: '{{ builder.web_cluster_dir }}'
+    path: '{{ helper.web_cluster_dir }}'
     owner: '{{ ansible_real_user_id | int }}'
     group: '{{ ansible_real_group_id | int }}'
     state: directory

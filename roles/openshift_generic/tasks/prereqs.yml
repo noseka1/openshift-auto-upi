@@ -1,7 +1,7 @@
 - name: Download CoreOS binaries
   get_url:
     url: '{{ item }}'
-    dest: '{{ builder.web_cluster_dir }}/{{ item | basename }}'
+    dest: '{{ helper.web_cluster_dir }}/{{ item | basename }}'
     checksum: 'sha256:{{ coreos.sha256sum_url }}'
   with_items:
     - '{{ coreos.installer_initramfs_url }}'

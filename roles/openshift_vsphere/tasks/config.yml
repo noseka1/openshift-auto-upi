@@ -1,14 +1,14 @@
-- name: Check if timestamp {{ builder.timestamp_ignition_created }} exists
+- name: Check if timestamp {{ helper.timestamp_ignition_created }} exists
   stat:
-    path: '{{ builder.timestamp_ignition_created }}'
+    path: '{{ helper.timestamp_ignition_created }}'
   register: timestamp
 
 - name: Create ignition
   import_tasks: ignition.yml
   when: not timestamp.stat.exists
 
-- name: Create timestamp {{ builder.timestamp_ignition_created }}
+- name: Create timestamp {{ helper.timestamp_ignition_created }}
   file:
-    path: '{{ builder.timestamp_ignition_created }}'
+    path: '{{ helper.timestamp_ignition_created }}'
     state: touch
   when: not timestamp.stat.exists
