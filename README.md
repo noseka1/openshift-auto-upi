@@ -16,7 +16,7 @@ Preparing infrastructure for OpenShift installation by hand is a rather tedious 
 * [Web Server](roles/web_server)
 * [Load Balancer](roles/loadbalancer)
 
-Note that the infrastructure from the above list provisioned using *openshift-auto-upi* is NOT meant for production use. It is meant to be a temporary fill in for your missing production-grade infrastructure. It can also be used for learning purposes as it showcases a minimum working configuration. Using *openshift-auto-upi* to provision any of the infrastructure from the above list is optional.
+Note that the infrastructure from the above list provisioned using *openshift-auto-upi* is NOT meant for production use. It is meant to be a temporary fill in for your missing production-grade infrastructure. Using *openshift-auto-upi* to provision any of the infrastructure from the above list is optional.
 
 # Deployment Overview
 
