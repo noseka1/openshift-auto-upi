@@ -271,3 +271,11 @@ $ oc adm certificate approve <name>
 
 * IPMI can be tested on virtual machines using [VirtualBMC](https://github.com/openstack/virtualbmc)
 * Check Ansible code using `ansible-lint *.yml`
+
+# References
+
+Projects similar to *openshift-auto-upi*:
+* [openshift4-vmware-upi](https://github.com/sa-ne/openshift4-vmware-upi)
+* [openshift4-rhv-upi](https://github.com/sa-ne/openshift4-rhv-upi)
+* [ocp4-upi-helpernode](https://github.com/christianh814/ocp4-upi-helpernode)
+
