@@ -226,7 +226,7 @@ $ ansible-playbook openshift_vsphere.yml
 ```
 # Adding Cluster Nodes
 
-Add the new hosts to the list of cluster hosts. At the same time, remove (comment out) the bootstrap node from the list to prevent the Ansible scripts powering on the bootstrap node:
+Add the new hosts to the list of cluster hosts. At the same time, remove (comment out) the bootstrap host from the list to prevent the Ansible scripts from powering on the bootstrap node:
 
 ```
 $ vi inventory/group_vars/all/openshift_cluster_hosts.yml
