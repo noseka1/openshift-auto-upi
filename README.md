@@ -226,19 +226,19 @@ $ ansible-playbook openshift_vsphere.yml
 ```
 # Adding Cluster Nodes
 
-Add the new nodes to the list of cluster nodes. At the same time, remove (comment out) the bootstrap node from the list:
+Add the new hosts to the list of cluster hosts. At the same time, remove (comment out) the bootstrap node from the list to prevent the Ansible scripts powering on the bootstrap node:
 
 ```
 $ vi inventory/group_vars/all/openshift_cluster_hosts.yml
 ```
 
-If you are adding infra nodes and you use the load balancer managed by openshift-auto-upi, refresh the load balancer configuration by running the Ansible playbook:
+If you are adding infra hosts and you use the load balancer managed by openshift-auto-upi, refresh the load balancer configuration by re-running the Ansible playbook:
 
 ```
 $ ansible-playbook loadbalancer.yml
 ```
 
-Re-run the platform-specific playbook to install the new cluster nodes:
+Re-run the platform-specific playbook to install the new cluster hosts:
 
 ```
 $ ansible-playbook openshift_<baremetal|libvirt|vsphere>.yml
@@ -255,7 +255,7 @@ $ oc adm certificate approve <name>
 
 * *VMware virtual machines were not assigned the MAC addresses that I configured in Ansible?* <br/>
   Check your RHCOS template. RHCOS template should NOT include a NIC that is attached to the VM Network. Instead, this NIC will be created by Ansible and assigned a proper MAC address. If the NIC already exists, Ansible scripts won't be able to correct the MAC address.
-  
+
 # openshift-auto-upi Development
 
 ## TODO List
@@ -267,7 +267,7 @@ $ oc adm certificate approve <name>
 * Installing python dependencies on RHEL7 (e.g. python-pyvmomi) can be a challenge
 * Check [firewall](https://docs.openshift.com/container-platform/4.3/installing/install_config/configuring-firewall.html)
 
-## Futher Notes
+## Development Notes
 
 * IPMI can be tested on virtual machines using [VirtualBMC](https://github.com/openstack/virtualbmc)
 * Check Ansible code using `ansible-lint *.yml`
