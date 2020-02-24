@@ -1,3 +1,31 @@
+- name: Create cluster folder
+  vcenter_folder:
+    hostname: '{{ vsphere.vcenter_hostname }}'
+    username: '{{ vsphere.vcenter_username }}'
+    password: '{{ vsphere.vcenter_password }}'
+    datacenter: '{{ vsphere.datacenter_name }}'
+    folder_name: '{{ vsphere.cluster_name }}'
+    folder_type: vm
+    validate_certs: no
+    state: present
+
+- name: Upload Red Hat CoreOS OVA template
+  vmware_deploy_ovf:
+    hostname: '{{ vsphere.vcenter_hostname }}'
+    username: '{{ vsphere.vcenter_username }}'
+    password: '{{ vsphere.vcenter_password }}'
+    datacenter: '{{ vsphere.datacenter_name }}'
+    cluster: '{{ vsphere.cluster_name }}'
+    datastore: '{{ vsphere.datastore_name }}'
+    folder: '/{{ vsphere.datacenter_name }}/vm/{{ vsphere.cluster_name }}'
+    name: '{{ vsphere.template_name }}'
+    allow_duplicates: no
+    disk_provisioning: thin
+    networks: '{}'
+    ova: '{{ helper.vsphere_dir }}/{{ coreos.vmware_ova_url | basename }}'
+    power_on: no
+    validate_certs: no
+
 - name: Create a virtual machine from a template
   vmware_guest:
     hostname: '{{ vsphere.vcenter_hostname }}'
