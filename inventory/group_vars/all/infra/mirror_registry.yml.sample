@@ -1,0 +1,28 @@
+mirror_registry:
+  certificate:
+    self_signed:
+      # Enter the hostname for the helper host. Ensure that your hostname is in DNS and that it resolves
+      # to the expected IP address.
+      common_name: helper.mycluster.example.com
+      subject_alt_name:
+        - DNS:helper.mycluster.example.com
+      # Alternatively, you can use an IP address for the helper host instead of the DNS hostname.
+      #common_name: 192.168.150.1
+      #subject_alt_name:
+      #  - IP:192.168.150.1
+  credentials:
+    username: registry
+    password: password
+  container_image: docker.io/library/registry:2
+  # After the start, registry will be listening on 0.0.0.0:<listen_port>
+  # Using port 5001 to avoid conflict with the haproxy config that uses port 5000 already.
+  listen_port: 5001
+  # Registry hostname that is reachable from remote hosts as well as from the helper host itself
+  # (typically equals to the common name on the registry's TLS certificate)
+  connect_host: helper.mycluster.example.com
+  connect_port: 5001
+  mirror_from: quay.io/openshift-release-dev/ocp-release:4.3.0-x86_64
+  mirror_to:   helper.mycluster.example.com:5001/ocp4/openshift4
+  # This is a JSON formatted pull secret that you can obtain at https://cloud.redhat.com
+  # Automation will add the credentials for the mirror registry to this pull secret.
+  pull_secret: ''

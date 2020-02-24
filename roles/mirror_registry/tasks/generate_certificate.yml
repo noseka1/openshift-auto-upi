@@ -1,0 +1,36 @@
+- name: Generate a private key
+  openssl_privatekey:
+    path: '{{ helper.mirror_registry_dir }}/certs/domain.key'
+    backup: True
+
+- name: Generate a certificate signing request
+  openssl_csr:
+    path: '{{ helper.mirror_registry_dir }}/certs/domain.csr'
+    privatekey_path: '{{ helper.mirror_registry_dir }}/certs/domain.key'
+    common_name: '{{ mirror_registry.certificate.self_signed.common_name }}'
+    subject_alt_name: '{{ mirror_registry.certificate.self_signed.subject_alt_name }}'
+    basic_constraints:
+      - CA:TRUE
+    basic_constraints_critical: True
+    backup: True
+
+- name: Generate self-signed certificate for common name {{ mirror_registry.certificate.self_signed.common_name }}
+  openssl_certificate:
+    provider: selfsigned
+    path: '{{ helper.mirror_registry_dir }}/certs/domain.crt'
+    privatekey_path: '{{ helper.mirror_registry_dir }}/certs/domain.key'
+    csr_path: '{{ helper.mirror_registry_dir }}/certs/domain.csr'
+    backup: True
+
+- name: Copy the self-signed certificate to the anchors directory
+  copy:
+    src: '{{ helper.mirror_registry_dir }}/certs/domain.crt'
+    dest: '/etc/pki/ca-trust/source/anchors/{{ mirror_registry.certificate.self_signed.common_name }}.crt'
+  register: new_cert
+  notify: Restart container-mirror-registry
+  become: True
+
+- name: Add the self-signed certificate to the list of trusted certificates
+  command: update-ca-trust
+  when: new_cert is changed
+  become: True

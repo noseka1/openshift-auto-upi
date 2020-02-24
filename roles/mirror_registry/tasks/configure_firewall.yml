@@ -1,0 +1,15 @@
+- name: Is firewalld running?
+  command: firewall-cmd --state
+  changed_when: False
+  failed_when: False
+  register: firewalld
+  become: True
+
+- name: Open port {{ mirror_registry.listen_port }}/tcp on firewall
+  firewalld:
+    port: '{{ mirror_registry.listen_port }}/tcp'
+    permanent: True
+    immediate: True
+    state: enabled
+  when: firewalld.rc == 0
+  become: True

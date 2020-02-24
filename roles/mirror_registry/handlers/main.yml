@@ -1,0 +1,5 @@
+- name: Restart container-mirror-registry
+  service:
+    name: container-mirror-registry
+    state: restarted
+  become: True
