@@ -1,0 +1,54 @@
+- name: Install required packages
+  yum:
+    name:
+      - podman
+      - httpd-tools
+    state: present
+  become: True
+
+- name: Create mirror registry directory structure
+  file:
+    dest: '{{ item }}'
+    state: directory
+  with_items:
+    - '{{  helper.mirror_registry_dir }}'
+    - '{{  helper.mirror_registry_dir }}/auth'
+    - '{{  helper.mirror_registry_dir }}/bin'
+    - '{{  helper.mirror_registry_dir }}/certs'
+    - '{{  helper.mirror_registry_dir }}/data'
+
+- name: Generate self-signed certificate
+  import_tasks: generate_certificate.yml
+
+- name: Generate registry credentials file
+  htpasswd:
+    path: '{{ helper.mirror_registry_dir }}/auth/htpasswd'
+    name: '{{ mirror_registry.credentials.username }}'
+    password: '{{ mirror_registry.credentials.password }}'
+    crypt_scheme: bcrypt
+  notify: Restart container-mirror-registry
+
+- name: Deploy mirror registry container
+  import_tasks: deploy_container.yml
+
+- name: Configure firewall
+  import_tasks: configure_firewall.yml
+
+- name: Restart container-mirror-registry if needed
+  meta: flush_handlers
+
+- name: Waiting for the mirror registry to come up
+  uri:
+    url: 'https://{{ mirror_registry.connect_host }}:{{ mirror_registry.connect_port | string }}/v2/_catalog'
+    url_username: '{{ mirror_registry.credentials.username }}'
+    url_password: '{{ mirror_registry.credentials.password }}'
+  register: result
+  until: result.status == 200
+  retries: 5
+  delay: 5
+
+- name: Create a pull secret
+  import_tasks: create_pull_secret.yml
+
+- name: Run mirroring
+  import_tasks: run_mirroring.yml

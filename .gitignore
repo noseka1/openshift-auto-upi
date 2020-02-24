@@ -9,6 +9,7 @@
 /inventory/group_vars/all/infra/dns_server.yml
 /inventory/group_vars/all/infra/dnsmasq.yml
 /inventory/group_vars/all/infra/libvirt.yml
+/inventory/group_vars/all/infra/mirror_registry.yml
 /inventory/group_vars/all/infra/vsphere.yml
 /inventory/group_vars/all/openshift_cluster_hosts.yml
 /inventory/group_vars/all/openshift_install_config.yml
