@@ -55,7 +55,7 @@ The dependency diagram below depicts the dependencies between *openshift-auto-up
 There are two options to create a Helper Host:
 
 * Create a Helper Host virtual machine. Recommended Helper Host machine size is 1 vCPU, 4 GB RAM, and 10 GB disk space. You have to install one of the supported operating systems on this machine.
-* If you run one of the supported operating system on an existing machine, you can use this machine as your Helper Host.
+* If you run one of the supported operating system on an existing machine, you can use that machine as your Helper Host.
 
 Supported operating systems for the Helper Host are:
 
