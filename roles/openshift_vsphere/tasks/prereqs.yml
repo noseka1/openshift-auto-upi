@@ -3,3 +3,14 @@
     name: '{{ rpm_name["python-pyvmomi"] }}'
     state: present
   become: True
+
+- name: Create dir '{{ helper.vsphere_dir }}'
+  file:
+    path: '{{ helper.vsphere_dir }}'
+    state: directory
+
+- name: Download Red Hat CoreOS OVA template {{ coreos.vmware_ova_url }}
+  get_url:
+    url: '{{ coreos.vmware_ova_url }}'
+    dest: '{{ helper.vsphere_dir }}/{{ coreos.vmware_ova_url | basename }}'
+    checksum: 'sha256:{{ coreos.sha256sum_url }}'
