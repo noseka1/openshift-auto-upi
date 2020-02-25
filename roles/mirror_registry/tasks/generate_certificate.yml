@@ -1,9 +1,9 @@
-- name: Generate a private key
+- name: Generate private key
   openssl_privatekey:
     path: '{{ helper.mirror_registry_dir }}/certs/domain.key'
     backup: True
 
-- name: Generate a certificate signing request
+- name: Generate certificate signing request
   openssl_csr:
     path: '{{ helper.mirror_registry_dir }}/certs/domain.csr'
     privatekey_path: '{{ helper.mirror_registry_dir }}/certs/domain.key'
@@ -26,11 +26,11 @@
   copy:
     src: '{{ helper.mirror_registry_dir }}/certs/domain.crt'
     dest: '/etc/pki/ca-trust/source/anchors/{{ mirror_registry.certificate.self_signed.common_name }}.crt'
-  register: new_cert
+  register: new_certificate
   notify: Restart container-mirror-registry
   become: True
 
 - name: Add the self-signed certificate to the list of trusted certificates
   command: update-ca-trust
-  when: new_cert is changed
+  when: new_certificate is changed
   become: True

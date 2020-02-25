@@ -6,14 +6,13 @@
     state: present
   become: True
 
-- name: Create mirror registry directory structure
+- name: Create a mirror registry directory structure
   file:
     dest: '{{ item }}'
     state: directory
   with_items:
     - '{{  helper.mirror_registry_dir }}'
     - '{{  helper.mirror_registry_dir }}/auth'
-    - '{{  helper.mirror_registry_dir }}/bin'
     - '{{  helper.mirror_registry_dir }}/certs'
     - '{{  helper.mirror_registry_dir }}/data'
 
@@ -29,7 +28,7 @@
   notify: Restart container-mirror-registry
 
 - name: Deploy mirror registry container
-  import_tasks: deploy_container.yml
+  import_tasks: mirror_create.yml
 
 - name: Configure firewall
   import_tasks: configure_firewall.yml
@@ -47,8 +46,11 @@
   retries: 5
   delay: 5
 
-- name: Create a pull secret
+- name: Create pull secret
   import_tasks: create_pull_secret.yml
 
-- name: Run mirroring
-  import_tasks: run_mirroring.yml
+- name: Synchronize the local mirror with the remote repo
+  import_tasks: mirror_sync.yml
+
+- name: Create openshift-install client
+  import_tasks: install_client.yml

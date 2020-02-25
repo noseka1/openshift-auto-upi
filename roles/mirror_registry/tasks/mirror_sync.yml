@@ -1,0 +1,26 @@
+- name: Copy the mirror sync script
+  template:
+    src: mirror_sync.sh
+    dest: '{{ helper.mirror_registry_dir }}'
+    mode: '0755'
+
+- name: Waiting since {{ ansible_date_time.time }} for the mirror sync to complete
+  command: '{{ helper.mirror_registry_dir }}/mirror_sync.sh'
+  register: mirror_command
+
+- debug:
+    var: mirror_command.stderr_lines
+
+- debug:
+    var: mirror_command.stdout_lines
+
+- name: Save standard error to file {{ helper.mirror_registry_dir }}/mirror_sync.stderr.txt
+  copy:
+    dest: '{{ helper.mirror_registry_dir }}/mirror_sync.stderr.txt'
+    content: '{{ mirror_command.stderr }}'
+
+- name: Save standard output to file {{ helper.mirror_registry_dir }}/mirror_sync.stdout.txt
+  copy:
+    dest: '{{ helper.mirror_registry_dir }}/mirror_sync.stdout.txt'
+    content: '{{ mirror_command.stdout }}'
+    backup: True

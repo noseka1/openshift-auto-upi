@@ -1,0 +1,22 @@
+- name: Pull the container image {{ mirror_registry.container_image }}
+  podman_image:
+    name: '{{ mirror_registry.container_image }}'
+  become: True
+
+- name: Copy the mirror-registry creation script
+  template:
+    src: mirror_create.sh
+    dest: '{{ helper.mirror_registry_dir }}'
+    mode: '0755'
+  register: container_create
+
+- name: Mirror create include
+  include_tasks: mirror_create_include.yml
+  when: container_create is changed
+
+- name: Enable container-mirror-registry on boot and start it
+  service:
+    name: container-mirror-registry
+    state: started
+    enabled: True
+  become: True
