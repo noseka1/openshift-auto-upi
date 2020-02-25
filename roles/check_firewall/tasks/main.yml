@@ -1,10 +1,37 @@
-- name: Check that corporate firewall doesn't filter access to Red Hat web services
+- name: Firewall check
+  debug:
+    msg: Checking that the URLs listed at https://docs.openshift.com/container-platform/latest/installing/install_config/configuring-firewall.html are reachable
+
+- name: Check that registry URLs are reachable
   uri:
     url: '{{ item }}'
-  register: result
+    timeout: 2
+  ignore_errors: True
   with_items:
-    - https://cloud.openshift.com
-    - https://quay.io
-    - https://registry.connect.redhat.com
     - https://registry.redhat.io
+    - https://quay.io
+    - https://sso.redhat.com
 
+- name: If you do not disable Telemetry, Red Hat Insights URLs must be reachable
+  uri:
+    url: '{{ item }}'
+    timeout: 2
+    status_code: [ 200, 404 ]
+    validate_certs: False
+  ignore_errors: True
+  with_items:
+    - https://cert-api.access.redhat.com
+    - https://api.access.redhat.com
+    - https://infogw.api.openshift.com
+    - https://cloud.redhat.com/api/ingress
+
+- name: Check that various other URLs are reachable
+  uri:
+    url: '{{ item }}'
+    timeout: 2
+  ignore_errors: True
+  with_items:
+    - https://mirror.openshift.com
+    #- https://*.cloudfront.net
+    - https://api.openshift.com
+    - https://cloud.redhat.com/openshift
