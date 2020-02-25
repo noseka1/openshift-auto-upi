@@ -7,7 +7,7 @@
     url: http://worldtimeapi.org/api/timezone/Etc/UTC
   register: current_utc_time
 
-- name: Current UTC time from http://worldtimeapi.org
+- name: Current UTC time according to http://worldtimeapi.org
   debug:
     var: current_utc_time.json.utc_datetime
 
