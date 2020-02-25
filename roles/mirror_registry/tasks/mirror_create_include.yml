@@ -1,24 +1,10 @@
-- name: Pull the container image {{ mirror_registry.container_image }}
-  podman_image:
-    name: '{{ mirror_registry.container_image }}'
-  become: True
-
-- name: Copy the mirror-registry creation script
-  template:
-    src: create.sh
-    dest: '{{ helper.mirror_registry_dir }}/bin'
-    mode: '0755'
-  register: container_create
-
 - name: Remove an existing mirror-registry container
   command: podman rm --force mirror-registry
   ignore_errors: True
-  when: container_create is changed
   become: True
 
 - name: Create a mirror-registry container
-  command: '{{ helper.mirror_registry_dir }}/bin/create.sh'
-  when: container_create is changed
+  command: '{{ helper.mirror_registry_dir }}/mirror_create.sh'
   become: True
 
 - name: Generate container-mirror-registry systemd script
@@ -31,18 +17,9 @@
   copy:
     dest: /etc/systemd/system/container-mirror-registry.service
     content: '{{ container_systemd.stdout }}'
-  register: container_systemd_service
   notify: Restart container-mirror-registry
   become: True
 
 - name: Reload systemd unit configuration
   command: systemctl --system daemon-reload
-  when: container_systemd_service is changed
   become: yes
-
-- name: Enable container-mirror-registry on boot and start it
-  service:
-    name: container-mirror-registry
-    state: started
-    enabled: True
-  become: True
