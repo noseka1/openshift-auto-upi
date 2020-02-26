@@ -4,7 +4,7 @@
     dest: '{{ helper.mirror_registry_dir }}'
     mode: '0755'
 
-- name: Waiting since {{ ansible_date_time.time }} for the mirror sync to complete
+- name: Waiting since {{ lookup("pipe", "date +%r") }} for the mirror sync to complete
   command: '{{ helper.mirror_registry_dir }}/mirror_sync.sh'
   register: mirror_command
 

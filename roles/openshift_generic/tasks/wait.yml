@@ -1,4 +1,4 @@
-- name: Waiting since {{ ansible_date_time.time }} for SSH on OpenShift nodes
+- name: Waiting since {{ lookup("pipe", "date +%r") }} for SSH on OpenShift nodes
   wait_for:
     port: 22
     host: '{{ item.ipaddr }}'
@@ -7,7 +7,7 @@
     timeout: 1800
   with_items: '{{ openshift_cluster_hosts }}'
 
-- name: Waiting since {{ ansible_date_time.time }} for the bootstrap to complete
+- name: Waiting since {{ lookup("pipe", "date +%r") }} for the bootstrap to complete
   command: |
     {{ helper.install_exe }} wait-for bootstrap-complete --dir '{{ helper.install_conf_dir }}'
   changed_when: False
