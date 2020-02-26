@@ -26,8 +26,18 @@
     backup: True
 
 - name: Disconnected installation instructions
-  debug:
-    msg: >
-      The installer and the mirror registry for disconnected installation are ready.
-      Refer to the instructions at the end of the {{ helper.mirror_registry_dir }}/mirror_sync.stdout.txt file
-      on how to configure the install-config.yaml.
+  set_fact:
+    msg: |
+      The installer and the mirror registry for the disconnected install are now ready.
+
+      Refer to the instructions at the end of the {{ helper.mirror_registry_dir }}/mirror_sync.stdout.txt file on how to
+      configure your install-config.yaml (add the imageContentSources element) to pull images from the mirror registry.
+
+      If your mirror registry uses a self-signed certificate, you must add that certificate to the additionalTrustBundle
+      element in your install-config.yaml.
+
+      Also, remember to use {{ helper.mirror_registry_dir }}/pull-secret.json as your pull secret instead of the original
+      pull secret that you downloaded from the Red Hat site. This updated pull secret contains credentials for the mirror
+      registry as well.
+
+- debug: msg="{{ msg.split('\n') }}"
