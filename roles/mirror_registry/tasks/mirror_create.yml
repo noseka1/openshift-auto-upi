@@ -11,7 +11,7 @@
   register: container_create
 
 - name: Mirror create include
-  include_tasks: mirror_create_include.yml
+  import_tasks: mirror_create_tasks.yml
   when: container_create is changed
 
 - name: Enable container-mirror-registry on boot and start it
