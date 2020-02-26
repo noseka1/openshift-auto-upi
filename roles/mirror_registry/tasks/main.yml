@@ -49,8 +49,8 @@
 - name: Create pull secret
   import_tasks: create_pull_secret.yml
 
-- name: Synchronize the local mirror with the remote repo
-  import_tasks: mirror_sync.yml
-
 - name: Create openshift-install client
   import_tasks: install_client.yml
+
+- name: Synchronize the local mirror with the remote repo
+  import_tasks: mirror_sync.yml

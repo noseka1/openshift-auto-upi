@@ -19,7 +19,16 @@
   unarchive:
     src: '{{ helper.install_bin_dir }}/{{ openshift_installer.archive_url | basename }}'
     dest: '{{ helper.install_bin_dir }}'
-    creates: '{{ helper.install_bin_dir }}/openshift-install'
+    creates: '{{ helper.install_exe }}'
+
+- name: Get installer info
+  command: '{{ helper.install_exe }} version'
+  changed_when: False
+  register: installer_version
+
+- name: Show installer info
+  debug:
+    var: installer_version.stdout_lines
 
 - name: Download oc client archive {{ openshift_client.archive_url }}
   get_url:
@@ -31,4 +40,4 @@
   unarchive:
     src: '{{ helper.install_bin_dir }}/{{ openshift_client.archive_url | basename }}'
     dest: '{{ helper.install_bin_dir }}'
-    creates: '{{ helper.install_bin_dir }}/oc'
+    creates: '{{ helper.oc_exe }}'

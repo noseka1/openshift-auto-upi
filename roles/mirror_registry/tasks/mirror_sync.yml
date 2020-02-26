@@ -24,3 +24,10 @@
     dest: '{{ helper.mirror_registry_dir }}/mirror_sync.stdout.txt'
     content: '{{ mirror_command.stdout }}'
     backup: True
+
+- name: Disconnected installation instructions
+  debug:
+    msg: >
+      The installer and the mirror registry for disconnected installation are ready.
+      Refer to the instructions at the end of the {{ helper.mirror_registry_dir }}/mirror_sync.stdout.txt file
+      on how to configure the install-config.yaml.
