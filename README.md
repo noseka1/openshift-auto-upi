@@ -28,6 +28,8 @@ Note that the infrastructure from the above list provisioned using *openshift-au
   * If your goal is to deploy OpenShift on your laptop, you can run the *openshift-auto-upi* directly on your laptop and use Libvirt as your target platform.
 * **OpenShift Hosts** will be provisioned for you by *openshift-auto-upi* unless your target platform is bare metal.
 
+## Networking
+
 Note that in order to use DHCP and/or PXE server installed on the Helper host, the Helper host and all of the OpenShift hosts have to be provisioned on the same layer 2 network. In the opposite case, it is sufficient to have a working IP route between the Helper host and the OpenShift hosts.
 
 Here is a sample libvirt network configuration. It instructs libvirt to not provide DNS and DHCP servers for this network. Instead, DNS and DHCP servers for this network will be provided by *openshift-auto-upi*.
