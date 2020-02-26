@@ -19,8 +19,11 @@
 
       Next steps:
 
-      1. You must remove the bootstrap machine from the load balancer at this point.
-      2. You can check the health of your cluster using:
+      1. You must remove the bootstrap machine from the load balancer at this point. I recommend to
+         simply shut the bootstrap machine down.
+      2. If you shut down the bootstrap machine, remember to remove it from the openshift_cluster_hosts
+         list to prevent the Ansible scripts from powering the bootstrap machine back on.
+      3. You can check the health of your cluster using:
 
          KUBECONFIG={{ helper.install_conf_dir }}/auth/kubeconfig {{ helper.oc_exe }} get clusteroperator
 
