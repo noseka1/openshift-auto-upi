@@ -169,7 +169,7 @@ $ ansible-playbook pxe_server.yml
 
 ## Installing Web Server
 
-Provision Web server on the Helper host using Ansible:
+Web server is used to host installation artifacts such as ignition files and machine images. You can provision a Web server on the Helper host using Ansible:
 
 ```
 $ ansible-playbook web_server.yml
