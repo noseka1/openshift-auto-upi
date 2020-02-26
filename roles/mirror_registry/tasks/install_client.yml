@@ -8,11 +8,34 @@
     chdir: '{{ helper.mirror_registry_dir }}'
     creates: '{{ helper.mirror_registry_dir }}/openshift-install'
 
-- name: Get installer's content location
-  command: |
-    {{ helper.mirror_registry_dir }}/openshift-install version
+- name: Get installer info
+  command: '{{ helper.mirror_registry_dir }}/openshift-install version'
+  changed_when: False
   register: installer_version
 
-- name: Show installer's content location
+- name: Show installer info
   debug:
     var: installer_version.stdout_lines
+
+- name: Ensure install bin directory exists
+  file:
+    path: '{{ helper.install_bin_dir }}'
+    state: directory
+
+- name: Check if a regular openshift installer is in place
+  stat:
+    path: '{{ helper.install_exe }}'
+  register: install_exe_stat
+
+- name: Remove the regular installer
+  fail:
+    msg: >
+      Please, remove the regular installer {{ helper.install_exe }} so that
+      the custom installer can be put in place.
+  when: install_exe_stat.stat.islnk is defined and not install_exe_stat.stat.islnk
+
+- name: Ensure the custom openshift-install will be used for the next cluster installation
+  file:
+    path: '{{ helper.install_exe }}'
+    src: '{{ helper.mirror_registry_dir }}/openshift-install'
+    state: link
