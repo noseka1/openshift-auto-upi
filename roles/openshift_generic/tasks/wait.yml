@@ -1,3 +1,12 @@
+- name: Waiting since {{ ansible_date_time.time }} for SSH on OpenShift nodes
+  wait_for:
+    port: 22
+    host: '{{ item.ipaddr }}'
+    search_regex: OpenSSH
+    delay: 10
+    timeout: 1800
+  with_items: '{{ openshift_cluster_hosts }}'
+
 - name: Waiting since {{ ansible_date_time.time }} for the bootstrap to complete
   command: |
     {{ helper.install_exe }} wait-for bootstrap-complete --dir '{{ helper.install_conf_dir }}'
@@ -19,6 +28,6 @@
 
          KUBECONFIG={{ helper.install_conf_dir }}/auth/kubeconfig {{ helper.oc_exe }} get clusterversion
 
-         Note that it will take a while for cluster operators to complete the deployment.
+         Note that it will take a while for the cluster operators to complete the cluster installation.
 
 - debug: msg="{{ msg.split('\n') }}"
