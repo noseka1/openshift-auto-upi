@@ -6,12 +6,6 @@ vsphere:
   datastore_name: Datastore
   cluster_name: Cluster
   network_name: VM Network
-  # ensuring that folder name matches the cluster name specified in the install-config.yaml file
+  # Ensuring that folder name matches the cluster name specified in the install-config.yaml file
   target_folder: '{{ openshift_install_config.name }}'
-  # RHCOS template should NOT include a NIC that is attached to the VM Network. Instead, this NIC
-  # will be created by Ansible and assigned a proper MAC address. If the NIC already exists,
-  # Ansible scripts won't be able to correct the MAC address.
-  # After you imported RHCOS OVA template, double-check that the template does not have a NIC
-  # attached to the VM Network. If it does have a NIC attached to the VM Network, go to
-  # Edit Settings and remove the NIC.
   template_name: RHCOS
