@@ -22,7 +22,10 @@ Note that the infrastructure from the above list provisioned using *openshift-au
 
 ![Deployment Diagram](docs/openshift_auto_upi.svg "Deployment Diagram")
 
-* **Helper Host** is a (virtual) machine that you must provide. It is a helper machine from which you will run *openshift-auto-upi* Ansible scripts and which may host part of your OpenShift infrastructure. Note that in order to achieve a minimum virtualized environment, **the Helper host and the Libvirt host may be the same machine**.
+* **Helper Host** is a (virtual) machine that you must provide. It is a helper machine from which you will run *openshift-auto-upi* Ansible scripts. Any provisioned infrastructure (DHCP server, DNS server, ...) will also be installed on the Helper host.
+  * Helper host requires access to the Internet.
+  * It is stronly discouraged to use *openshift-auto-upi* to provision infrastructure components on a bastion host. *openshift-auto-upi* opens firewall ports which you don't want to be accessible from the public Internet. 
+  * If your goal is to deploy OpenShift on your laptop, you can run the *openshift-auto-upi* directly on your laptop and use Libvirt as your target platform.
 * **OpenShift Hosts** will be provisioned for you by *openshift-auto-upi* unless your target platform is bare metal.
 
 Note that in order to use DHCP and/or PXE server installed on the Helper host, the Helper host and all of the OpenShift hosts have to be provisioned on the same layer 2 network. In the opposite case, it is sufficient to have a working IP route between the Helper host and the OpenShift hosts.
