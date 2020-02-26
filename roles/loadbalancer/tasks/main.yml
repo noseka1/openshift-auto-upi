@@ -4,13 +4,12 @@
     state: present
   become: True
 
-- name: Allow HAProxy to listen on ports
-  seport:
-    ports: 6443, 22623
-    proto: tcp
-    setype: http_port_t
-    state: present
-  become: yes
+- name: Allow HAProxy to listen on ports 6443 and 22623
+  seboolean:
+    name: haproxy_connect_any
+    state: True
+    persistent: True
+  become: True
 
 - name: Is firewalld running?
   command: firewall-cmd --state
