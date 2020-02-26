@@ -1,5 +1,7 @@
 # Helper Host OS Specific Configuration
 
+*openshift-auto-upi* assumes that SELinux is enabled and running either in Enforcing or Permissive mode. If you cannot enable SELinux you will have to manually correct the Ansible scripts to make them work.
+
 ## Configuring RHEL7
 
 If you use RHEL7 on your Helper host, you will need to apply an additional configuration that is described in this section.
