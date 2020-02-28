@@ -1,8 +1,9 @@
 mirror_registry:
   certificate:
     self_signed:
-      # Enter the hostname or the IP address for the helper node host. If using hostname, ensure that
-      # your hostname is in DNS and that it resolves to the expected IP address.
+      # Enter a hostname or an IP address of the host where the registry is going to be located.
+      # If using hostname, ensure that your hostname is in DNS and that it resolves to the expected
+      # IP address.
       common_name: helper.mycluster.example.com
       subject_alt_name:
         - DNS:helper.mycluster.example.com
