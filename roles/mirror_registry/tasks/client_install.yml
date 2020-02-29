@@ -1,15 +1,5 @@
-- name: Create openshift-install client that downloads container images from the mirror
-  command: |
-    oc adm release extract \
-      --registry-config pull-secret.json \
-      --command openshift-install \
-      {{ mirror_registry.mirror_to }}:{{ mirror_registry.mirror_to_release }}
-  args:
-    chdir: '{{ helper.mirror_registry_dir }}'
-    creates: '{{ helper.mirror_registry_dir }}/openshift-install'
-
 - name: Get installer info
-  command: '{{ helper.mirror_registry_dir }}/openshift-install version'
+  command: '{{ helper.mirror_registry_dir }}/clients/{{ mirror_registry.openshift_install_repo }}/openshift-install version'
   changed_when: False
   register: installer_version
 
@@ -37,5 +27,5 @@
 - name: Ensure the custom openshift-install will be used for the next cluster installation
   file:
     path: '{{ helper.install_exe }}'
-    src: '{{ helper.mirror_registry_dir }}/openshift-install'
+    src: '{{ helper.mirror_registry_dir }}/clients/{{ mirror_registry.openshift_install_repo }}/openshift-install'
     state: link

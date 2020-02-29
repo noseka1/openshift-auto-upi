@@ -25,7 +25,7 @@
 - name: Copy the self-signed certificate to the anchors directory
   copy:
     src: '{{ helper.mirror_registry_dir }}/certs/domain.crt'
-    dest: '/etc/pki/ca-trust/source/anchors/{{ mirror_registry.certificate.self_signed.common_name }}.crt'
+    dest: '/etc/pki/ca-trust/source/anchors/openshift-auto-upi.{{ mirror_registry.certificate.self_signed.common_name }}.crt'
   register: new_certificate
   notify: Restart container-mirror-registry
   become: True
