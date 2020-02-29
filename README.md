@@ -203,7 +203,7 @@ $ ansible-playbook loadbalancer.yml
 
 ## Configuring DNS Client
 
-If you installed a DNS server on the Helper host, you may want to configure the Helper host to resolve OpenShift host names using this DNS server:
+If you used *openshift-auto-upi* to deploy a DNS server, you may want to configure the Helper host to resolve OpenShift host names using this DNS server:
 
 ```
 $ cp inventory/group_vars/all/infra/dns_client.yml.sample inventory/group_vars/all/infra/dns_client.yml
