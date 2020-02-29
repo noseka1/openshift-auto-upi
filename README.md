@@ -64,20 +64,6 @@ The dependency diagram below depicts the dependencies between *openshift-auto-up
 
 ![Dependency Diagram](docs/openshift_auto_upi_dependency_graph.svg "Dependency Diagram")
 
-# Creating Mirror Registry
-
-If you are installing OpenShift in a restricted network, you will need to create a local mirror registry. This registry will contain all OpenShift container images required for the installation. *openshift-auto-upi* automates the creation of the mirror registry by implementing the steps described [here](https://docs.openshift.com/container-platform/latest/installing/install_config/installing-restricted-networks-preparations.html). To set up a mirror registry:
-
-```
-$ cp inventory/group_vars/all/infra/mirror_registry.yml.sample \
-    inventory/group_vars/all/infra/mirror_registry.yml
-$ vi inventory/group_vars/all/infra/mirror_registry.yml
-```
-
-```
-$ ansible-playbook mirror_registry.yml
-```
-
 # Setting Up Helper Host
 
 There are two options to create a Helper Host:
@@ -101,6 +87,19 @@ $ yum install ansible
 ```
 $ git clone https://github.com/noseka1/openshift-auto-upi.git
 $ cd openshift-auto-upi
+```
+## Creating Mirror Registry
+
+If you are installing OpenShift in a restricted network, you will need to create a local mirror registry. This registry will contain all OpenShift container images required for the installation. *openshift-auto-upi* automates the creation of the mirror registry by implementing the steps described [here](https://docs.openshift.com/container-platform/latest/installing/install_config/installing-restricted-networks-preparations.html). To set up a mirror registry:
+
+```
+$ cp inventory/group_vars/all/infra/mirror_registry.yml.sample \
+    inventory/group_vars/all/infra/mirror_registry.yml
+$ vi inventory/group_vars/all/infra/mirror_registry.yml
+```
+
+```
+$ ansible-playbook mirror_registry.yml
 ```
 
 ## Preparing for OpenShift Installation
