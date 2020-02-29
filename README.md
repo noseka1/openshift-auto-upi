@@ -15,6 +15,7 @@ Preparing infrastructure for OpenShift installation by hand is a rather tedious 
 * [PXE Server](roles/pxe_server)
 * [Web Server](roles/web_server)
 * [Load Balancer](roles/loadbalancer)
+* [Mirror Registry](roles/mirror_registry)
 
 Note that the infrastructure from the above list provisioned using *openshift-auto-upi* is NOT meant for production use. It is meant to be a temporary fill in for your missing production-grade infrastructure. Using *openshift-auto-upi* to provision any of the infrastructure from the above list is optional.
 
@@ -68,7 +69,8 @@ The dependency diagram below depicts the dependencies between *openshift-auto-up
 If you are installing OpenShift in a disconnected environment, you will need to create a local mirror registry. This registry will contain all OpenShift container images required for the installation. To set up a mirror registry:
 
 ```
-$ cp inventory/group_vars/all/infra/mirror_registry.yml.sample inventory/group_vars/all/infra/mirror_registry.yml
+$ cp inventory/group_vars/all/infra/mirror_registry.yml.sample \
+    inventory/group_vars/all/infra/mirror_registry.yml
 $ vi inventory/group_vars/all/infra/mirror_registry.yml
 ```
 
@@ -106,14 +108,16 @@ $ cd openshift-auto-upi
 Create custom *openshift_install_config.yml* configuration:
 
 ```
-$ cp inventory/group_vars/all/openshift_install_config.yml.sample inventory/group_vars/all/openshift_install_config.yml
+$ cp inventory/group_vars/all/openshift_install_config.yml.sample \
+    inventory/group_vars/all/openshift_install_config.yml
 $ vi inventory/group_vars/all/openshift_install_config.yml
 ```
 
 Create custom *openshift_cluster_hosts.yml* configuration:
 
 ```
-$ cp inventory/group_vars/all/openshift_cluster_hosts.yml.sample inventory/group_vars/all/openshift_cluster_hosts.yml
+$ cp inventory/group_vars/all/openshift_cluster_hosts.yml.sample \
+    inventory/group_vars/all/openshift_cluster_hosts.yml
 $ vi inventory/group_vars/all/openshift_cluster_hosts.yml
 ```
 
