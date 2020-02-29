@@ -1,8 +1,8 @@
 - name: Power on baremetal machine
   ipmi_power:
-    user: '{{ item.ipmi.username }}'
-    password: '{{ item.ipmi.password }}'
-    name: '{{ item.ipmi.hostname }}'
-    port: '{{ item.ipmi.port }}'
+    user: '{{ item.bmc.username }}'
+    password: '{{ item.bmc.password }}'
+    name: '{{ item.bmc.hostname }}'
+    port: '{{ item.bmc.port }}'
     state: on
   with_items: '{{ openshift_cluster_hosts }}'
