@@ -1,13 +1,9 @@
-- name: Create directory structure
+- name: Ensure required directories exist
   file:
     path: '{{ item }}'
     state: directory
   with_items:
-    - '{{ helper.install_dir }}'
-    - '{{ helper.install_cluster_dir }}'
     - '{{ helper.install_bin_dir }}'
-    - '{{ helper.install_conf_dir }}'
-    - '{{ helper.timestamp_dir }}'
 
 - name: Download openshift-install archive {{ openshift_installer.archive_url }}
   get_url:
@@ -21,15 +17,6 @@
     dest: '{{ helper.install_bin_dir }}'
     creates: '{{ helper.install_exe }}'
 
-- name: Get installer info
-  command: '{{ helper.install_exe }} version'
-  changed_when: False
-  register: installer_version
-
-- name: Show installer info
-  debug:
-    var: installer_version.stdout_lines
-
 - name: Download oc client archive {{ openshift_client.archive_url }}
   get_url:
     url: '{{ openshift_client.archive_url }}'
@@ -41,3 +28,12 @@
     src: '{{ helper.install_bin_dir }}/{{ openshift_client.archive_url | basename }}'
     dest: '{{ helper.install_bin_dir }}'
     creates: '{{ helper.oc_exe }}'
+
+- name: Get installer info
+  command: '{{ helper.install_exe }} version'
+  changed_when: False
+  register: installer_version
+
+- name: Show installer info
+  debug:
+    var: installer_version.stdout_lines

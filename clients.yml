@@ -1,4 +1,4 @@
 - hosts: helper
   tasks:
     - import_role:
-        name: helper
+        name: clients
