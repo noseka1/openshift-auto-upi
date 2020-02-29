@@ -1,0 +1,15 @@
+- name: Create a directory for the client
+  file:
+    dest: '{{ helper.mirror_registry_dir }}/clients/{{ item.key }}'
+    state: directory
+
+- name: Create openshift-install client that downloads container images from {{ item.key }}
+  command: |
+    oc adm release extract \
+      --registry-config pull-secret.json \
+      --command openshift-install \
+      --to '{{ helper.mirror_registry_dir }}/clients/{{ item.key }}'
+      {{ item.value.mirror_to }}:{{ item.value.mirror_to_release }}
+  args:
+    chdir:   '{{ helper.mirror_registry_dir }}'
+    creates: '{{ helper.mirror_registry_dir }}/clients/{{ item.key }}/openshift-install'

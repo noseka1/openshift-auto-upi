@@ -1,0 +1,3 @@
+- name: Create an openshift-install client for each repository
+  include_tasks: client_create_tasks.yml
+  with_dict: '{{ mirror_registry.mirror_repositories }}'

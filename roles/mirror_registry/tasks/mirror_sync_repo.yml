@@ -1,0 +1,26 @@
+- name: Copy the mirror sync script for {{ item.key }}
+  template:
+    src: mirror_sync.sh
+    dest: '{{ helper.mirror_registry_dir }}/mirror_sync.{{ item.key }}.sh'
+    mode: '0755'
+
+- name: Waiting since {{ lookup("pipe", "date +%r") }} for the sync of {{ item.value.mirror_from }} to complete
+  command: '{{ helper.mirror_registry_dir }}/mirror_sync.{{ item.key }}.sh'
+  register: mirror_command
+
+- debug:
+    var: mirror_command.stderr_lines
+
+- debug:
+    var: mirror_command.stdout_lines
+
+- name: Save standard error to file {{ helper.mirror_registry_dir }}/mirror_sync.{{ item.key }}.stderr.txt
+  copy:
+    dest: '{{ helper.mirror_registry_dir }}/mirror_sync.{{ item.key }}.stderr.txt'
+    content: '{{ mirror_command.stderr }}'
+
+- name: Save standard output to file {{ helper.mirror_registry_dir }}/mirror_sync.{{ item.key }}.stdout.txt
+  copy:
+    dest: '{{ helper.mirror_registry_dir }}/mirror_sync.{{ item.key }}.stdout.txt'
+    content: '{{ mirror_command.stdout }}'
+    backup: True
