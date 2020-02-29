@@ -218,14 +218,14 @@ $ ansible-playbook dns_client.yml
 
 # Installing OpenShift
 
+## Installing OpenShift on Bare Metal
+
 Create your `install-config.yaml` file:
 
 ```
 $ cp files/common/install-config.yaml.sample files/common/install-config.yaml
 $ vi files/common/install-config.yaml
 ```
-
-## Installing OpenShift on Bare Metal
 
 Kick off the OpenShift installation by issuing the command:
 
@@ -242,6 +242,13 @@ $ cp inventory/group_vars/all/infra/libvirt.yml.sample inventory/group_vars/all/
 $ vi inventory/group_vars/all/infra/libvirt.yml
 ```
 
+Create your `install-config.yaml` file:
+
+```
+$ cp files/common/install-config.yaml.sample files/common/install-config.yaml
+$ vi files/common/install-config.yaml
+```
+
 Kick off the OpenShift installation by issuing the command:
 
 ```
@@ -255,6 +262,13 @@ Create custom *vsphere.yml* configuration:
 ```
 $ cp inventory/group_vars/all/infra/vsphere.yml.sample inventory/group_vars/all/infra/vsphere.yml
 $ vi inventory/group_vars/all/infra/vsphere.yml
+```
+
+Create your `install-config.yaml` file:
+
+```
+$ cp files/common/install-config.yaml.sample files/common/install-config.yaml
+$ vi files/common/install-config.yaml
 ```
 
 Kick off the OpenShift installation by issuing the command:
