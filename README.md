@@ -218,6 +218,13 @@ $ ansible-playbook dns_client.yml
 
 # Installing OpenShift
 
+Create your `install-config.yaml` file:
+
+```
+$ cp files/common/install-config.yaml.sample files/common/install-config.yaml
+$ vi files/common/install-config.yaml
+```
+
 ## Installing OpenShift on Bare Metal
 
 Kick off the OpenShift installation by issuing the command:
