@@ -66,7 +66,7 @@ The dependency diagram below depicts the dependencies between *openshift-auto-up
 
 # Creating Mirror Registry
 
-If you are installing OpenShift in a disconnected environment, you will need to create a local mirror registry. This registry will contain all OpenShift container images required for the installation. To set up a mirror registry:
+If you are installing OpenShift in a restricted network, you will need to create a local mirror registry. This registry will contain all OpenShift container images required for the installation. *openshift-auto-upi* automates the creation of the mirror registry by implementing the steps described [here](https://docs.openshift.com/container-platform/latest/installing/install_config/installing-restricted-networks-preparations.html). To set up a mirror registry:
 
 ```
 $ cp inventory/group_vars/all/infra/mirror_registry.yml.sample \
