@@ -1,6 +1,8 @@
 # OpenShift Automated User-Provided Infrastructure
 
-Preparing infrastructure for OpenShift installation by hand is a rather tedious job. In order to save the effort, *openshift-auto-upi* provides a set of Ansible scripts that automate the infrastructure creation.
+Preparing infrastructure for OpenShift 4 installation by hand is a rather tedious job. In order to save the effort, *openshift-auto-upi* provides a set of Ansible scripts that automate the infrastructure creation.
+
+*openshift-auto-upi* is a separate tool, and is not in any way part of the OpenShift product. It enhances the openshift-installer by including automation for the following:
 
 *openshift-auto-upi* comes with Ansible roles to provision OpenShift cluster hosts on the following target platforms:
 
