@@ -32,13 +32,13 @@ Note that the infrastructure from the above list provisioned using *openshift-au
 
 *openshift-auto-upi* assumes that OpenShift hosts are assigned fixed IP addresses. This is accomplished by pairing the hosts MAC addresses with IP addresses in the DHCP server configuration. DHCP server then always assigns the same IP address to a specific host.
 
+Note that in order to use DHCP and/or PXE server installed on the Helper host, the Helper host and all of the OpenShift hosts have to be provisioned on the same layer 2 network. In the opposite case, it is sufficient to have a working IP route between the Helper host and the OpenShift hosts.
+
 If the DNS server is managed by *openshift-auto-upi*, a DNS name will be created for each OpenShift host. These DNS names follow the scheme:
 ```
 <hostname>.<cluster_name>.<base_domain>
 ```
 Note that these names are created only for your convenience. *openshift-auto-upi* doesn't rely on their existence as they are not a requirement for installing OpenShift.
-
-Note that in order to use DHCP and/or PXE server installed on the Helper host, the Helper host and all of the OpenShift hosts have to be provisioned on the same layer 2 network. In the opposite case, it is sufficient to have a working IP route between the Helper host and the OpenShift hosts.
 
 Here is a sample libvirt network configuration. It instructs libvirt to not provide DNS and DHCP servers for this network. Instead, DNS and DHCP servers for this network will be provided by *openshift-auto-upi*.
 
