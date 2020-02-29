@@ -63,6 +63,19 @@ The dependency diagram below depicts the dependencies between *openshift-auto-up
 
 ![Dependency Diagram](docs/openshift_auto_upi_dependency_graph.svg "Dependency Diagram")
 
+# Creating Mirror Registry
+
+If you are installing OpenShift in a disconnected environment, you will need to create a local mirror registry. This registry will contain all OpenShift container images required for the installation. To set up a mirror registry:
+
+```
+$ cp inventory/group_vars/all/infra/mirror_registry.yml.sample inventory/group_vars/all/infra/mirror_registry.yml
+$ vi inventory/group_vars/all/infra/mirror_registry.yml
+```
+
+```
+$ ansible-playbook mirror_registry.yml
+```
+
 # Setting Up Helper Host
 
 There are two options to create a Helper Host:
