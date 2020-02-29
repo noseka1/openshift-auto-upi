@@ -76,9 +76,7 @@ Supported operating systems for the Helper Host are:
 * Red Hat Enterprise Linux 8
 * Fedora release >= 31
 
-Before continuing to the next section, follow the basic configuration steps described [here](docs/os_specific_config.md).
-
-## Configuring Helper Host
+Before continuing with the next steps, follow the basic configuration steps described [here](docs/os_specific_config.md).
 
 ```
 $ yum install git
@@ -89,6 +87,8 @@ $ yum install ansible
 $ git clone https://github.com/noseka1/openshift-auto-upi.git
 $ cd openshift-auto-upi
 ```
+
+## Preparing for OpenShift Installation
 
 Create custom *openshift_install_config.yml* configuration:
 
@@ -104,10 +104,10 @@ $ cp inventory/group_vars/all/openshift_cluster_hosts.yml.sample inventory/group
 $ vi inventory/group_vars/all/openshift_cluster_hosts.yml
 ```
 
-Configure Helper host using Ansible:
+Download OpenShift clients using Ansible:
 
 ```
-$ ansible-playbook helper.yml
+$ ansible-playbook clients.yml
 ```
 
 ## Installing DHCP Server
