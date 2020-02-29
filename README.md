@@ -38,7 +38,7 @@ If the DNS server is managed by *openshift-auto-upi*, a DNS name will be created
 ```
 <hostname>.<cluster_name>.<base_domain>
 ```
-Note that these names are created only for your convenience. *openshift-auto-upi* doesn't rely on their existence as they are not a requirement for installing OpenShift.
+Note that these names are created only for your convenience. *openshift-auto-upi* doesn't rely on their existence as they are not required for installing OpenShift.
 
 Here is a sample libvirt network configuration. It instructs libvirt to not provide DNS and DHCP servers for this network. Instead, DNS and DHCP servers for this network will be provided by *openshift-auto-upi*.
 
