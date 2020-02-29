@@ -18,8 +18,8 @@
 #
 # A minimum test cluster requires one master node and one infra node.
 #
-# Note that the IPMI configuration is only needed for bare metal installations. If not installing
-# on bare metal, feel free to remove the ipmi related configuration from this file.
+# Note that the BMC configuration is only needed for bare metal installations. If not installing
+# on bare metal, feel free to remove the bmc related configuration from this file.
 # On the contrary, cpu, memory and disk parameters are used for virtualized installations only.
 # They will be ignored if deploying on bare metal.
 openshift_cluster_hosts:
@@ -31,7 +31,7 @@ openshift_cluster_hosts:
     memory_gb: 16
     disk_gb: 120
     ignition_config: bootstrap.ign
-    ipmi:
+    bmc:
       username: admin
       password: ''
       hostname: 192.168.150.120
@@ -45,7 +45,7 @@ openshift_cluster_hosts:
     memory_gb: 32
     disk_gb: 120
     ignition_config: master.ign
-    ipmi:
+    bmc:
       username: admin
       password: ''
       hostname: 192.168.150.121
@@ -58,7 +58,7 @@ openshift_cluster_hosts:
     memory_gb: 32
     disk_gb: 120
     ignition_config: worker.ign
-    ipmi:
+    bmc:
       username: admin
       password: ''
       hostname: 192.168.150.122
@@ -71,7 +71,7 @@ openshift_cluster_hosts:
     memory_gb: 16
     disk_gb: 120
     ignition_config: worker.ign
-    ipmi:
+    bmc:
       username: admin
       password: ''
       hostname: 192.168.150.123
