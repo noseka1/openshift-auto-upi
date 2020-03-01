@@ -62,7 +62,7 @@ Here is a sample libvirt network configuration. It instructs libvirt to not prov
 
 # Dependency Diagram
 
-The dependency diagram below depicts the dependencies between *openshift-auto-upi* Ansible playbooks. You want to execute Ansible playbooks in the dependency order. First, run the *helper* playbook at the top and then continue from top to bottom with the remaining playbooks. Following sections describe the installation process in more detail.
+The dependency diagram below depicts the dependencies between some of the *openshift-auto-upi* Ansible playbooks. You want to execute Ansible playbooks in the dependency order. Following sections describe the installation process in more detail.
 
 ![Dependency Diagram](docs/openshift_auto_upi_dependency_graph.svg "Dependency Diagram")
 
