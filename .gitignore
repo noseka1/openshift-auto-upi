@@ -3,6 +3,7 @@
 /.project
 
 # user configuration files
+/files/common/install-config.yaml
 /inventory/group_vars/all/infra/check_dns.yml
 /inventory/group_vars/all/infra/dhcp_server.yml
 /inventory/group_vars/all/infra/dns_client.yml

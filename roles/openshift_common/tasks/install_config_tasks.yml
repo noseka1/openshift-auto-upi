@@ -1,11 +1,19 @@
+- name: Ensure required directories exist
+  file:
+    path: '{{ item }}'
+    state: directory
+  with_items:
+    - '{{ helper.install_conf_dir }}'
+    - '{{ helper.web_cluster_dir }}'
+
 - name: Copy install-config.yaml to the {{ helper.install_conf_dir }} directory
   template:
-    src: files/vsphere/install-config.yaml
+    src: files/common/install-config.yaml
     dest: '{{ helper.install_conf_dir }}'
 
 - name: Create a backup copy of install-config.yaml as the installer deletes the original
   template:
-    src: files/vsphere/install-config.yaml
+    src: files/common/install-config.yaml
     dest: '{{ helper.install_conf_dir }}/install-config.backup.yaml'
     backup: True
 
