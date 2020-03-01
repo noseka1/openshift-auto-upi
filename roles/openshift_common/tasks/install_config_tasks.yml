@@ -17,6 +17,10 @@
     dest: '{{ helper.install_conf_dir }}/install-config.backup.yaml'
     backup: True
 
+- name: Create Kubernetes manifests # noqa 301
+  command: |
+    {{ helper.install_exe }} create manifests --dir '{{ helper.install_conf_dir }}'
+
 - name: Create ignition configs # noqa 301
   command: |
     {{ helper.install_exe }} create ignition-configs --dir '{{ helper.install_conf_dir }}'
