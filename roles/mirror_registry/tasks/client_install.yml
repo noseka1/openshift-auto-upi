@@ -7,10 +7,12 @@
   debug:
     var: installer_version.stdout_lines
 
-- name: Ensure install bin directory exists
+- name: Ensure required directories exist
   file:
-    path: '{{ helper.install_bin_dir }}'
+    path: '{{ item }}'
     state: directory
+  with_items:
+    - '{{ helper.install_bin_dir }}'
 
 - name: Check if a regular openshift installer is in place
   stat:

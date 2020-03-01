@@ -23,11 +23,12 @@
   when: firewalld.rc == 0
   become: True
 
-- name: Ensure {{ helper.tftp_dir }} exists
+- name: Ensure required directories exist
   file:
-    dest: '{{ helper.tftp_dir }}'
+    path: '{{ item }}'
     state: directory
-  become: True
+  with_items:
+    - '{{ helper.tftp_dir }}'
 
 - name: Create {{ helper.tftp_cluster_dir }} directory
   file:
