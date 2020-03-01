@@ -34,3 +34,16 @@
          Note that it will take a while for the cluster operators to complete the cluster installation.
 
 - debug: msg="{{ msg.split('\n') }}"
+
+- name: Ensure required directories exist
+  file:
+    path: '{{ item }}'
+    state: directory
+  with_items:
+    - '{{ helper.timestamp_dir }}'
+
+- name: Create timestamp {{ helper.timestamp_bootstrap_complete }}
+  file:
+    path: '{{ helper.timestamp_bootstrap_complete }}'
+    state: touch
+  when: not timestamp.stat.exists
