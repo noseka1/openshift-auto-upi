@@ -8,14 +8,14 @@
 - name: Check if timestamp {{ helper.timestamp_ignition_created }} exists
   stat:
     path: '{{ helper.timestamp_ignition_created }}'
-  register: timestamp
+  register: timestamp_ignition_created
 
 - name: Configure installer
   import_tasks: install_config_tasks.yml
-  when: not timestamp.stat.exists
+  when: not timestamp_ignition_created.stat.exists
 
 - name: Create timestamp {{ helper.timestamp_ignition_created }}
   file:
     path: '{{ helper.timestamp_ignition_created }}'
     state: touch
-  when: not timestamp.stat.exists
+  when: not timestamp_ignition_created.stat.exists
