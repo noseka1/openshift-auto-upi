@@ -1,10 +1,17 @@
+- name: Ensure required directories exist
+  file:
+    path: '{{ item }}'
+    state: directory
+  with_items:
+    - '{{ helper.timestamp_dir }}'
+
 - name: Check if timestamp {{ helper.timestamp_ignition_created }} exists
   stat:
     path: '{{ helper.timestamp_ignition_created }}'
   register: timestamp
 
-- name: Create ignition
-  import_tasks: ignition.yml
+- name: Configure installer
+  import_tasks: install_config_tasks.yml
   when: not timestamp.stat.exists
 
 - name: Create timestamp {{ helper.timestamp_ignition_created }}
@@ -12,9 +19,3 @@
     path: '{{ helper.timestamp_ignition_created }}'
     state: touch
   when: not timestamp.stat.exists
-
-- name: Create pxelinux.cfg configs
-  template:
-    src: files/generic/pxelinux.cfg/menu.cfg
-    dest: '{{ helper.tftp_cluster_dir }}/pxelinux.cfg/01-{{ item.macaddr | regex_replace(":", "-") }}'
-  with_items: '{{ openshift_cluster_hosts }}'

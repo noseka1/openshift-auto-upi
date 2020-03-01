@@ -2,15 +2,14 @@
   import_tasks: prereqs.yml
 
 - name: Configure the installer
-  import_tasks: config.yml
-
-- name: Run some checks before the installation
-  import_tasks: check.yml
+  import_role:
+    name: openshift_common
+    tasks_from: install_config.yml
 
 - name: Run the installation
   import_tasks: run.yml
 
 - name: Wait for the bootstrap to complete
   import_role:
-    name: openshift_generic
+    name: openshift_common
     tasks_from: wait.yml

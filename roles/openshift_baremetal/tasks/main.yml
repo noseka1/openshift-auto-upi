@@ -3,13 +3,13 @@
 
 - name: Configure the installer
   import_role:
-    name: openshift_generic
-    tasks_from: config.yml
+    name: openshift_common
+    tasks_from: install_config.yml
 
 - name: Run the installation
   import_tasks: run.yml
 
 - name: Wait for the bootstrap to complete
   import_role:
-    name: openshift_generic
+    name: openshift_common
     tasks_from: wait.yml

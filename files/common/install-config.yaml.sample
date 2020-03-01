@@ -1,0 +1,65 @@
+# {{ ansible_managed }}
+apiVersion: v1
+baseDomain: {{ openshift_install_config.base_domain }}
+compute:
+- hyperthreading: Enabled
+  name: worker
+  replicas: {{ openshift_install_config.worker_replicas }}
+controlPlane:
+  hyperthreading: Enabled
+  name: master
+  replicas: {{ openshift_install_config.master_replicas }}
+metadata:
+  name: {{ openshift_install_config.name }}
+networking:
+  clusterNetworks:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  networkType: OpenShiftSDN
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  # Bare metal and Libvirt target platforms
+#  none: {}
+  # vSphere target platform
+#  vsphere:
+#    vcenter: '{{ vsphere.vcenter_hostname }}'
+#    username: '{{ vsphere.vcenter_username  }}'
+#    password: '{{ vsphere.vcenter_password  }}'
+#    datacenter: '{{ vsphere.datacenter_name }}'
+#    defaultDatastore: '{{ vsphere.datastore_name }}'
+fips: false
+pullSecret: '{{ openshift_install_config.pull_secret }}'
+sshKey: '{{ openshift_install_config.ssh_key }}'
+
+# Routing outgoing traffic through a cluster-wide proxy.
+# If your proxy certificate is signed by a certificate authority which RHCOS does not trust by default,
+# you may also wish to add the CA's certificate to the additionalTrustBundle. If additionalTrustBundle
+# and at least one proxy setting are configured, the cluster Proxy object will be configured with
+# trustedCA referencing the additional trust bundle.
+#proxy:
+#  httpsProxy: https://username:password@proxy.example.com:123/
+#  httpProxy: https://username:password@proxy.example.com:123/
+#  noProxy: 123.example.com,10.88.0.0/16
+
+# Certificate bundle that will be added to the nodes' trusted certificate store. This trust bundle may
+# also be used when a proxy has been configured or when using a mirror registry.
+#additionalTrustBundle: |
+#  -----BEGIN CERTIFICATE-----
+#  ...base-64-encoded, Certificate Authority cert...
+#  -----END CERTIFICATE-----
+#
+#  -----BEGIN CERTIFICATE-----
+#  ...base-64-encoded, Certificate Authority cert...
+#  -----END CERTIFICATE-----
+
+# Mirror registry.
+# If your mirror(s) are signed by a certificate authority which RHCOS does not trust by default, you may
+# also wish to configure an additional trust bundle.
+#imageContentSources:
+#- mirrors:
+#  - 192.168.150.2:5001/ocp4/openshift4
+#  source: quay.io/openshift-release-dev/ocp-release
+#- mirrors:
+#  - 192.168.150.2:5001/ocp4/openshift4
+#  source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
