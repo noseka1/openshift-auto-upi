@@ -310,9 +310,7 @@ $ oc adm certificate approve <name>
 * Implement Libvirt using [fw_cfg](https://github.com/coreos/coreos-assembler/blob/master/src/cmd-run)
 * Support oVirt
 * Add documentation on the vm boot order: disk and then network
-* Container registry mirror, [disconnected install](https://docs.openshift.com/container-platform/4.3/installing/install_config/installing-restricted-networks-preparations.html) (?)
 * Installing python dependencies on RHEL7 (e.g. python-pyvmomi) can be a challenge
-* Check [firewall](https://docs.openshift.com/container-platform/4.3/installing/install_config/configuring-firewall.html)
 
 ## Development Notes
 
