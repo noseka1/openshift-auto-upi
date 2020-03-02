@@ -89,7 +89,14 @@ $ yum install ansible
 ```
 $ git clone https://github.com/noseka1/openshift-auto-upi.git
 $ cd openshift-auto-upi
+
+Install Ansible dependencies with:
 ```
+$ ansible-galaxy role install \
+  --role-file requirements.yml \
+  --force
+```
+
 ## Creating Mirror Registry
 
 If you are installing OpenShift in a restricted network, you will need to create a local mirror registry. This registry will contain all OpenShift container images required for the installation. *openshift-auto-upi* automates the creation of the mirror registry by implementing the steps described in the [Creating a mirror registry](https://docs.openshift.com/container-platform/latest/installing/install_config/installing-restricted-networks-preparations.html). To set up a mirror registry:

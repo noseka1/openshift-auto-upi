@@ -1,48 +1,5 @@
-- name: Install haproxy
-  yum:
-    name: haproxy
-    state: present
-  become: True
+- set_fact:
+    lb_config: '{{ (lookup("template", "lb_config.yml") | from_yaml).lb_config }}'
 
-- name: Allow HAProxy to listen on ports 6443 and 22623
-  seboolean:
-    name: haproxy_connect_any
-    state: True
-    persistent: True
-  become: True
-
-- name: Is firewalld running?
-  command: firewall-cmd --state
-  changed_when: False
-  failed_when: False
-  register: firewalld
-  become: True
-
-- name: Enable ports on firewall
-  firewalld:
-    port: '{{ item }}/tcp'
-    permanent: True
-    immediate: True
-    state: enabled
-  when: firewalld.rc == 0
-  with_items:
-    - 6443
-    - 22623
-    - 443
-    - 80
-  become: True
-
-- name: Start haproxy
-  service:
-    name: haproxy
-    enabled: True
-    state: started
-  become: True
-
-- name: Add OpenShift nodes to the load balancer
-  blockinfile:
-    block: '{{ lookup("template", "haproxy.cfg") }}'
-    dest: /etc/haproxy/haproxy.cfg
-    backup: True
-  notify: Restart haproxy
-  become: True
+- import_role:
+    name: infra-ansible/roles/load-balancers/manage-haproxy

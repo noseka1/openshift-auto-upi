@@ -1,0 +1,62 @@
+lb_config:
+  stats_page:
+    enabled: False
+  frontends:
+  - lb_name: openshift_api_server
+    lb_host: '*'
+    lb_host_port: 6443
+  - lb_name: machine_config_server
+    lb_host: '*'
+    lb_host_port: 22623
+{% if (openshift_cluster_hosts | selectattr("role", "==", "infra") | list | length) > 0 %}
+  - lb_name: ingress_https
+    lb_host: '*'
+    lb_host_port: 443
+  - lb_name: ingress_http
+    lb_host: '*'
+    lb_host_port: 80
+    lb_mode: http
+{% endif %}
+  lb_entries:
+  - lb_match_port: 6443
+    backends:
+{% for item in openshift_cluster_hosts %}
+{% if item.role == 'bootstrap' or item.role == 'master' %}
+    - name: {{ item.hostname }}
+      host: {{ item.ipaddr }}
+      port: 6443
+      check: 'check'
+{% endif %}
+{% endfor %}
+  - lb_match_port: 22623
+    backends:
+{% for item in openshift_cluster_hosts %}
+{% if item.role == 'bootstrap' or item.role == 'master' %}
+    - name: {{ item.hostname }}
+      host: {{ item.ipaddr }}
+      port: 22623
+      check: 'check'
+{% endif %}
+{% endfor %}
+{% if (openshift_cluster_hosts | selectattr("role", "==", "infra") | list | length) > 0 %}
+  - lb_match_port: 443
+    backends:
+{% for item in openshift_cluster_hosts %}
+{% if item.role == 'infra' %}
+    - name: {{ item.hostname }}
+      host: {{ item.ipaddr }}
+      port: 443
+      check: 'check'
+{% endif %}
+{% endfor %}
+  - lb_match_port: 80
+    backends:
+{% for item in openshift_cluster_hosts %}
+{% if item.role == 'infra' %}
+    - name: {{ item.hostname }}
+      host: {{ item.ipaddr }}
+      port: 80
+      check: 'check'
+{% endif %}
+{% endfor %}
+{% endif %}
