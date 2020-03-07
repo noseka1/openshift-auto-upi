@@ -1,0 +1,20 @@
+- name: Check that the load balancer ports are open
+  wait_for:
+    host: '{{ item.host }}'
+    port: '{{ item.port }}'
+    connect_timeout: 1
+    timeout: 1
+  ignore_errors: True
+  with_items:
+    - host: 'api.{{ openshift_install_config.cluster_domain }}'
+      port: 6443
+    - host: 'api.{{ openshift_install_config.cluster_domain }}'
+      port: 22623
+    - host: 'api-int.{{ openshift_install_config.cluster_domain }}'
+      port: 6443
+    - host: 'api-int.{{ openshift_install_config.cluster_domain }}'
+      port: 22623
+    - host: 'myapp.apps.{{ openshift_install_config.cluster_domain }}'
+      port: 443
+    - host: 'myapp.apps.{{ openshift_install_config.cluster_domain }}'
+      port: 80
