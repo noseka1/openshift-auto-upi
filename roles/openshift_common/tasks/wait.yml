@@ -31,6 +31,9 @@
 
          KUBECONFIG={{ helper.install_conf_dir }}/auth/kubeconfig {{ helper.oc_exe }} get clusterversion
 
-         Note that it will take a while for the cluster operators to complete the cluster installation.
+      4. Note that it will take a while for the cluster operators to complete the cluster installation.
+         You can wait for the cluster installation to complete using:
+
+         KUBECONFIG={{ helper.install_conf_dir }}/auth/kubeconfig {{ helper.install_exe }} wait-for install-complete --dir {{ helper.install_conf_dir }}
 
 - debug: msg="{{ msg.split('\n') }}"
