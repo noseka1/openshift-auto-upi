@@ -4,7 +4,7 @@
     dest: '{{ helper.mirror_registry_dir }}/mirror_sync.{{ item.key }}.sh'
     mode: '0755'
 
-- name: Waiting since {{ lookup("pipe", "date +%r") }} for the sync of {{ item.value.mirror_from }} to complete
+- name: Waiting since {{ lookup("pipe", "date +%r") }} for the sync of {{ item.value.mirror_from }} to {{ item.value.mirror_to }} to complete
   command: '{{ helper.mirror_registry_dir }}/mirror_sync.{{ item.key }}.sh'
   register: mirror_command
 
