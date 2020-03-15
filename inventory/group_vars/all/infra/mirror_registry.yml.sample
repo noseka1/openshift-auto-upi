@@ -14,7 +14,7 @@ mirror_registry:
   credentials:
     username: registry
     password: password
-  container_image: docker.io/library/registry:2
+  container_image: docker.io/library/registry:2.7.1
   # After the start, registry will be listening on 0.0.0.0:<listen_port>
   # Using port 5001 to avoid conflict with haproxy that uses port 5000 already.
   listen_port: 5001
@@ -27,7 +27,7 @@ mirror_registry:
   mirror_repositories:
     repo1:
       mirror_from: quay.io/openshift-release-dev/ocp-release:4.3.0-x86_64
-      mirror_to: helper.mycluster.example.com:5001/ocp4/openshift4
+      mirror_to: helper.mycluster.example.com:5001/openshift-release-dev/ocp4
       mirror_to_release: 4.3.0
   # Which repo to use for the OpenShift installation?
   openshift_install_repo: repo1
