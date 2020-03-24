@@ -83,7 +83,7 @@ Before continuing with the next steps, make sure that you applied the [OS-specif
 
 If you plan to use *filetranspiler* for creating ignition configs, follow the setup instructions at [Using filetranspiler with openshift-auto-upi](docs/filetranspiler.md)
 
-Complete the Help host setup with:
+Complete the Helper host setup with:
 
 ```
 $ yum install git
