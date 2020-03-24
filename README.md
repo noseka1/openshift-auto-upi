@@ -79,7 +79,11 @@ Supported operating systems for the Helper host are:
 * Red Hat Enterprise Linux 8
 * Fedora release >= 31
 
-Before continuing with the next steps, make sure that you applied the [OS-specific configuration instructions](docs/os_specific_config.md).
+Before continuing with the next steps, make sure that you applied the [OS-specific configuration instructions](docs/os_specific_config.md) to your Helper host.
+
+If you plan to use *filetranspiler* for creating ignition configs, follow the setup instructions at [Using filetranspiler with openshift-auto-upi](docs/filetranspiler.md)
+
+Complete the Help host setup with:
 
 ```
 $ yum install git
