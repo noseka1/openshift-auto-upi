@@ -25,7 +25,7 @@ Note that the infrastructure from the above list provisioned using *openshift-au
 
 ![Deployment Diagram](docs/openshift_auto_upi.svg "Deployment Diagram")
 
-* **Helper Host** is a (virtual) machine that you must provide. It is a helper machine from which you will run *openshift-auto-upi* Ansible scripts. Any provisioned infrastructure (DHCP, DNS server, ...) will also be installed on the Helper host by default.
+* **Helper host** is a (virtual) machine that you must provide. It is a helper machine from which you will run *openshift-auto-upi* Ansible scripts. Any provisioned infrastructure (DHCP, DNS server, ...) will also be installed on the Helper host by default.
   * Helper host requires access to the Internet.
   * It is stronly discouraged to use *openshift-auto-upi* to provision infrastructure components on a bastion host. Services provisioned by *openshift-auto-upi* are not meant to be exposed to the public Internet.
   * If your goal is to deploy OpenShift on your laptop, you can run the *openshift-auto-upi* directly on your laptop and use the local Libvirt as your target platform.
@@ -68,12 +68,12 @@ The dependency diagram below depicts the dependencies between some of the *opens
 
 # Setting Up Helper Host
 
-There are two options to create a Helper Host:
+There are two options to create a Helper host:
 
-* Create a Helper Host virtual machine. Recommended Helper Host machine size is 1 vCPU, 4 GB RAM, and 10 GB disk space. You have to install one of the supported operating systems on this machine.
-* If you run one of the supported operating system on an existing machine, you can use that machine as your Helper Host.
+* Create a Helper host virtual machine. Minimum recommended Helper host machine size is 1 vCPU, 4 GB RAM, and 10 GB disk space. You have to install one of the supported operating systems on this machine.
+* If you run one of the supported operating system on an existing machine, you can use that machine as your Helper host.
 
-Supported operating systems for the Helper Host are:
+Supported operating systems for the Helper host are:
 
 * Red Hat Enterprise Linux 7
 * Red Hat Enterprise Linux 8
