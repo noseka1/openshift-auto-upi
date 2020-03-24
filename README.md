@@ -29,7 +29,7 @@ Note that the infrastructure from the above list provisioned using *openshift-au
   * Helper host requires access to the Internet.
   * It is stronly discouraged to use *openshift-auto-upi* to provision infrastructure components on a bastion host. Services provisioned by *openshift-auto-upi* are not meant to be exposed to the public Internet.
   * If your goal is to deploy OpenShift on your laptop, you can run the *openshift-auto-upi* directly on your laptop and use the local Libvirt as your target platform.
-* **OpenShift Hosts** will be provisioned for you by *openshift-auto-upi* unless your target platform is bare metal.
+* **OpenShift hosts** will be provisioned for you by *openshift-auto-upi* unless your target platform is bare metal.
 
 ## Networking
 
