@@ -79,7 +79,7 @@ Supported operating systems for the Helper Host are:
 * Red Hat Enterprise Linux 8
 * Fedora release >= 31
 
-Before continuing with the next steps, follow the basic configuration steps described [here](docs/os_specific_config.md).
+Before continuing with the next steps, make sure that you applied the [OS-specific configuration instructions](docs/os_specific_config.md).
 
 ```
 $ yum install git
