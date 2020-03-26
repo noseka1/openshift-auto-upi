@@ -1,7 +1,7 @@
-- name: Configure the installer
+- name: Generate ignition configs
   import_role:
     name: openshift_common
-    tasks_from: install_config.yml
+    tasks_from: generate_ignition.yml
 
 - name: Ensure prerequisites
   import_tasks: ensure_prereqs.yml

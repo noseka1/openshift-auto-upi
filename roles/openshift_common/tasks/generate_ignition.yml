@@ -11,7 +11,7 @@
   register: timestamp_ignition_created
 
 - name: Configure installer
-  import_tasks: install_config_tasks.yml
+  import_tasks: generate_ignition_tasks.yml
   when: not timestamp_ignition_created.stat.exists
 
 - name: Create timestamp {{ helper.timestamp_ignition_created }}
