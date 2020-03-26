@@ -9,7 +9,7 @@
     - name: Power on virtual machine
       ovirt_vm:
         auth: '{{ ovirt_auth }}'
-        name: '{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
+        name: '{{ virtual_machine_names[item.hostname] }}'
         cluster: '{{ ovirt.cluster_name }}'
         state: running
       with_items: '{{ openshift_cluster_hosts }}'

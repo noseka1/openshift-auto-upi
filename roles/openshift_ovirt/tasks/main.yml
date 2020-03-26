@@ -3,6 +3,11 @@
     name: openshift_common
     tasks_from: install_config.yml
 
+- name: Compute virtual machine names
+  import_role:
+    name: openshift_common
+    tasks_from: compute_vm_names.yml
+
 - name: Ensure prerequisites
   import_tasks: ensure_prereqs.yml
 
