@@ -52,6 +52,20 @@
     validate_certs: False
   when: template_network_info.network_data["0"] is defined
 
+- name: Retrieve all machines in the folder {{ vsphere.target_folder }}
+  vmware_vm_info:
+    hostname: '{{ vsphere.vcenter_hostname }}'
+    username: '{{ vsphere.vcenter_username }}'
+    password: '{{ vsphere.vcenter_password }}'
+    folder: '/{{ vsphere.datacenter_name }}/vm/{{ vsphere.target_folder }}'
+    vm_type: vm
+    validate_certs: False
+  register: vsphere_vms
+
+- name: Define existing virtual machines
+  set_fact:
+    vsphere_existing_vms: '{{ vsphere_vms.virtual_machines | json_query("[*].guest_name") }}'
+
 - name: Create a virtual machine from a template
   vmware_guest:
     hostname: '{{ vsphere.vcenter_hostname }}'
@@ -86,4 +100,5 @@
     wait_for_ip_address: False
     validate_certs: False
     state: present
+  when: virtual_machine_names[item.hostname] not in vsphere_existing_vms
   with_items: '{{ openshift_cluster_hosts }}'
