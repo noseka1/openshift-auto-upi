@@ -28,11 +28,3 @@
     xml: '{{ lookup("template", libvirt.domain_template) }}'
   with_items: '{{ openshift_cluster_hosts }}'
   become: True
-
-- name: Power on virtual machine
-  virt:
-    uri: '{{ libvirt.libvirt_connection_uri }}'
-    name: '{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
-    state: running
-  with_items: '{{ openshift_cluster_hosts }}'
-  become: True
