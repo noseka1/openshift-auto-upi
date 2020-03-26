@@ -87,13 +87,3 @@
     validate_certs: False
     state: present
   with_items: '{{ openshift_cluster_hosts }}'
-
-- name: Power on virtual machine
-  vmware_guest:
-    hostname: '{{ vsphere.vcenter_hostname }}'
-    username: '{{ vsphere.vcenter_username }}'
-    password: '{{ vsphere.vcenter_password }}'
-    name: '{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
-    validate_certs: False
-    state: poweredon
-  with_items: '{{ openshift_cluster_hosts }}'
