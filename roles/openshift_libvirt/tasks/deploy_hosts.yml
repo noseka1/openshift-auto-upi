@@ -1,6 +1,6 @@
 - name: Create a volume
   shell: |
-    VOLUME_NAME='{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
+    VOLUME_NAME='{{ virtual_machine_names[item.hostname] }}'
     virsh \
       --connect '{{ libvirt.libvirt_connection_uri }}' \
       vol-info \
