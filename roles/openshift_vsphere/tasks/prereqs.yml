@@ -14,10 +14,10 @@
     path: '{{ item }}'
     state: directory
   with_items:
-    - '{{ helper.vsphere_dir }}'
+    - '{{ helper.images_dir }}'
 
 - name: Download Red Hat CoreOS OVA template {{ coreos.vmware_ova_url }}
   get_url:
     url: '{{ coreos.vmware_ova_url }}'
-    dest: '{{ helper.vsphere_dir }}/{{ coreos.vmware_ova_url | basename }}'
+    dest: '{{ helper.images_dir }}/{{ coreos.vmware_ova_url | basename }}'
     checksum: 'sha256:{{ coreos.sha256sum_url }}'

@@ -1,0 +1,21 @@
+- block:
+    - name: Log in to '{{ ovirt.ovirt_url }}'
+      ovirt_auth:
+        url: '{{ ovirt.ovirt_url }}'
+        username: '{{ ovirt.ovirt_username }}'
+        password: '{{ ovirt.ovirt_password }}'
+        insecure: True
+
+    - name: Power on virtual machine
+      ovirt_vm:
+        auth: '{{ ovirt_auth }}'
+        name: '{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
+        cluster: '{{ ovirt.cluster_name }}'
+        state: running
+      with_items: '{{ openshift_cluster_hosts }}'
+
+  always:
+    - name: Always revoke the SSO token, log out from '{{ ovirt.ovirt_url }}'
+      ovirt_auth:
+        state: absent
+        ovirt_auth: '{{ ovirt_auth }}'
