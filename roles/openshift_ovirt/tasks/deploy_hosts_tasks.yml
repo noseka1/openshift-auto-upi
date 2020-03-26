@@ -8,33 +8,17 @@
   import_tasks: create_ovirt_template.yml
   when: ovirt_template_info.ovirt_templates | length == 0
 
-- name: Create a virtual machines
-  ovirt_vm:
+- name: Retrieve all machines in the cluster {{ ovirt.cluster_name }}
+  ovirt_vm_info:
     auth: '{{ ovirt_auth }}'
-    name: '{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
-    cluster: '{{ ovirt.cluster_name }}'
-    template: '{{ ovirt.template_name }}'
-    cloud_init:
-      custom_script: '{{ lookup("file", "{{ helper.install_conf_dir }}/{{ item.ignition_config }}") | from_json | to_json }}'
-    cloud_init_persist: True
-    memory: '{{ item.memory_gb }} GiB'
-    cpu_cores: '{{ item.num_cpus }}'
-    nics:
-      - name: nic1
-        mac_address: '{{ item.macaddr }}'
-        profile_name: '{{ ovirt.network_profile_name }}'
-        interface: virtio
-    delete_protected: False
-    state: stopped
-    fetch_nested: True
-  register: ovirt_vm
-  with_items: '{{ openshift_cluster_hosts }}'
+    pattern: 'cluster="{{ ovirt.cluster_name }}"'
+  register: result
 
-- name: Resize disk to the requested size and rename it
-  ovirt_disk:
-    auth: '{{ ovirt_auth }}'
-    id: '{{ (ovirt_vm.results | selectattr("vm.name", "equalto", item.hostname + "." + openshift_install_config.cluster_domain) | first).vm.disk_attachments.0.id }}'
-    name: '{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
-    vm_name: '{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
-    size: '{{ item.disk_gb }} GiB'
+- name: Define existing virtual machines
+  set_fact:
+    ovirt_existing_vms: '{{ result.ovirt_vms | json_query("[*].name") }}'
+
+- name: Create virtual machines
+  include_tasks: create_host.yml
+  when: virtual_machine_names[item.hostname] not in ovirt_existing_vms
   with_items: '{{ openshift_cluster_hosts }}'

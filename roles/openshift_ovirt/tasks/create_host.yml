@@ -1,0 +1,33 @@
+- name: Fetch ignition file for machine {{ virtual_machine_names[item.hostname] }}
+  slurp:
+    src: '{{ helper.install_conf_dir }}/{{ item.ignition_config }}'
+  register: ovirt_ignition
+
+- name: Create a virtual machine {{ virtual_machine_names[item.hostname] }}
+  ovirt_vm:
+    auth: '{{ ovirt_auth }}'
+    name: '{{ virtual_machine_names[item.hostname] }}'
+    cluster: '{{ ovirt.cluster_name }}'
+    template: '{{ ovirt.template_name }}'
+    cloud_init:
+      custom_script: '{{ ovirt_ignition.content | b64decode | from_json | to_json }}'
+    cloud_init_persist: True
+    memory: '{{ item.memory_gb }} GiB'
+    cpu_cores: '{{ item.num_cpus }}'
+    nics:
+      - name: nic1
+        mac_address: '{{ item.macaddr }}'
+        profile_name: '{{ ovirt.network_profile_name }}'
+        interface: virtio
+    delete_protected: False
+    state: stopped
+    fetch_nested: True
+  register: ovirt_vm
+
+- name: Resize disk to the requested size and rename it
+  ovirt_disk:
+    auth: '{{ ovirt_auth }}'
+    id: '{{ ovirt_vm.vm.disk_attachments.0.id }}'
+    name: '{{ virtual_machine_names[item.hostname] }}'
+    vm_name: '{{ virtual_machine_names[item.hostname] }}'
+    size: '{{ item.disk_gb }} GiB'

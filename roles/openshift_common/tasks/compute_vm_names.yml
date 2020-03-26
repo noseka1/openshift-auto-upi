@@ -1,0 +1,5 @@
+- name: Compute virtual machine names
+  set_fact:
+    virtual_machine_names: >
+      {{ virtual_machine_names | default ({}) | combine({ item.hostname: item.hostname + "." + openshift_install_config.cluster_domain }) }}
+  with_items: '{{ openshift_cluster_hosts }}'
