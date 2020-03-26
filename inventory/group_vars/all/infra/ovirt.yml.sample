@@ -1,0 +1,10 @@
+ovirt:
+  ovirt_url: https://engine.example.com/ovirt-engine/api
+  ovirt_username: admin@internal
+  ovirt_password: ''
+  storage_domain_name: hosted_storage
+  cluster_name: Default
+  network_profile_name: ovirtmgmt
+  # Only lower-case and upper-case letters, numbers, '_', '-', '.' are allowed.
+  template_disk_name: RHCOS
+  template_name: RHCOS

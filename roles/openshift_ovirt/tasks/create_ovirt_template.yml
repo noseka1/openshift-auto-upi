@@ -1,0 +1,40 @@
+- name: Upload {{ ovirt_image_filename | basename }} to oVirt
+  ovirt_disk:
+    auth: '{{ ovirt_auth }}'
+    name: '{{ ovirt.template_disk_name }}'
+    description: '{{ ovirt_image_filename | basename }}'
+    image_path: '{{ ovirt_image_filename }}'
+    size: '{{ ovirt_image_size }} GiB'
+    format: cow
+    sparse: True
+    storage_domain: '{{ ovirt.storage_domain_name }}'
+  register: ovirt_disk
+
+- name: Create a temporary virtual machine
+  ovirt_vm:
+    auth: '{{ ovirt_auth }}'
+    name: '{{ ovirt.template_name }}'
+    cluster: '{{ ovirt.cluster_name }}'
+    type: server
+    boot_devices:
+      - hd
+    disks:
+      - id: '{{ ovirt_disk.id }}'
+        bootable: True
+        interface: virtio
+    delete_protected: False
+    state: stopped
+
+- name: Make a virtual machine template {{ ovirt.template_name }}
+  ovirt_template:
+    auth: '{{ ovirt_auth }}'
+    name: '{{ ovirt.template_name }}'
+    description: Red Hat CoreOS template
+    vm: '{{ ovirt.template_name }}'
+    cluster: '{{ ovirt.cluster_name }}'
+
+- name: Remove temporary virtual machine
+  ovirt_vm:
+    auth: '{{ ovirt_auth }}'
+    name: '{{ ovirt.template_name }}'
+    state: absent

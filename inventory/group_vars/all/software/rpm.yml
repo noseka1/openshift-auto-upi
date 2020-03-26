@@ -1,6 +1,7 @@
 rpm_name_map:
   RedHat:
     default:
+      python-ovirt-engine-sdk4: python-ovirt-engine-sdk4
       python-dns: python-dns
       libvirt-python: libvirt-python
       python-pyghmi: python-pyghmi

@@ -1,0 +1,16 @@
+- block:
+    - name: Log in to '{{ ovirt.ovirt_url }}'
+      ovirt_auth:
+        url: '{{ ovirt.ovirt_url }}'
+        username: '{{ ovirt.ovirt_username }}'
+        password: '{{ ovirt.ovirt_password }}'
+        insecure: True
+
+    - name: Run oVirt tasks
+      import_tasks: deploy_hosts_tasks.yml
+
+  always:
+    - name: Always revoke the SSO token, log out from '{{ ovirt.ovirt_url }}'
+      ovirt_auth:
+        state: absent
+        ovirt_auth: '{{ ovirt_auth }}'

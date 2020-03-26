@@ -1,0 +1,37 @@
+- name: Install Python SDK for oVirt Engine API used by Ansible to talk to oVirt
+  yum:
+    name: '{{ rpm_name["python-ovirt-engine-sdk4"] }}'
+    state: present
+  become: True
+
+- name: Ensure required directories exist
+  file:
+    path: '{{ item }}'
+    state: directory
+  with_items:
+    - '{{ helper.images_dir }}'
+
+- name: Download Red Hat CoreOS image for OpenStack {{ coreos.openstack_qcow2_url }}
+  get_url:
+    url: '{{ coreos.openstack_qcow2_url }}'
+    dest: '{{ helper.images_dir }}/{{ coreos.openstack_qcow2_url | basename }}'
+    checksum: 'sha256:{{ coreos.sha256sum_url }}'
+
+- name: Set image filename
+  set_fact:
+    ovirt_image_filename: '{{ helper.images_dir }}/{{ coreos.openstack_qcow2_url | basename | regex_replace("\.gz$", "") }}'
+
+- name: Extract Red Hat CoreOS image for OpenStack
+  command: gunzip --keep '{{ helper.images_dir }}/{{ coreos.openstack_qcow2_url | basename }}'
+  args:
+    creates:
+      '{{ ovirt_image_filename }}'
+
+- name: Obtain image info
+  command: file {{ ovirt_image_filename }}
+  changed_when: False
+  register: ovirt_image_info
+
+- name: Calculate image size in GiB
+  set_fact:
+    ovirt_image_size: '{{ (ovirt_image_info.stdout_lines[0].split()[5] | int / 2**30) | round(0, "ceil") | int }}'
