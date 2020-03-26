@@ -12,11 +12,11 @@
   ovirt_vm_info:
     auth: '{{ ovirt_auth }}'
     pattern: 'cluster="{{ ovirt.cluster_name }}"'
-  register: result
+  register: ovirt_vms
 
 - name: Define existing virtual machines
   set_fact:
-    ovirt_existing_vms: '{{ result.ovirt_vms | json_query("[*].name") }}'
+    ovirt_existing_vms: '{{ ovirt_vms.ovirt_vms | json_query("[*].name") }}'
 
 - name: Create virtual machines
   include_tasks: create_host.yml
