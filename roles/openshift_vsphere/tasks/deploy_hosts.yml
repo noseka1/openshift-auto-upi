@@ -60,7 +60,7 @@
     datacenter: '{{ vsphere.datacenter_name }}'
     cluster: '{{ vsphere.cluster_name }}'
     folder: '{{ vsphere.target_folder }}'
-    name: '{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
+    name: '{{ virtual_machine_names[item.hostname] }}'
     template: '{{ vsphere.template_name }}'
     customvalues:
       - key: guestinfo.ignition.config.data.encoding
