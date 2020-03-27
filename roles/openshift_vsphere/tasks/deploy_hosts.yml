@@ -66,7 +66,7 @@
   set_fact:
     vsphere_existing_vms: '{{ vsphere_vms.virtual_machines | json_query("[*].guest_name") }}'
 
-- name: Create a virtual machine from a template
+- name: Create a virtual machine from the template if the vm doesn't exist
   vmware_guest:
     hostname: '{{ vsphere.vcenter_hostname }}'
     username: '{{ vsphere.vcenter_username }}'

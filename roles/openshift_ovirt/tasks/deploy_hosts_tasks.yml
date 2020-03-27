@@ -18,7 +18,7 @@
   set_fact:
     ovirt_existing_vms: '{{ ovirt_vms.ovirt_vms | json_query("[*].name") }}'
 
-- name: Create virtual machines
+- name: Create virtual machines that don't exist
   include_tasks: create_host.yml
   when: virtual_machine_names[item.hostname] not in ovirt_existing_vms
   with_items: '{{ openshift_cluster_hosts }}'
