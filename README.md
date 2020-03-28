@@ -333,7 +333,6 @@ $ oc adm certificate approve <name>
 ## TODO List
 
 * Implement Libvirt using [fw_cfg](https://github.com/coreos/coreos-assembler/blob/master/src/cmd-run)
-* Support oVirt
 * Add documentation on the vm boot order: disk and then network
 * Installing python dependencies on RHEL7 (e.g. python-pyvmomi) can be a challenge
 
