@@ -2,12 +2,13 @@
 
 Preparing infrastructure for OpenShift 4 installation by hand is a rather tedious job. In order to save the effort, *openshift-auto-upi* provides a set of Ansible scripts that automate the infrastructure creation.
 
-*openshift-auto-upi* is a separate tool, and is not in any way part of the OpenShift product. It enhances the openshift-installer by including automation for the following:
+*openshift-auto-upi* is a separate tool, and is not in any way part of the OpenShift product. It enhances the *openshift-installer* by including automation for the following:
 
 *openshift-auto-upi* comes with Ansible roles to provision OpenShift cluster hosts on the following target platforms:
 
 * [Bare Metal](roles/openshift_baremetal)
 * [Libvirt](roles/openshift_libvirt)
+* [oVirt (RHEV)](roles/openshift_ovirt)
 * [vSphere](roles/openshift_vsphere)
 
 *openshift-auto-upi* comes with Ansible roles to provision and configure:
@@ -85,11 +86,14 @@ Before continuing with the next steps, make sure that you applied the [OS-specif
 $ yum install git
 $ yum install ansible
 ```
+Clone the *openshift-auto-upi* repo to your Helper host and check out a tagged release. I recommend that you use a tagged release which receives more testing than master:
 
 ```
 $ git clone https://github.com/noseka1/openshift-auto-upi.git
+$ git checkout <release_tag>
 $ cd openshift-auto-upi
 ```
+
 ## Creating Mirror Registry
 
 If you are installing OpenShift in a restricted network, you will need to create a local mirror registry. This registry will contain all OpenShift container images required for the installation. *openshift-auto-upi* automates the creation of the mirror registry by implementing the steps described in the [Creating a mirror registry](https://docs.openshift.com/container-platform/latest/installing/install_config/installing-restricted-networks-preparations.html). To set up a mirror registry:
@@ -254,6 +258,27 @@ Kick off the OpenShift installation by issuing the command:
 ```
 $ ansible-playbook openshift_libvirt.yml
 ```
+## Installing OpenShift on oVirt (RHEV)
+
+Create custom *ovirt.yml* configuration:
+
+```
+$ cp inventory/group_vars/all/infra/ovirt.yml.sample inventory/group_vars/all/infra/ovirt.yml
+$ vi inventory/group_vars/all/infra/ovirt.yml
+```
+
+Create your `install-config.yaml` file:
+
+```
+$ cp files/common/install-config.yaml.sample files/common/install-config.yaml
+$ vi files/common/install-config.yaml
+```
+
+Kick off the OpenShift installation by issuing the command:
+
+```
+$ ansible-playbook openshift_ovirt.yml
+```
 
 ## Installing OpenShift on vSphere
 
@@ -293,7 +318,7 @@ $ ansible-playbook loadbalancer.yml
 Re-run the platform-specific playbook to install the new cluster hosts:
 
 ```
-$ ansible-playbook openshift_<baremetal|libvirt|vsphere>.yml
+$ ansible-playbook openshift_<baremetal|libvirt|ovirt|vsphere>.yml
 ```
 
 To allow the new nodes to join the cluster, you may need to sign their CSRs:
