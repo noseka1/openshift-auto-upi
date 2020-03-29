@@ -258,7 +258,7 @@ Kick off the OpenShift installation by issuing the command:
 ```
 $ ansible-playbook openshift_libvirt.yml
 ```
-## Installing OpenShift on oVirt (RHEV)
+## Installing OpenShift on oVirt
 
 Create custom *ovirt.yml* configuration:
 
