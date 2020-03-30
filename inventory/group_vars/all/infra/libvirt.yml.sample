@@ -3,3 +3,4 @@ libvirt:
   domain_template: files/libvirt/domain.xml
   pool_name: default
   network_name: default
+  template_name: RHCOS

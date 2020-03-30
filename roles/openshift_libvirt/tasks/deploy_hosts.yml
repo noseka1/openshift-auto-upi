@@ -1,30 +1,20 @@
-- name: Create a volume
-  shell: |
-    VOLUME_NAME='{{ virtual_machine_names[item.hostname] }}'
-    virsh \
-      --connect '{{ libvirt.libvirt_connection_uri }}' \
-      vol-info \
-      --pool '{{ libvirt.pool_name }}' \
-      "$VOLUME_NAME"
-    if [ $? -ne 0 ]; then
-      virsh \
-        --connect  '{{ libvirt.libvirt_connection_uri }}' \
-        vol-create-as \
-        --pool '{{ libvirt.pool_name }}' \
-        --name "$VOLUME_NAME" \
-        --capacity {{ item.disk_gb }}G \
-        --allocation 0 || exit 1
-      echo CHANGED
-    fi
-  register: volume
-  changed_when: volume is failed or volume.stdout.find("CHANGED")
-  with_items: '{{ openshift_cluster_hosts }}'
-  become: True
+- name: Create a disk image template
+  import_tasks: create_volume.yml
+  vars:
+    libvirt_volume_name: '{{ libvirt.template_name }}'
+    libvirt_volume_data: '{{ libvirt_image_filename }}'
 
-- name: Create a virtual machine from a template
+- name: Retrieve all existing machines
   virt:
     uri: '{{ libvirt.libvirt_connection_uri }}'
-    command: define
-    xml: '{{ lookup("template", libvirt.domain_template) }}'
+    command: list_vms
+  register: libvirt_vms
+
+- name: Define existing virtual machines
+  set_fact:
+    libvirt_existing_vms: '{{ libvirt_vms.list_vms }}'
+
+- name: Create virtual machines that don't exist
+  include_tasks: deploy_host.yml
+  when: virtual_machine_names[item.hostname] not in libvirt_existing_vms
   with_items: '{{ openshift_cluster_hosts }}'
-  become: True
