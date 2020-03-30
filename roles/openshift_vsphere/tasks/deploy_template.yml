@@ -1,0 +1,53 @@
+- name: Create cluster folder {{ vsphere.datacenter_name }}/{{ vsphere.target_folder }}
+  vcenter_folder:
+    hostname: '{{ vsphere.vcenter_hostname }}'
+    username: '{{ vsphere.vcenter_username }}'
+    password: '{{ vsphere.vcenter_password }}'
+    datacenter: '{{ vsphere.datacenter_name }}'
+    folder_name: '{{ vsphere.target_folder }}'
+    folder_type: vm
+    validate_certs: False
+    state: present
+
+- name: Upload Red Hat CoreOS OVA template to {{ vsphere.datacenter_name }}/{{ vsphere.target_folder }}/{{ vsphere.template_name }}
+  vmware_deploy_ovf:
+    hostname: '{{ vsphere.vcenter_hostname }}'
+    username: '{{ vsphere.vcenter_username }}'
+    password: '{{ vsphere.vcenter_password }}'
+    datacenter: '{{ vsphere.datacenter_name }}'
+    cluster: '{{ vsphere.cluster_name }}'
+    datastore: '{{ vsphere.datastore_name }}'
+    folder: '/{{ vsphere.datacenter_name }}/vm/{{ vsphere.target_folder }}'
+    name: '{{ vsphere.template_name }}'
+    allow_duplicates: False
+    disk_provisioning: thin
+    networks: '{"VM Network": "{{ vsphere.network_name }}"}'
+    ova: '{{ helper.images_dir }}/{{ coreos.vmware_ova_url | basename }}'
+    power_on: False
+    validate_certs: False
+
+- name: Gather network info about the {{ vsphere.template_name }} template
+  vmware_guest_network:
+    hostname: '{{ vsphere.vcenter_hostname }}'
+    username: '{{ vsphere.vcenter_username }}'
+    password: '{{ vsphere.vcenter_password }}'
+    datacenter: '{{ vsphere.datacenter_name }}'
+    cluster: '{{ vsphere.cluster_name }}'
+    name: '{{ vsphere.template_name }}'
+    gather_network_info: True
+    validate_certs: False
+  register: template_network_info
+
+- name: Remove the network interface from the {{ vsphere.template_name }} template
+  vmware_guest_network:
+    hostname: '{{ vsphere.vcenter_hostname }}'
+    username: '{{ vsphere.vcenter_username }}'
+    password: '{{ vsphere.vcenter_password }}'
+    datacenter: '{{ vsphere.datacenter_name }}'
+    cluster: '{{ vsphere.cluster_name }}'
+    name: '{{ vsphere.template_name }}'
+    networks:
+      - label: '{{ template_network_info.network_data["0"].label }}'
+        state: absent
+    validate_certs: False
+  when: template_network_info.network_data["0"] is defined

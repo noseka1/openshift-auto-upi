@@ -1,0 +1,9 @@
+- name: Check if virtual machine template {{ ovirt.template_name }} already exists
+  ovirt_template_info:
+    auth: '{{ ovirt_auth }}'
+    pattern: 'name="{{ ovirt.template_name }}" and cluster="{{ ovirt.cluster_name }}"'
+  register: ovirt_template_info
+
+- name: Create virtual machine template
+  import_tasks: deploy_template_tasks.yml
+  when: ovirt_template_info.ovirt_templates | length == 0
