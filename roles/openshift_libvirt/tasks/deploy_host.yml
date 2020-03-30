@@ -1,0 +1,33 @@
+- name: Remove a volume that holds ignition data
+  import_tasks: delete_volume.yml
+  vars:
+    libvirt_volume_name: '{{ virtual_machine_names[item.hostname] }}-ign'
+
+- name: Create a volume that holds ignition data
+  import_tasks: create_volume.yml
+  vars:
+    libvirt_volume_name: '{{ virtual_machine_names[item.hostname] }}-ign'
+    libvirt_volume_data: '{{ helper.install_conf_dir }}/{{ item.ignition_config }}'
+
+- name: Create a volume that contains the machine disk image
+  import_tasks: create_volume_cow.yml
+  vars:
+    libvirt_volume_name: '{{ virtual_machine_names[item.hostname] }}'
+    libvirt_volume_base: '{{ libvirt.template_name }}'
+    libvirt_volume_size: '{{ item.disk_gb }}G'
+
+- name: Retrieve ignition volume path
+  command: |
+    virsh vol-path \
+      --pool {{ libvirt.pool_name }} \
+      {{ virtual_machine_names[item.hostname] }}-ign
+  changed_when: False
+  register: libvirt_ignition_path
+  become: True
+
+- name: Create a virtual machine {{ virtual_machine_names[item.hostname] }}
+  virt:
+    uri: '{{ libvirt.libvirt_connection_uri }}'
+    command: define
+    xml: '{{ lookup("template", libvirt.domain_template) }}'
+  become: True

@@ -1,0 +1,33 @@
+- name: Obtain data file info
+  stat:
+    path: '{{ libvirt_volume_data }}'
+  register: libvirt_data_info
+
+- name: Create a volume {{ libvirt_volume_name }} and upload data from {{ libvirt_volume_data }}
+  shell: |
+    set -x
+    VOLUME_NAME='{{ libvirt_volume_name }}'
+    virsh \
+      --connect '{{ libvirt.libvirt_connection_uri }}' \
+      vol-info \
+      --pool '{{ libvirt.pool_name }}' \
+      "$VOLUME_NAME"
+    if [ $? -ne 0 ]; then
+      virsh \
+        --connect  '{{ libvirt.libvirt_connection_uri }}' \
+        vol-create-as \
+        --pool '{{ libvirt.pool_name }}' \
+        --name "$VOLUME_NAME" \
+        --capacity {{ libvirt_data_info.stat.size }} \
+        --allocation 0 || exit 1
+      virsh \
+        --connect  '{{ libvirt.libvirt_connection_uri }}' \
+        vol-upload \
+        --pool '{{ libvirt.pool_name }}' \
+        "$VOLUME_NAME" \
+        '{{ libvirt_volume_data }}' || exit 1
+      echo CHANGED
+    fi
+  register: libvirt_volume
+  changed_when: libvirt_volume is failed or libvirt_volume.stdout | regex_search('CHANGED')
+  become: True
