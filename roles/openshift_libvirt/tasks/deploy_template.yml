@@ -1,0 +1,5 @@
+- name: Create a disk image template
+  import_tasks: create_volume.yml
+  vars:
+    libvirt_volume_name: '{{ libvirt.template_name }}'
+    libvirt_volume_data: '{{ libvirt_image_filename }}'

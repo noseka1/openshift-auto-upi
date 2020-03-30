@@ -11,6 +11,9 @@
 - name: Ensure prerequisites
   import_tasks: ensure_prereqs.yml
 
+- name: Deploy template
+  import_tasks: deploy_template.yml
+
 - name: Deploy hosts
   import_tasks: deploy_hosts.yml
 
