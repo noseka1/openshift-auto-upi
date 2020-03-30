@@ -18,6 +18,7 @@ coreos_versions:
     installer_kernel_url:    '{{ coreos_url_prefix }}/4.3/4.3.0/rhcos-4.3.0-x86_64-installer-kernel'
     metal_bios_url:          '{{ coreos_url_prefix }}/4.3/4.3.0/rhcos-4.3.0-x86_64-metal.raw.gz'
     openstack_qcow2_url:     '{{ coreos_url_prefix }}/4.3/4.3.0/rhcos-4.3.0-x86_64-openstack.qcow2.gz'
+    qemu_qcow2_url:          '{{ coreos_url_prefix }}/4.3/4.3.0/rhcos-4.3.0-x86_64-qemu.qcow2.gz'
     vmware_ova_url:          '{{ coreos_url_prefix }}/4.3/4.3.0/rhcos-4.3.0-x86_64-vmware.ova'
     sha256sum_url:           '{{ coreos_url_prefix }}/4.3/4.3.0/sha256sum.txt'
   4.4.0-rc.1:
@@ -25,6 +26,7 @@ coreos_versions:
     installer_kernel_url:    '{{ coreos_url_prefix }}/4.4/latest/rhcos-4.4.0-rc.1-x86_64-installer-kernel-x86_64'
     metal_bios_url:          '{{ coreos_url_prefix }}/4.4/latest/rhcos-4.4.0-rc.1-x86_64-metal.x86_64.raw.gz'
     openstack_qcow2_url:     '{{ coreos_url_prefix }}/4.4/latest/rhcos-4.4.0-rc.1-x86_64-openstack.x86_64.qcow2.gz'
+    qemu_qcow2_url:          '{{ coreos_url_prefix }}/4.4/latest/rhcos-4.4.0-rc.1-x86_64-qemu.x86_64.qcow2.gz'
     vmware_ova_url:          '{{ coreos_url_prefix }}/4.4/latest/rhcos-4.4.0-rc.1-x86_64-vmware.x86_64.ova'
     sha256sum_url:           '{{ coreos_url_prefix }}/4.4/latest/sha256sum.txt'
 
@@ -33,5 +35,6 @@ coreos:
   installer_kernel_url:    '{{ coreos_versions[openshift_install_config.version].installer_kernel_url }}'
   metal_bios_url:          '{{ coreos_versions[openshift_install_config.version].metal_bios_url }}'
   openstack_qcow2_url:     '{{ coreos_versions[openshift_install_config.version].openstack_qcow2_url }}'
+  qemu_qcow2_url:          '{{ coreos_versions[openshift_install_config.version].qemu_qcow2_url }}'
   vmware_ova_url:          '{{ coreos_versions[openshift_install_config.version].vmware_ova_url }}'
   sha256sum_url:           '{{ coreos_versions[openshift_install_config.version].sha256sum_url }}'

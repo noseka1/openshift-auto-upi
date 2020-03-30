@@ -13,25 +13,18 @@
   with_items:
     - '{{ helper.web_cluster_dir }}'
 
-- name: Download CoreOS binaries
+- name: Download Red Hat CoreOS image for QEMU {{ coreos.qemu_qcow2_url }}
   get_url:
-    url: '{{ item }}'
-    dest: '{{ helper.web_cluster_dir }}/{{ item | basename }}'
+    url: '{{ coreos.qemu_qcow2_url }}'
+    dest: '{{ helper.images_dir }}/{{ coreos.qemu_qcow2_url | basename }}'
     checksum: 'sha256:{{ coreos.sha256sum_url }}'
-  with_items:
-    - '{{ coreos.installer_initramfs_url }}'
-    - '{{ coreos.installer_kernel_url }}'
-    - '{{ coreos.metal_bios_url }}'
 
-- name: Ensure required directories exist
-  file:
-    path: '{{ item }}'
-    state: directory
-  with_items:
-    - '{{ helper.tftp_cluster_dir }}'
+- name: Set image filename
+  set_fact:
+    libvirt_image_filename: '{{ helper.images_dir }}/{{ coreos.qemu_qcow2_url | basename | regex_replace("\.gz$", "") }}'
 
-- name: Create pxelinux.cfg configs
-  template:
-    src: files/generic/pxelinux.cfg/menu.cfg
-    dest: '{{ helper.tftp_cluster_dir }}/pxelinux.cfg/01-{{ item.macaddr | regex_replace(":", "-") }}'
-  with_items: '{{ openshift_cluster_hosts }}'
+- name: Extract Red Hat CoreOS image for QEMU
+  command: gunzip --keep '{{ helper.images_dir }}/{{ coreos.qemu_qcow2_url | basename }}'
+  args:
+    creates:
+      '{{ libvirt_image_filename }}'
