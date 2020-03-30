@@ -1,0 +1,40 @@
+- name: Fetch ignition file for machine {{ virtual_machine_names[item.hostname] }}
+  slurp:
+    src: '{{ helper.install_conf_dir }}/{{ item.ignition_config }}'
+  register: vsphere_ignition
+
+- name: Create a virtual machine from the template
+  vmware_guest:
+    hostname: '{{ vsphere.vcenter_hostname }}'
+    username: '{{ vsphere.vcenter_username }}'
+    password: '{{ vsphere.vcenter_password }}'
+    datacenter: '{{ vsphere.datacenter_name }}'
+    cluster: '{{ vsphere.cluster_name }}'
+    folder: '{{ vsphere.target_folder }}'
+    name: '{{ virtual_machine_names[item.hostname] }}'
+    template: '{{ vsphere.template_name }}'
+    customvalues:
+      - key: guestinfo.ignition.config.data.encoding
+        value: base64
+      - key: guestinfo.ignition.config.data
+        value: '{{ vsphere_ignition.content }}'
+      - key: disk.EnableUUID
+        value: 'TRUE'
+    disk:
+      - size_gb: '{{ item.disk_gb }}'
+        type: thin
+        datastore: '{{ vsphere.datastore_name }}'
+    hardware:
+      memory_mb: '{{ item.memory_gb * 1024 }}'
+      num_cpus: '{{ item.num_cpus }}'
+      scsi: paravirtual
+      hotadd_cpu: False
+      hotremove_cpu: False
+      hotadd_memory: False
+    networks:
+      - name: '{{ vsphere.network_name }}'
+        mac: '{{ item.macaddr }}'
+    wait_for_ip_address: False
+    validate_certs: False
+    state: present
+  when: virtual_machine_names[item.hostname] not in vsphere_existing_vms
