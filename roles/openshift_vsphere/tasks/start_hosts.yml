@@ -1,4 +1,4 @@
-- name: Power on virtual machine
+- name: Power on newly created virtual machine
   vmware_guest:
     hostname: '{{ vsphere.vcenter_hostname }}'
     username: '{{ vsphere.vcenter_username }}'
@@ -6,4 +6,5 @@
     name: '{{ virtual_machine_names[item.hostname] }}'
     validate_certs: False
     state: poweredon
+  when: virtual_machine_names[item.hostname] not in vsphere_existing_vms
   with_items: '{{ openshift_cluster_hosts }}'
