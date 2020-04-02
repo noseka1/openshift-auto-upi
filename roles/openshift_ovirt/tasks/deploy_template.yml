@@ -1,9 +1,23 @@
-- name: Check if virtual machine template {{ ovirt.template_name }} already exists
-  ovirt_template_info:
-    auth: '{{ ovirt_auth }}'
-    pattern: 'name="{{ ovirt.template_name }}" and cluster="{{ ovirt.cluster_name }}"'
-  register: ovirt_template_info
+- block:
+    - name: Log in to '{{ ovirt.ovirt_url }}'
+      ovirt_auth:
+        url: '{{ ovirt.ovirt_url }}'
+        username: '{{ ovirt.ovirt_username }}'
+        password: '{{ ovirt.ovirt_password }}'
+        insecure: True
 
-- name: Create virtual machine template
-  import_tasks: deploy_template_tasks.yml
-  when: ovirt_template_info.ovirt_templates | length == 0
+    - name: Check if virtual machine template {{ ovirt.template_name }} already exists
+      ovirt_template_info:
+        auth: '{{ ovirt_auth }}'
+        pattern: 'name="{{ ovirt.template_name }}" and cluster="{{ ovirt.cluster_name }}"'
+      register: ovirt_template_info
+
+    - name: Create virtual machine template
+      import_tasks: deploy_template_tasks.yml
+      when: ovirt_template_info.ovirt_templates | length == 0
+
+  always:
+    - name: Always revoke the SSO token, log out from '{{ ovirt.ovirt_url }}'
+      ovirt_auth:
+        state: absent
+        ovirt_auth: '{{ ovirt_auth }}'
