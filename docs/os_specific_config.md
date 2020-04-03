@@ -6,7 +6,7 @@ Note that at this time (April 2020) I could not find oVirt Engine SDK packages f
 ```
 $ pip install ovirt-engine-sdk-python
 ```
-You will need to modify *openshift-auto-upi* scripts and remove the installation of the oVirt Enigne SDK rpm package.
+You will need to modify *openshift-auto-upi* scripts and remove the installation of the oVirt Engine SDK rpm package.
 
 ## Configuring RHEL7
 
