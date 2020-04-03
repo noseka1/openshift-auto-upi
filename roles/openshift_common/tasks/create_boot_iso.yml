@@ -1,0 +1,21 @@
+- name: Create ISO image directory structure
+  file:
+    path: '{{ helper.images_dir }}/{{ virtual_machine_names[item.hostname] }}-isoroot/boot/grub'
+    state: directory
+
+- name: Copy the GRUB configuration to ISO
+  template:
+    src: '{{ openshift_install_config.boot_iso.filename }}'
+    dest: '{{ helper.images_dir }}/{{ virtual_machine_names[item.hostname] }}-isoroot/boot/grub/grub.cfg'
+
+- name: Set boot ISO filename
+  set_fact:
+    boot_iso_filename: '{{ helper.images_dir }}/{{ virtual_machine_names[item.hostname] }}-boot.iso'
+
+- name: Generate the ISO image
+  command: grub2-mkrescue --output {{ boot_iso_filename }} {{ helper.images_dir }}/{{ virtual_machine_names[item.hostname] }}-isoroot
+
+- name: Obtain ISO image info
+  stat:
+    path: '{{ boot_iso_filename }}'
+  register: boot_iso_info

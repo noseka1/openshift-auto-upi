@@ -31,3 +31,7 @@
     name: '{{ virtual_machine_names[item.hostname] }}'
     vm_name: '{{ virtual_machine_names[item.hostname] }}'
     size: '{{ item.disk_gb }} GiB'
+
+- name: Configure virtual machine to boot from ISO
+  include_tasks: attach_boot_iso.yml
+  when: openshift_install_config.boot_iso.enabled

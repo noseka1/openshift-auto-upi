@@ -1,0 +1,10 @@
+- name: Power on newly created virtual machine
+  ovirt_vm:
+    auth: '{{ ovirt_auth }}'
+    name: '{{ virtual_machine_names[item.hostname] }}'
+    cluster: '{{ ovirt.cluster_name }}'
+    state: running
+
+- name: Detach boot ISO from the virtual machine
+  import_tasks: detach_boot_iso.yml
+  when: openshift_install_config.boot_iso.enabled
