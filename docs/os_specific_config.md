@@ -2,7 +2,11 @@
 
 *openshift-auto-upi* assumes that SELinux is enabled and running on your Helper host. Both Enforcing and Permissive SELinux modes are supported. If you cannot enable SELinux on your Helper host, you will have to manually modify the Ansible scripts to correct SELinux related errors as you encounter them.
 
-Note that oVirt (RHEV) does not support Python 3 at this time (March 2020, oVirt version 4.3.x). If you are installing OpenShift on oVirt, I recommend to use RHEL7 on your Helper host as this is supported by the *openshift-auto-upi* scripts. You can make oVirt work on Fedora and RHEL8 if you use Python 2 and modify *openshift-auto-upi* scripts accordingly.
+Note that at this time (April 2020) I could not find oVirt Engine SDK packages for Python 3 for RHEL8 and Fedora. If you are installing OpenShift on oVirt, I recommend to use RHEL7 on your Helper host as this is supported by the *openshift-auto-upi* scripts. You can make oVirt work on Fedora and RHEL8 by installing oVirt Engine SDK for Python 3 using pip:
+```
+$ pip install ovirt-engine-sdk-python
+```
+You will need to modify *openshift-auto-upi* scripts and remove the installation of the oVirt Enigne SDK rpm package.
 
 ## Configuring RHEL7
 
