@@ -17,7 +17,7 @@
       - key: guestinfo.ignition.config.data.encoding
         value: base64
       - key: guestinfo.ignition.config.data
-        value: '{{ vsphere_ignition.content | b64decode | from_json | to_json }}'
+        value: '{{ vsphere_ignition.content }}'
       - key: disk.EnableUUID
         value: 'TRUE'
     disk:
