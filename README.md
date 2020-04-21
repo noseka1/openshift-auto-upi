@@ -50,7 +50,7 @@ Note that these names are created only for your convenience. *openshift-auto-upi
 
 ## Deployment Playbooks
 
-The table below depicts the *openshift-auto-upi* Ansible playbooks that you need to execute in order to deploy OpenShift on select target platform. You want to execute the Ansible playbooks in the order from top to bottom. Following sections describe the installation process in more detail.
+The table below depicts the *openshift-auto-upi* Ansible playbooks that you need to execute in order to deploy OpenShift on select target platform. You want to execute the Ansible playbooks in the order from top to bottom.
 
 | | Bare metal | Libvirt FwCfg | Libvirt PXE | oVirt | vSphere |
 |-|:-:|:-:|:-:|:-:|:-:|
@@ -63,6 +63,8 @@ The table below depicts the *openshift-auto-upi* Ansible playbooks that you need
 | **loadbalancer** | optional | optional | optional | optional | optional |
 | **dns_client** | optional | optional | optional | optional | optional |
 
+Following sections describe the installation process in more detail.
+ 
 # Setting Up Helper Host
 
 There are two options to create a Helper host:
