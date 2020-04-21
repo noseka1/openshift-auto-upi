@@ -8,9 +8,9 @@
   set_fact:
     libvirt_existing_vms: '{{ libvirt_vms.list_vms }}'
 
-- name: Pass ignition data in the firmware config
+- name: Don't pass ignition data in the firmware config
   set_fact:
-    libvirt_pass_ignition_via_fwcfg: True
+    libvirt_pass_ignition_via_fwcfg: False
 
 - name: Create virtual machines that don't exist
   include_tasks: deploy_host.yml

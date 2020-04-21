@@ -1,0 +1,23 @@
+- name: Generate ignition configs
+  import_role:
+    name: openshift_common
+    tasks_from: generate_ignition.yml
+
+- name: Compute virtual machine names
+  import_role:
+    name: openshift_common
+    tasks_from: compute_vm_names.yml
+
+- name: Ensure prerequisites
+  import_tasks: ensure_prereqs.yml
+
+- name: Deploy hosts
+  import_tasks: deploy_hosts.yml
+
+- name: Start hosts
+  import_tasks: start_hosts.yml
+
+- name: Wait for the bootstrap to complete
+  import_role:
+    name: openshift_common
+    tasks_from: wait_for_bootstrap.yml
