@@ -245,11 +245,19 @@ $ cp files/common/install-config.yaml.sample files/common/install-config.yaml
 $ vi files/common/install-config.yaml
 ```
 
-Kick off the OpenShift installation by issuing the command:
+In order to install OpenShift using the Libvirt FwCfg method, kick off the installation by issuing the command:
 
 ```
-$ ansible-playbook openshift_libvirt.yml
+$ ansible-playbook openshift_libvirt_fwcfg.yml
 ```
+
+Alternatively, in order to install OpenShift using the Libvirt PXE method, kick off the installation by issuing the command:
+
+```
+$ ansible-playbook openshift_libvirt_pxe.yml
+```
+
+
 ## Installing OpenShift on oVirt
 
 Create custom *ovirt.yml* configuration:
