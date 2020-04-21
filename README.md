@@ -7,7 +7,7 @@ Preparing infrastructure for OpenShift 4 installation by hand is a rather tediou
 *openshift-auto-upi* comes with Ansible roles to provision OpenShift cluster hosts on the following target platforms:
 
 * [Bare Metal](roles/openshift_baremetal)
-* [Libvirt](roles/openshift_libvirt)
+* [Libvirt](docs/openshift_libvirt.md)
 * [oVirt (RHEV)](roles/openshift_ovirt)
 * [vSphere](roles/openshift_vsphere)
 
@@ -43,23 +43,6 @@ If the DNS server is managed by *openshift-auto-upi*, a DNS name will be created
 <hostname>.<cluster_name>.<base_domain>
 ```
 Note that these names are created only for your convenience. *openshift-auto-upi* doesn't rely on their existence as they are not required for installing OpenShift.
-
-Here is a sample libvirt network configuration. It instructs libvirt to not provide DNS and DHCP servers for this network. Instead, DNS and DHCP servers for this network will be provided by *openshift-auto-upi*.
-
-```xml
-<network>
-  <name>default</name>
-  <forward mode='nat'>
-    <nat>
-      <port start='1024' end='65535'/>
-    </nat>
-  </forward>
-  <bridge name='default' stp='on' delay='0'/>
-  <dns enable='no'/>
-  <ip address='192.168.150.1' netmask='255.255.255.0'>
-  </ip>
-</network>
-```
 
 # Dependency Diagram
 
