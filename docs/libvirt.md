@@ -9,7 +9,15 @@ Create a storage pool. Sample configuration:
 ```
 
 ```
-$ virsh pool-create pool.xml
+$ virsh pool-define pool.xml
+```
+
+```
+$ virsh pool-start openshift
+```
+
+```
+$ virsh pool-autostart openshift
 ```
 
 Here is a sample libvirt network configuration. It instructs libvirt to not provide DNS and DHCP servers for this network. Instead, DNS and DHCP servers for this network will be provided by *openshift-auto-upi*.
