@@ -44,11 +44,20 @@ If the DNS server is managed by *openshift-auto-upi*, a DNS name will be created
 ```
 Note that these names are created only for your convenience. *openshift-auto-upi* doesn't rely on their existence as they are not required for installing OpenShift.
 
-# Dependency Diagram
+## Deployment Playbooks
 
-The dependency diagram below depicts the dependencies between some of the *openshift-auto-upi* Ansible playbooks. You want to execute Ansible playbooks in the dependency order. Following sections describe the installation process in more detail.
+The table below depicts the *openshift-auto-upi* Ansible playbooks that you need to run in order to deploy OpenShift on select target platform. You want to execute the Ansible playbooks in the order from top to bottom. Following sections describe the installation process in more detail.
 
-![Dependency Diagram](docs/openshift_auto_upi_dependency_graph.svg "Dependency Diagram")
+| | Bare metal | Libvirt FwCfg | Libvirt PXE | oVirt | vSphere |
+|-|:-:|:-:|:-:|:-:|:-:|
+| **mirror_registry** | optional | optional | optional | optional | optional |
+| **clients** | required | required | required | required | required |
+| **dhcp_server** | optional | optional | optional | optional | optional | optional |
+| **dns_server** | optional | optional | optional | optional | optional | optional |
+| **pxe_server** | required | - | required | - | - | - |
+| **web_server** | required | - | required | - | - | - |
+| **loadbalancer** | required | required | required | required | required |
+| **dns_client** | optional | optional | optional | optional | optional |
 
 # Setting Up Helper Host
 
