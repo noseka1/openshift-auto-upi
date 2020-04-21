@@ -7,7 +7,7 @@ Preparing infrastructure for OpenShift 4 installation by hand is a rather tediou
 *openshift-auto-upi* comes with Ansible roles to provision OpenShift cluster hosts on the following target platforms:
 
 * [Bare Metal](roles/openshift_baremetal)
-* [Libvirt](roles/openshift_libvirt_fwcfg.md)
+* [Libvirt](roles/openshift_libvirt_fwcfg)
 * [oVirt (RHEV)](roles/openshift_ovirt)
 * [vSphere](roles/openshift_vsphere)
 
