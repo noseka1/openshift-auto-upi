@@ -19,12 +19,14 @@
     <disk type='volume' device='disk'>
       <driver name='qemu' type='qcow2'/>
       <source pool='{{ libvirt.pool_name }}' volume='{{ virtual_machine_names[item.hostname] }}' />
-      <target bus="virtio" dev="vda"/>
+      <target bus="sata" dev="sda"/>
+      <boot order='1'/>
     </disk>
     <interface type='network'>
       <mac address='{{ item.macaddr }}'/>
       <source network='{{ libvirt.network_name }}'/>
       <model type='virtio'/>
+      <boot order='2'/>
     </interface>
     <input type='mouse' bus='ps2'/>
     <input type='keyboard' bus='ps2'/>
@@ -34,8 +36,10 @@
       <model type="cirrus"/>
     </video>
   </devices>
+{% if libvirt_pass_ignition_via_fwcfg %}
   <qemu:commandline>
     <qemu:arg value="-fw_cfg"/>
     <qemu:arg value="name=opt/com.coreos/config,file={{ libvirt_ignition_path.stdout_lines.0 }}"/>
   </qemu:commandline>
+{% endif %}
 </domain>

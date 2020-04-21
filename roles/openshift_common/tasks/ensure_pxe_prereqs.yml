@@ -1,0 +1,42 @@
+- name: Ensure required directories exist
+  file:
+    path: '{{ item }}'
+    state: directory
+  with_items:
+    - '{{ helper.web_cluster_dir }}'
+  become: True
+
+- name: Copy ignition files to the webserver html directory
+  copy:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    remote_src: True
+    backup: True
+  with_items:
+    - { src: '{{ helper.install_conf_dir }}/bootstrap.ign', dest: '{{ helper.web_cluster_dir }}' }
+    - { src: '{{ helper.install_conf_dir }}/master.ign',    dest: '{{ helper.web_cluster_dir }}' }
+    - { src: '{{ helper.install_conf_dir }}/worker.ign',    dest: '{{ helper.web_cluster_dir }}' }
+
+- name: Download CoreOS binaries
+  get_url:
+    url: '{{ item }}'
+    dest: '{{ helper.web_cluster_dir }}/{{ item | basename }}'
+    checksum: 'sha256:{{ coreos.sha256sum_url }}'
+  with_items:
+    - '{{ coreos.installer_initramfs_url }}'
+    - '{{ coreos.installer_kernel_url }}'
+    - '{{ coreos.metal_bios_url }}'
+
+- name: Ensure required directories exist
+  file:
+    path: '{{ item }}'
+    state: directory
+  with_items:
+    - '{{ helper.tftp_cluster_dir }}'
+  become: True
+
+- name: Create pxelinux.cfg configs
+  template:
+    src: files/generic/pxelinux.cfg/menu.cfg
+    dest: '{{ helper.tftp_cluster_dir }}/pxelinux.cfg/01-{{ item.macaddr | regex_replace(":", "-") }}'
+  with_items: '{{ openshift_cluster_hosts }}'

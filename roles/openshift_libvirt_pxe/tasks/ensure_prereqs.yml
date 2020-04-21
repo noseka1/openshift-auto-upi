@@ -1,6 +1,8 @@
-- name: Install pyghmi required by Ansible
+- name: Ensure libvirt client libraries are installed
   yum:
-    name: '{{ rpm_name["python-pyghmi"] }}'
+    name:
+      - libvirt-client
+      - '{{ rpm_name["libvirt-python"] }}'
     state: present
   become: True
 
