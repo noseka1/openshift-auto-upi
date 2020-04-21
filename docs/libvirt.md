@@ -1,7 +1,7 @@
 Create a storage pool. Sample configuration:
 ```xml
 <pool type='dir'>
-  <name>default</name>
+  <name>openshift</name>
   <target>
     <path>/var/lib/libvirt/images</path>
   </target>
