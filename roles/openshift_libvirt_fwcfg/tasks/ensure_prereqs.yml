@@ -6,6 +6,13 @@
     state: present
   become: True
 
+- name: Ensure required directories exist
+  file:
+    path: '{{ item }}'
+    state: directory
+  with_items:
+    - '{{ helper.images_dir }}'
+
 - name: Download Red Hat CoreOS image for QEMU {{ coreos.qemu_qcow2_url }}
   get_url:
     url: '{{ coreos.qemu_qcow2_url }}'

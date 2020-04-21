@@ -50,8 +50,3 @@
     cp -ar /usr/share/syslinux/* '{{ helper.tftp_cluster_dir }}'
   args:
     creates: '{{ helper.tftp_cluster_dir }}/pxelinux.0'
-
-- name: Create {{ helper.tftp_cluster_dir }}/pxelinux.cfg directory
-  file:
-    dest: '{{ helper.tftp_cluster_dir }}/pxelinux.cfg'
-    state: directory

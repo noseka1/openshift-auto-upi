@@ -1,6 +1,8 @@
 - name: Ensure required directories exist
   file:
     path: '{{ item }}'
+    owner: '{{ ansible_real_user_id | int }}'
+    group: '{{ ansible_real_group_id | int }}'
     state: directory
   with_items:
     - '{{ helper.web_cluster_dir }}'
@@ -32,8 +34,23 @@
     path: '{{ item }}'
     state: directory
   with_items:
+    - '{{ helper.tftp_dir }}'
+  become: True
+
+- name: Ensure required directories exist
+  file:
+    path: '{{ item }}'
+    owner: '{{ ansible_real_user_id | int }}'
+    group: '{{ ansible_real_group_id | int }}'
+    state: directory
+  with_items:
     - '{{ helper.tftp_cluster_dir }}'
   become: True
+
+- name: Create {{ helper.tftp_cluster_dir }}/pxelinux.cfg directory
+  file:
+    dest: '{{ helper.tftp_cluster_dir }}/pxelinux.cfg'
+    state: directory
 
 - name: Create pxelinux.cfg configs
   template:
