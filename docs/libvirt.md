@@ -1,6 +1,6 @@
 # Installing OpenShift on Libvirt
 
-## Choosing the Installation Method
+## Choosing Installation Method
 
 There are two installation methods available for Libvirt, fwcfg and PXE:
 
