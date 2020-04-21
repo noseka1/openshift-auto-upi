@@ -29,6 +29,7 @@
     state: directory
   with_items:
     - '{{ helper.tftp_dir }}'
+  become: True
 
 - name: Create {{ helper.tftp_cluster_dir }} directory
   file:
