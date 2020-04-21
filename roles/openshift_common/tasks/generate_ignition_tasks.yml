@@ -4,7 +4,6 @@
     state: directory
   with_items:
     - '{{ helper.install_conf_dir }}'
-    - '{{ helper.web_cluster_dir }}'
 
 - name: Copy install-config.yaml to the {{ helper.install_conf_dir }} directory
   template:
@@ -24,14 +23,3 @@
 - name: Create ignition configs # noqa 301
   command: |
     {{ helper.install_exe }} create ignition-configs --dir '{{ helper.install_conf_dir }}'
-
-- name: Copy ignition files to the webserver html directory
-  copy:
-    src: '{{ item.src }}'
-    dest: '{{ item.dest }}'
-    remote_src: True
-    backup: True
-  with_items:
-    - { src: '{{ helper.install_conf_dir }}/bootstrap.ign', dest: '{{ helper.web_cluster_dir }}' }
-    - { src: '{{ helper.install_conf_dir }}/master.ign',    dest: '{{ helper.web_cluster_dir }}' }
-    - { src: '{{ helper.install_conf_dir }}/worker.ign',    dest: '{{ helper.web_cluster_dir }}' }
