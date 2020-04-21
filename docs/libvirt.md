@@ -1,4 +1,4 @@
-Create a storage pool if it doesn't exist yet. Sample configuration:
+Create a default storage pool in libvirt if it doesn't exist. Sample configuration:
 ```xml
 <!-- default-pool.xml -->
 <pool type='dir'>
@@ -21,7 +21,7 @@ $ virsh pool-start default
 $ virsh pool-autostart default
 ```
 
-Here is a sample libvirt network configuration. It instructs libvirt to not provide DNS and DHCP servers for this network. Instead, DNS and DHCP servers for this network will be provided by *openshift-auto-upi*.
+Unless you want to reuse one of the existing networks, I recommend that you create a separate network for OpenShift. The following sample network configuration instructs libvirt to not provide DNS and DHCP servers for this network. Instead, DNS and DHCP servers for this network will be provided by *openshift-auto-upi*.
 
 ```xml
 <!-- openshift-network.xml -->
