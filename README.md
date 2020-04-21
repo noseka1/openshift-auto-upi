@@ -56,7 +56,7 @@ The table below depicts the *openshift-auto-upi* Ansible playbooks that you need
 | **dns_server** | optional | optional | optional | optional | optional | optional |
 | **pxe_server** | required | - | required | - | - | - |
 | **web_server** | required | - | required | - | - | - |
-| **loadbalancer** | required | required | required | required | required |
+| **loadbalancer** | optional | optional | optional | optional | optional |
 | **dns_client** | optional | optional | optional | optional | optional |
 
 # Setting Up Helper Host
