@@ -303,7 +303,7 @@ $ ansible-playbook openshift_vsphere.yml
 ```
 # Adding Cluster Nodes
 
-Add the new hosts to the list of cluster hosts. At the same time, remove (comment out) the bootstrap host from the list to prevent the Ansible scripts from powering the bootstrap node back on:
+Add the new hosts to the list of cluster hosts:
 
 ```
 $ vi inventory/group_vars/all/openshift_cluster_hosts.yml
@@ -318,7 +318,7 @@ $ ansible-playbook loadbalancer.yml
 Re-run the platform-specific playbook to install the new cluster hosts:
 
 ```
-$ ansible-playbook openshift_<baremetal|libvirt|ovirt|vsphere>.yml
+$ ansible-playbook openshift_<baremetal|libvirt_fwcfg|libvirt_pxe|ovirt|vsphere>.yml
 ```
 
 To allow the new nodes to join the cluster, you may need to sign their CSRs:
