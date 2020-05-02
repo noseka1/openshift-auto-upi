@@ -10,9 +10,9 @@ openshift_installer_versions:
   4.3.0:
     archive_url:   '{{ openshift_installer_url_prefix }}/4.3.0/openshift-install-linux-4.3.0.tar.gz'
     sha256sum_url: '{{ openshift_installer_url_prefix }}/4.3.0/sha256sum.txt'
-  4.4.0-nightly:
-    archive_url:   '{{ openshift_installer_url_prefix }}-dev-preview/latest-4.4/openshift-install-linux-4.4.0-0.nightly-2020-02-20-153224.tar.gz'
-    sha256sum_url: '{{ openshift_installer_url_prefix }}-dev-preview/latest-4.4/sha256sum.txt'
+  4.4.0:
+    archive_url:   '{{ openshift_installer_url_prefix }}/4.4.0/openshift-install-linux-4.4.0.tar.gz'
+    sha256sum_url: '{{ openshift_installer_url_prefix }}/4.4.0/sha256sum.txt'
 
 openshift_installer:
   archive_url:   '{{ openshift_installer_versions[openshift_install_config.version].archive_url }}'
