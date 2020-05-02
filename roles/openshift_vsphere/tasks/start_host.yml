@@ -1,0 +1,8 @@
+- name: Power on newly created virtual machine
+  vmware_guest:
+    hostname: '{{ vsphere.vcenter_hostname }}'
+    username: '{{ vsphere.vcenter_username }}'
+    password: '{{ vsphere.vcenter_password }}'
+    name: '{{ virtual_machine_names[item.hostname] }}'
+    validate_certs: False
+    state: poweredon

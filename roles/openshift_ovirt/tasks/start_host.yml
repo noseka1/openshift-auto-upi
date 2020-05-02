@@ -1,0 +1,6 @@
+- name: Power on newly created virtual machine
+  ovirt_vm:
+    auth: '{{ ovirt_auth }}'
+    name: '{{ virtual_machine_names[item.hostname] }}'
+    cluster: '{{ ovirt.cluster_name }}'
+    state: running
