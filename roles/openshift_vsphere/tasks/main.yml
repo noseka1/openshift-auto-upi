@@ -8,6 +8,11 @@
     name: openshift_common
     tasks_from: compute_vm_names.yml
 
+- name: Install boot ISO tools
+  import_role:
+    name: openshift_common
+    tasks_from: install_iso_tools.yml
+
 - name: Ensure prerequisites
   import_tasks: ensure_prereqs.yml
 

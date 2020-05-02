@@ -37,3 +37,7 @@
     wait_for_ip_address: False
     validate_certs: False
     state: present
+
+- name: Configure virtual machine to boot from ISO
+  include_tasks: attach_boot_iso.yml
+  when: openshift_install_config.boot_iso.enabled
