@@ -6,12 +6,8 @@
         password: '{{ ovirt.ovirt_password }}'
         insecure: True
 
-    - name: Power on newly created virtual machine
-      ovirt_vm:
-        auth: '{{ ovirt_auth }}'
-        name: '{{ virtual_machine_names[item.hostname] }}'
-        cluster: '{{ ovirt.cluster_name }}'
-        state: running
+    - name: Start newly created virtual machines
+      include_tasks: start_host.yml
       when: virtual_machine_names[item.hostname] not in ovirt_existing_vms
       with_items: '{{ openshift_cluster_hosts }}'
 
