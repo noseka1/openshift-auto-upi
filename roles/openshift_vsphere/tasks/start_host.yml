@@ -6,3 +6,7 @@
     name: '{{ virtual_machine_names[item.hostname] }}'
     validate_certs: False
     state: poweredon
+
+- name: Detach boot ISO from the virtual machine
+  import_tasks: detach_boot_iso.yml
+  when: openshift_install_config.boot_iso.enabled
