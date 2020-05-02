@@ -37,4 +37,3 @@
     wait_for_ip_address: False
     validate_certs: False
     state: present
-  when: virtual_machine_names[item.hostname] not in vsphere_existing_vms
