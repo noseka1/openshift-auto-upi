@@ -1,0 +1,14 @@
+- name: Detach CD-ROM
+  ovirt_vm:
+    auth: '{{ ovirt_auth }}'
+    name: '{{ virtual_machine_names[item.hostname] }}'
+    cluster: '{{ ovirt.cluster_name }}'
+    cd_iso: ''
+
+- name: Go back to booting from the first hard disk
+  ovirt_vm:
+    auth: '{{ ovirt_auth }}'
+    name: '{{ virtual_machine_names[item.hostname] }}'
+    cluster: '{{ ovirt.cluster_name }}'
+    boot_devices:
+      - hd
