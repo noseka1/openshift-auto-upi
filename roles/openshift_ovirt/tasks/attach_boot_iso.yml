@@ -1,0 +1,32 @@
+- name: Generate an ISO image
+  import_role:
+    name: openshift_common
+    tasks_from: create_boot_iso.yml
+
+- name: Upload ISO image {{ boot_iso_filename }} to oVirt
+  ovirt_disk:
+    auth: '{{ ovirt_auth }}'
+    name: '{{ boot_iso_filename | basename }}'
+    description: Boot ISO image
+    upload_image_path: '{{ boot_iso_filename }}'
+    bootable: true
+    content_type: iso
+    format: raw
+    size: '{{ (boot_iso_info.stat.size / 2**10) | round(0, "ceil") | int }} kiB'
+    storage_domain: '{{ ovirt.storage_domain_name }}'
+  register: ovirt_boot_iso
+
+- name: Attach CD-ROM with the boot ISO inserted
+  ovirt_vm:
+    auth: '{{ ovirt_auth }}'
+    name: '{{ virtual_machine_names[item.hostname] }}'
+    cluster: '{{ ovirt.cluster_name }}'
+    cd_iso: '{{ ovirt_boot_iso.id }}'
+
+- name: Set virtual machine {{ item.hostname }} to boot from the ISO
+  ovirt_vm:
+    auth: '{{ ovirt_auth }}'
+    name: '{{ virtual_machine_names[item.hostname] }}'
+    cluster: '{{ ovirt.cluster_name }}'
+    boot_devices:
+      - cdrom
