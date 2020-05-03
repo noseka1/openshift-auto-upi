@@ -1,4 +1,4 @@
-- name: Power on newly created virtual machine
+- name: Power on newly created virtual machine {{ virtual_machine_names[item.hostname] }}
   ovirt_vm:
     auth: '{{ ovirt_auth }}'
     name: '{{ virtual_machine_names[item.hostname] }}'
