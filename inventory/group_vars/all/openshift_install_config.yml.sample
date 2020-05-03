@@ -21,6 +21,23 @@ openshift_install_config:
   # for them to download their ignition files. Make sure that this URL is reachable
   # from the OpenShift nodes.
   ignition_url_prefix: 'http://192.168.150.2:81/openshift-auto-upi/mycluster'
+  # You can customize the GRUB bootloader configuration here. This customization will be
+  # used only during the first boot of the OpenShift hosts. Following boots will go back
+  # to using the factory GRUB configuration. Currently, this customization is used to
+  # achieve static IP configuration.
+  boot_iso:
+    # Must enable in order to use the boot customization functionality
+    enabled: False
+    filename: files/boot/grub.cfg
+    parameters:
+      gateway: 192.168.150.1
+      netmask: 255.255.255.0
+      # On oVirt and libvirt the interface name is most likely "ens3". On vSphere the
+      # interface name is most likely "ens192".
+      interface: ens3
+      # List of DNS servers
+      nameservers:
+        - 192.168.150.1
   # When you deploy the cluster, this public SSH key is added to the core user’s
   # ~/.ssh/authorized_keys list. You can use this key to SSH into the OpenShift hosts
   # as the user core.
