@@ -1,0 +1,10 @@
+- name: Ensure tools for creating a boot iso are installed
+  yum:
+    name:
+      - grub2-tools-extra
+      - grub2-pc-modules
+      - grub2-efi-x64-modules
+      - xorriso
+      - mtools
+  when: openshift_install_config.boot_iso.enabled
+  become: True
