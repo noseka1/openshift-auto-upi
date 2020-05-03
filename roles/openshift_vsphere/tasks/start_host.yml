@@ -1,4 +1,4 @@
-- name: Power on newly created virtual machine
+- name: Power on newly created virtual machine {{ virtual_machine_names[item.hostname] }}
   vmware_guest:
     hostname: '{{ vsphere.vcenter_hostname }}'
     username: '{{ vsphere.vcenter_username }}'
