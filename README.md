@@ -44,6 +44,32 @@ If the DNS server is managed by *openshift-auto-upi*, a DNS name will be created
 ```
 Note that these names are created only for your convenience. *openshift-auto-upi* doesn't rely on their existence as they are not required for installing OpenShift.
 
+### Using Static IPs
+
+If you prefer configuring your OpenShift hosts using static IPs as opposed to leveraging the default DHCP provisioning, *openshift-auto-upi* allows you to do that. While you are configuring *openshift-auto-upi* (detailed information in the following sections), perform these steps:
+
+After cloning the *openshift-auto-upi* git repository, checkout the `static_ips_2` branch (instead of a release_tag):
+
+```
+$ git checkout static_ips_2
+```
+
+Add your network configuration (gateway, netmask, name servers) to the *boot_iso* section of the *openshift_install_config.yml* file:
+
+```
+$ cp inventory/group_vars/all/openshift_install_config.yml.sample \
+    inventory/group_vars/all/openshift_install_config.yml
+$ vi inventory/group_vars/all/openshift_install_config.yml
+```
+
+You are all set! *openshift-auto-upi* will configure your OpenShift nodes using static IPs.
+
+> :exclamation: Note that Static IPs is an experimental feature currently implemented only for oVirt and vSphere target platforms.
+
+If you tried Static IPs out, I would be happy if you leave your [feedback](https://github.com/noseka1/openshift-auto-upi/pull/1).
+
+For further information on the Static IPs feature, you can refer to [OpenShift UPI using static IPs](https://www.openshift.com/blog/openshift-upi-using-static-ips).
+
 ## Platform-Specific Documentation
 
 [Installing OpenShift on Libvirt](docs/openshift_libvirt.md)
