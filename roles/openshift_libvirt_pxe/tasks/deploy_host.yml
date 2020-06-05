@@ -27,3 +27,10 @@
     command: define
     xml: '{{ lookup("template", libvirt.domain_template) }}'
   become: True
+
+- name: Power on virtual machine {{ virtual_machine_names[item.hostname] }}
+  virt:
+    uri: '{{ libvirt.libvirt_connection_uri }}'
+    name: '{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
+    state: running
+  become: True

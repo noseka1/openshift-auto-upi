@@ -1,8 +1,0 @@
-- name: Power on newly created virtual machine {{ virtual_machine_names[item.hostname] }}
-  virt:
-    uri: '{{ libvirt.libvirt_connection_uri }}'
-    name: '{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
-    state: running
-  when: virtual_machine_names[item.hostname] not in libvirt_existing_vms
-  with_items: '{{ openshift_cluster_hosts }}'
-  become: True

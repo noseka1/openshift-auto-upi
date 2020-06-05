@@ -22,9 +22,6 @@
 - name: Deploy hosts
   import_tasks: deploy_hosts.yml
 
-- name: Start hosts
-  import_tasks: start_hosts.yml
-
 - name: Wait for the bootstrap to complete
   import_role:
     name: openshift_common

@@ -6,8 +6,8 @@
 - name: Ensure prerequisites
   import_tasks: ensure_prereqs.yml
 
-- name: Start hosts
-  import_tasks: start_hosts.yml
+- name: Deploy hosts
+  import_tasks: deploy_hosts.yml
 
 - name: Wait for the bootstrap to complete
   import_role:

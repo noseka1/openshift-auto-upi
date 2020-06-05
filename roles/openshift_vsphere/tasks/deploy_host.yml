@@ -41,3 +41,16 @@
 - name: Configure virtual machine to boot from ISO
   include_tasks: attach_boot_iso.yml
   when: openshift_install_config.boot_iso.enabled
+
+- name: Power on virtual machine {{ virtual_machine_names[item.hostname] }}
+  vmware_guest:
+    hostname: '{{ vsphere.vcenter_hostname }}'
+    username: '{{ vsphere.vcenter_username }}'
+    password: '{{ vsphere.vcenter_password }}'
+    name: '{{ virtual_machine_names[item.hostname] }}'
+    validate_certs: False
+    state: poweredon
+
+- name: Detach boot ISO from the virtual machine
+  import_tasks: detach_boot_iso.yml
+  when: openshift_install_config.boot_iso.enabled
