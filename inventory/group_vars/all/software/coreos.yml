@@ -31,10 +31,10 @@ coreos_versions:
     sha256sum_url:           '{{ coreos_url_prefix }}/4.4/4.4.3/sha256sum.txt'
 
 coreos:
-  installer_initramfs_url: '{{ coreos_versions[openshift_install_config.version].installer_initramfs_url }}'
-  installer_kernel_url:    '{{ coreos_versions[openshift_install_config.version].installer_kernel_url }}'
-  metal_bios_url:          '{{ coreos_versions[openshift_install_config.version].metal_bios_url }}'
-  openstack_qcow2_url:     '{{ coreos_versions[openshift_install_config.version].openstack_qcow2_url }}'
-  qemu_qcow2_url:          '{{ coreos_versions[openshift_install_config.version].qemu_qcow2_url }}'
-  vmware_ova_url:          '{{ coreos_versions[openshift_install_config.version].vmware_ova_url }}'
-  sha256sum_url:           '{{ coreos_versions[openshift_install_config.version].sha256sum_url }}'
+  installer_initramfs_url: '{{ coreos_versions[openshift_install_config.coreos_version].installer_initramfs_url }}'
+  installer_kernel_url:    '{{ coreos_versions[openshift_install_config.coreos_version].installer_kernel_url }}'
+  metal_bios_url:          '{{ coreos_versions[openshift_install_config.coreos_version].metal_bios_url }}'
+  openstack_qcow2_url:     '{{ coreos_versions[openshift_install_config.coreos_version].openstack_qcow2_url }}'
+  qemu_qcow2_url:          '{{ coreos_versions[openshift_install_config.coreos_version].qemu_qcow2_url }}'
+  vmware_ova_url:          '{{ coreos_versions[openshift_install_config.coreos_version].vmware_ova_url }}'
+  sha256sum_url:           '{{ coreos_versions[openshift_install_config.coreos_version].sha256sum_url }}'
