@@ -2,6 +2,8 @@ ovirt:
   ovirt_url: https://engine.example.com/ovirt-engine/api
   ovirt_username: admin@internal
   ovirt_password: ''
+  # Verify server certificate when connecting to oVirt
+  validate_certs: False
   storage_domain_name: hosted_storage
   cluster_name: Default
   network_profile_name: ovirtmgmt

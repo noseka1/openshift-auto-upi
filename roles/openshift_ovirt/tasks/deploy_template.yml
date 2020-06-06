@@ -4,7 +4,7 @@
         url: '{{ ovirt.ovirt_url }}'
         username: '{{ ovirt.ovirt_username }}'
         password: '{{ ovirt.ovirt_password }}'
-        insecure: True
+        insecure: '{{ not ovirt.validate_certs }}'
 
     - name: Check if virtual machine template {{ ovirt.template_name }} already exists
       ovirt_template_info:

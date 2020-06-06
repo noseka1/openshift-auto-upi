@@ -4,7 +4,7 @@
         url: '{{ ovirt.ovirt_url }}'
         username: '{{ ovirt.ovirt_username }}'
         password: '{{ ovirt.ovirt_password }}'
-        insecure: True
+        insecure: '{{ not ovirt.validate_certs }}'
 
     - name: Retrieve all machines in the cluster {{ ovirt.cluster_name }}
       ovirt_vm_info:
