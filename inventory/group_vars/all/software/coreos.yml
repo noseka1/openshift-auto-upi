@@ -13,14 +13,14 @@ coreos_versions:
     metal_bios_url:          '{{ coreos_url_prefix }}/4.2/4.2.0/rhcos-4.2.0-x86_64-metal-bios.raw.gz'
     vmware_ova_url:          '{{ coreos_url_prefix }}/4.2/4.2.0/rhcos-4.2.0-x86_64-vmware.ova'
     sha256sum_url:           '{{ coreos_url_prefix }}/4.2/4.2.0/sha256sum.txt'
-  4.3.0:
-    installer_initramfs_url: '{{ coreos_url_prefix }}/4.3/4.3.0/rhcos-4.3.0-x86_64-installer-initramfs.img'
-    installer_kernel_url:    '{{ coreos_url_prefix }}/4.3/4.3.0/rhcos-4.3.0-x86_64-installer-kernel'
-    metal_bios_url:          '{{ coreos_url_prefix }}/4.3/4.3.0/rhcos-4.3.0-x86_64-metal.raw.gz'
-    openstack_qcow2_url:     '{{ coreos_url_prefix }}/4.3/4.3.0/rhcos-4.3.0-x86_64-openstack.qcow2.gz'
-    qemu_qcow2_url:          '{{ coreos_url_prefix }}/4.3/4.3.0/rhcos-4.3.0-x86_64-qemu.qcow2.gz'
-    vmware_ova_url:          '{{ coreos_url_prefix }}/4.3/4.3.0/rhcos-4.3.0-x86_64-vmware.ova'
-    sha256sum_url:           '{{ coreos_url_prefix }}/4.3/4.3.0/sha256sum.txt'
+  4.3.8:
+    installer_initramfs_url: '{{ coreos_url_prefix }}/4.3/4.3.8/rhcos-4.3.8-x86_64-installer-initramfs.x86_64.img'
+    installer_kernel_url:    '{{ coreos_url_prefix }}/4.3/4.3.8/rhcos-4.3.8-x86_64-installer-kernel-x86_64'
+    metal_bios_url:          '{{ coreos_url_prefix }}/4.3/4.3.8/rhcos-4.3.8-x86_64-metal.x86_64.raw.gz'
+    openstack_qcow2_url:     '{{ coreos_url_prefix }}/4.3/4.3.8/rhcos-4.3.8-x86_64-openstack.x86_64.qcow2.gz'
+    qemu_qcow2_url:          '{{ coreos_url_prefix }}/4.3/4.3.8/rhcos-4.3.8-x86_64-qemu.x86_64.qcow2.gz'
+    vmware_ova_url:          '{{ coreos_url_prefix }}/4.3/4.3.8/rhcos-4.3.8-x86_64-vmware.x86_64.ova'
+    sha256sum_url:           '{{ coreos_url_prefix }}/4.3/4.3.8/sha256sum.txt'
   4.4.3:
     installer_initramfs_url: '{{ coreos_url_prefix }}/4.4/4.4.3/rhcos-4.4.3-x86_64-installer-initramfs.x86_64.img'
     installer_kernel_url:    '{{ coreos_url_prefix }}/4.4/4.4.3/rhcos-4.4.3-x86_64-installer-kernel-x86_64'
