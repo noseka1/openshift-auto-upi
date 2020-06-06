@@ -1,0 +1,9 @@
+- name: Waiting since {{ lookup("pipe", "date +%r") }} for SSH on OpenShift hosts
+  wait_for:
+    port: 22
+    host: '{{ item.ipaddr }}'
+    search_regex: OpenSSH
+    delay: 10
+    timeout: 1800
+  when: virtual_machine_names[item.hostname] not in wait_for_ssh_existing_vms
+  with_items: '{{ openshift_cluster_hosts }}'
