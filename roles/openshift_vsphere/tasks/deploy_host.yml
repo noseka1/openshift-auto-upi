@@ -35,7 +35,7 @@
       - name: '{{ vsphere.network_name }}'
         mac: '{{ item.macaddr }}'
     wait_for_ip_address: False
-    validate_certs: False
+    validate_certs: '{{ vsphere.validate_certs }}'
     state: present
 
 - name: Configure virtual machine to boot from ISO
@@ -48,7 +48,7 @@
     username: '{{ vsphere.vcenter_username }}'
     password: '{{ vsphere.vcenter_password }}'
     name: '{{ virtual_machine_names[item.hostname] }}'
-    validate_certs: False
+    validate_certs: '{{ vsphere.validate_certs }}'
     state: poweredon
 
 - name: Detach boot ISO from the virtual machine

@@ -2,6 +2,8 @@ vsphere:
   vcenter_hostname: photon-machine
   vcenter_username: administrator@mysso.com
   vcenter_password: ''
+  # Verify server certificate when connecting to vSphere
+  validate_certs: False
   datacenter_name: Datacenter
   datastore_name: Datastore
   cluster_name: Cluster

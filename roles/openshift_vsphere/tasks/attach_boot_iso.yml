@@ -13,7 +13,7 @@
     src: '{{ boot_iso_filename }}'
     path: '{{ boot_iso_filename | basename }}'
     timeout: 300
-    validate_certs: False
+    validate_certs: '{{ vsphere.validate_certs }}'
 
 - name: Attach CD-ROM with the boot ISO inserted
   vmware_guest:
@@ -29,7 +29,7 @@
         controller_type: ide
         controller_number: 0
         unit_number: 0
-    validate_certs: False
+    validate_certs: '{{ vsphere.validate_certs }}'
 
 - name: Set virtual machine {{ item.hostname }} to boot from the ISO
   vmware_guest_boot_manager:
@@ -40,4 +40,4 @@
     boot_order:
       - cdrom
     boot_delay: 0
-    validate_certs: False
+    validate_certs: '{{ vsphere.validate_certs }}'

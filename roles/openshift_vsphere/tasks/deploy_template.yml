@@ -6,7 +6,7 @@
     datacenter: '{{ vsphere.datacenter_name }}'
     folder_name: '{{ vsphere.target_folder }}'
     folder_type: vm
-    validate_certs: False
+    validate_certs: '{{ vsphere.validate_certs }}'
     state: present
 
 - name: Upload Red Hat CoreOS OVA template to {{ vsphere.datacenter_name }}/{{ vsphere.target_folder }}/{{ vsphere.template_name }}
@@ -24,7 +24,7 @@
     networks: '{"VM Network": "{{ vsphere.network_name }}"}'
     ova: '{{ helper.images_dir }}/{{ coreos.vmware_ova_url | basename }}'
     power_on: False
-    validate_certs: False
+    validate_certs: '{{ vsphere.validate_certs }}'
 
 - name: Gather network info about the {{ vsphere.template_name }} template
   vmware_guest_network:
@@ -35,7 +35,7 @@
     cluster: '{{ vsphere.cluster_name }}'
     name: '{{ vsphere.template_name }}'
     gather_network_info: True
-    validate_certs: False
+    validate_certs: '{{ vsphere.validate_certs }}'
   register: template_network_info
 
 - name: Remove the network interface from the {{ vsphere.template_name }} template
@@ -49,5 +49,5 @@
     networks:
       - label: '{{ template_network_info.network_data["0"].label }}'
         state: absent
-    validate_certs: False
+    validate_certs: '{{ vsphere.validate_certs }}'
   when: template_network_info.network_data["0"] is defined

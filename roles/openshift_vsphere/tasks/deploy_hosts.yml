@@ -5,7 +5,7 @@
     password: '{{ vsphere.vcenter_password }}'
     folder: '/{{ vsphere.datacenter_name }}/vm/{{ vsphere.target_folder }}'
     vm_type: vm
-    validate_certs: False
+    validate_certs: '{{ vsphere.validate_certs }}'
   register: vsphere_vms
 
 - name: Define existing virtual machines

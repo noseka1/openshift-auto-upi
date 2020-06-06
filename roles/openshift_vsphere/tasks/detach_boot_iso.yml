@@ -10,7 +10,7 @@
     name: '{{ virtual_machine_names[item.hostname] }}'
     boot_order:
       - disk
-    validate_certs: False
+    validate_certs: '{{ vsphere.validate_certs }}'
 
 - name: Eject CD-ROM
   vmware_guest:
@@ -22,4 +22,4 @@
       - type: none
         controller_number: 0
         unit_number: 0
-    validate_certs: False
+    validate_certs: '{{ vsphere.validate_certs }}'
