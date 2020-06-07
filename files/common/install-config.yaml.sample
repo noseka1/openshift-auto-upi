@@ -19,7 +19,7 @@ networking:
   serviceNetwork:
   - 172.30.0.0/16
 platform:
-  # Bare metal and Libvirt target platforms
+  # Bare metal, Libvirt, and oVirt target platforms
 #  none: {}
   # vSphere target platform
 #  vsphere:
