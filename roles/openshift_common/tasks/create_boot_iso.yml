@@ -5,7 +5,7 @@
 
 - name: Copy the GRUB configuration to ISO
   template:
-    src: '{{ openshift_install_config.boot_iso.filename }}'
+    src: files/boot/grub/grub.cfg
     dest: '{{ helper.images_dir }}/{{ virtual_machine_names[item.hostname] }}-isoroot/boot/grub/grub.cfg'
 
 - name: Set boot ISO filename
