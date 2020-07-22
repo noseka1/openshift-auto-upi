@@ -1,9 +1,9 @@
 # OpenShift Installer configuration
 openshift_install_config:
   # Version of OpenShift to be installed.
-  version: 4.4.6
+  version: 4.5.3
   # Version of the CoreOS image.
-  coreos_version: 4.4.3
+  coreos_version: 4.5.2
   # Unique name of the OpenShift cluster which also becomes a part of cluster's FQDN.
   name: mycluster
   # Base domain which is appended to the cluster's name to form a cluster FQDN.

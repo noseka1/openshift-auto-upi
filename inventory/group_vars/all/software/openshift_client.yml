@@ -13,6 +13,9 @@ openshift_client_versions:
   4.4.6:
     archive_url:   '{{ openshift_client_url_prefix }}/4.4.6/openshift-client-linux-4.4.6.tar.gz'
     sha256sum_url: '{{ openshift_client_url_prefix }}/4.4.6/sha256sum.txt'
+  4.5.3:
+    archive_url:   '{{ openshift_client_url_prefix }}/4.5.3/openshift-client-linux-4.5.3.tar.gz'
+    sha256sum_url: '{{ openshift_client_url_prefix }}/4.5.3/sha256sum.txt'
 
 openshift_client:
   archive_url:   '{{ openshift_client_versions[openshift_install_config.version].archive_url }}'
