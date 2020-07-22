@@ -6,5 +6,5 @@
       - grub2-efi-x64-modules
       - xorriso
       - mtools
-  when: openshift_install_config.boot_iso.enabled
+  when: openshift_install_config.static_ips.enabled
   become: True

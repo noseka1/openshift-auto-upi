@@ -23,12 +23,17 @@ openshift_install_config:
   # for them to download their ignition files. Make sure that this URL is reachable
   # from the OpenShift nodes.
   ignition_url_prefix: 'http://192.168.150.2:81/openshift-auto-upi/mycluster'
-  # You can customize the GRUB bootloader configuration here. This customization will be
-  # used only during the first boot of the OpenShift hosts. Following boots will go back
-  # to using the factory GRUB configuration. Currently, this customization is used to
-  # achieve static IP configuration.
-  boot_iso:
-    # Must enable in order to use the boot customization functionality
+  # Configure OpenShift hosts using static IPs as opposed to using DHCP.
+  # This feature is currently supported for bare metal, libvirt_pxe, oVirt, and vSphere.
+  # It is not supported for libvirt_fwcfg.
+  # For bare metal and libvirt_pxe, the PXE menu config is modified to include the
+  # static IP configuration.
+  # For oVirt and vSphere, a boot ISO is created that includes a custom GRUB boot loader
+  # configuration that includes the static IP configuration. This custom GRUB confguration
+  # is used only during the first boot of the OpenShift hosts. Following boots will go
+  # back to using the factory GRUB configuration.
+  static_ips:
+    # Must enable in order to use the static IP provisioning.
     enabled: False
     parameters:
       gateway: 192.168.150.1
