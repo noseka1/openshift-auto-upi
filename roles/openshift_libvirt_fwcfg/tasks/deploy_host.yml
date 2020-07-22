@@ -18,7 +18,9 @@
 
 - name: Retrieve ignition volume path
   command: |
-    virsh vol-path \
+    virsh \
+      --connect '{{ libvirt.libvirt_connection_uri }}' \
+      vol-path \
       --pool {{ libvirt.pool_name }} \
       {{ virtual_machine_names[item.hostname] }}-ign
   changed_when: False
