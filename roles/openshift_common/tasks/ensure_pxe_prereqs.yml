@@ -54,6 +54,6 @@
 
 - name: Create pxelinux.cfg configs
   template:
-    src: files/generic/pxelinux.cfg/menu.cfg
+    src: files/boot/pxe/pxelinux.cfg/menu.cfg
     dest: '{{ helper.tftp_cluster_dir }}/pxelinux.cfg/01-{{ item.macaddr | regex_replace(":", "-") }}'
   with_items: '{{ openshift_cluster_hosts }}'
