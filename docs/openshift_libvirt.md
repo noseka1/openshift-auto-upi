@@ -7,7 +7,7 @@ There are two installation methods available for Libvirt: FwCfg and PXE:
 1. **FwCfg**. This installation method uses OpenShift QEMU images. The ignition configuration is passed to the virtual machines using [QEMU Firmware Configuration Device](https://github.com/qemu/qemu/blob/master/docs/specs/fw_cfg.txt). Virtual machines are created from a shared disk image template which allows for better hardware utilization than what can be accomplished with the PXE installation method. <br/>
 :exclamation: QEMU Firmware Configuration Device feature is not available on RHEL7. If you are installing OpenShift on a RHEL7 based hypervisor, you must use the PXE installation method.
 
-2. **PXE**. This installation method utilizes the bare metal installation procedure in order to install OpenShift on virtual machines. This method is more complex and less resource efficient than the fwcfg installation method, however, it works on RHEL7.
+2. **PXE**. This installation method utilizes the bare metal installation procedure in order to install OpenShift on virtual machines. This method is more complex and less resource efficient than the FwCfg installation method, however, it works on RHEL7. It can also be used for testing of bare metal installations when bare metal instances are not available.
 
 ## Configuring Libvirt
 
