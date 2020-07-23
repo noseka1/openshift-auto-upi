@@ -1,4 +1,4 @@
-# Customizing Installation Manifests
+# Customizing Ignition Configs
 
 ## Using *filetranspiler* with *openshift-auto-upi*
 
@@ -26,4 +26,4 @@ Verify that *filetranspiler* was installed properly:
 $ podman run --rm -ti localhost/filetranspiler --version
 ```
 
-## Using jsonpatch to customize the installation manifests
+## Using *jsonpatch* to customize ignition configuration
