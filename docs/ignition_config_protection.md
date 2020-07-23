@@ -10,6 +10,7 @@ Wipe out the existing cluster configuration:
 
 ```
 $ rm -rf ~/openshift-auto-upi-workspace/<cluster>/conf
+$ rm -rf ~/openshift-auto-upi-workspace/<cluster>/ignition
 ```
 
 Delete the timestamp that prevents generating of ignition configs on the next `openshift-auto-upi` run:
