@@ -31,6 +31,11 @@ openshift_cluster_hosts:
     memory_gb: 16
     disk_gb: 120
     ignition_config: bootstrap.ign
+#    ignition_transform:
+#      filetranspiler_roots:
+#        - files/ignition/filetranspiler/bootstrap
+#      jsonpatches:
+#        - files/ignition/jsonpatch/bootstrap/password.json
     bmc:
       username: admin
       password: ''
@@ -45,6 +50,9 @@ openshift_cluster_hosts:
     memory_gb: 32
     disk_gb: 120
     ignition_config: master.ign
+#    ignition_transform:
+#      jsonpatches:
+#        - files/ignition/jsonpatch/non-bootstrap/password.json
     bmc:
       username: admin
       password: ''
@@ -58,6 +66,9 @@ openshift_cluster_hosts:
     memory_gb: 32
     disk_gb: 120
     ignition_config: worker.ign
+#    ignition_transform:
+#      jsonpatches:
+#        - files/ignition/jsonpatch/non-bootstrap/password.json
     bmc:
       username: admin
       password: ''
@@ -71,6 +82,9 @@ openshift_cluster_hosts:
     memory_gb: 16
     disk_gb: 120
     ignition_config: worker.ign
+#    ignition_transform:
+#      jsonpatches:
+#        - files/ignition/jsonpatch/non-bootstrap/password.json
     bmc:
       username: admin
       password: ''

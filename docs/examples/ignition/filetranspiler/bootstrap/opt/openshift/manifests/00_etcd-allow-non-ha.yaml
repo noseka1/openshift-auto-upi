@@ -1,0 +1,10 @@
+apiVersion: operator.openshift.io/v1
+kind: Etcd
+metadata:
+  name: cluster
+spec:
+  managementState: Managed
+  unsupportedConfigOverrides:
+    # Allow creating a cluster with less than 3 nodes
+    # See also: https://github.com/code-ready/snc/wiki/Workaround-for-4.4--etcd-operator-addition
+    useUnsupportedUnsafeNonHANonProductionUnstableEtcd: true
