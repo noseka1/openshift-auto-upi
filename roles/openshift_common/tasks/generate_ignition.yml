@@ -19,3 +19,33 @@
     path: '{{ helper.timestamp_ignition_created }}'
     state: touch
   when: not timestamp_ignition_created.stat.exists
+
+- name: Ensure required directories exist
+  file:
+    path: '{{ item }}'
+    state: directory
+  with_items:
+    - '{{ helper.install_ignition_dir }}'
+
+- name: Install jsonpatch utility
+  yum:
+    name: '{{ rpm_name["python-jsonpatch"] }}'
+    state: present
+  become: True
+
+- name: Create individual ignition files
+  copy:
+    src: '{{ helper.install_conf_dir }}/{{ item.ignition_config }}'
+    dest: '{{ helper.install_ignition_dir }}/{{ item.hostname }}.ign'
+    remote_src: True
+    backup: True
+  with_items: '{{ openshift_cluster_hosts }}'
+
+- name: Generate ignition transform script
+  template:
+    src: transform_ignition.sh
+    dest: '{{ helper.install_ignition_dir }}'
+    mode: '0755'
+
+- name: Run ignition transform script
+  command: '{{ helper.install_ignition_dir }}/transform_ignition.sh'

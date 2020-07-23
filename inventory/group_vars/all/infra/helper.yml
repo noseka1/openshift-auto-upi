@@ -5,6 +5,7 @@ helper:
   oc_exe:                     '{{ ansible_env["HOME"] }}/openshift-auto-upi-workspace/{{ openshift_install_config.name }}/bin/oc'
   install_exe:                '{{ ansible_env["HOME"] }}/openshift-auto-upi-workspace/{{ openshift_install_config.name }}/bin/openshift-install'
   install_conf_dir:           '{{ ansible_env["HOME"] }}/openshift-auto-upi-workspace/{{ openshift_install_config.name }}/conf'
+  install_ignition_dir:       '{{ ansible_env["HOME"] }}/openshift-auto-upi-workspace/{{ openshift_install_config.name }}/ignition'
   images_dir:                 '{{ ansible_env["HOME"] }}/openshift-auto-upi-workspace/{{ openshift_install_config.name }}/images'
   mirror_registry_dir:        '{{ ansible_env["HOME"] }}/openshift-auto-upi-workspace/{{ openshift_install_config.name }}/mirror_registry'
   timestamp_dir:              '{{ ansible_env["HOME"] }}/openshift-auto-upi-workspace/{{ openshift_install_config.name }}/timestamps'
