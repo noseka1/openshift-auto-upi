@@ -46,7 +46,7 @@ Note that these names are created only for your convenience. *openshift-auto-upi
 
 ### Using Static IPs
 
-If you prefer configuring your OpenShift hosts using static IPs as opposed to leveraging the default DHCP provisioning, *openshift-auto-upi* allows you to do that. Note that Static IPs feature is currently implemented for bare metal, libvirt_pxe, oVirt, and vSphere target platforms. Static IPs for libvirt_fwcfg is not implemented at this time.
+If you prefer configuring your OpenShift hosts using static IPs as opposed to leveraging the default DHCP provisioning, *openshift-auto-upi* allows you to do that. Note that Static IPs feature is currently implemented for bare metal, Libvirt PXE, oVirt, and vSphere target platforms. Static IPs for Libvirt FwCfg is not implemented at this time.
 
 While you are configuring *openshift-auto-upi* (detailed information in the following sections), add your network configuration (gateway, netmask, name servers) to the *static_ips* section of the *openshift_install_config.yml* file:
 
