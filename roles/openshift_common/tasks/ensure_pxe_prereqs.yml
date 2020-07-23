@@ -10,14 +10,11 @@
 
 - name: Copy ignition files to the webserver html directory
   copy:
-    src: '{{ item.src }}'
-    dest: '{{ item.dest }}'
+    src: '{{ helper.install_ignition_dir }}/{{ item.hostname }}.ign'
+    dest: '{{ helper.web_cluster_dir }}/{{ item.hostname }}.ign'
     remote_src: True
     backup: True
-  with_items:
-    - { src: '{{ helper.install_conf_dir }}/bootstrap.ign', dest: '{{ helper.web_cluster_dir }}' }
-    - { src: '{{ helper.install_conf_dir }}/master.ign',    dest: '{{ helper.web_cluster_dir }}' }
-    - { src: '{{ helper.install_conf_dir }}/worker.ign',    dest: '{{ helper.web_cluster_dir }}' }
+  with_items: '{{ openshift_cluster_hosts }}'
 
 - name: Download CoreOS binaries
   get_url:

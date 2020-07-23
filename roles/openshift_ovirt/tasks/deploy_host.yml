@@ -1,6 +1,6 @@
 - name: Fetch ignition file for machine {{ virtual_machine_names[item.hostname] }}
   slurp:
-    src: '{{ helper.install_conf_dir }}/{{ item.ignition_config }}'
+    src: '{{ helper.install_ignition_dir }}/{{ item.hostname }}.ign'
   register: ovirt_ignition
 
 - name: Create a virtual machine {{ virtual_machine_names[item.hostname] }}

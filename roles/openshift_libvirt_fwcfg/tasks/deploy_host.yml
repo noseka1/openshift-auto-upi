@@ -7,7 +7,7 @@
   import_tasks: create_volume.yml
   vars:
     libvirt_volume_name: '{{ virtual_machine_names[item.hostname] }}-ign'
-    libvirt_volume_data: '{{ helper.install_conf_dir }}/{{ item.ignition_config }}'
+    libvirt_volume_data: '{{ helper.install_ignition_dir }}/{{ item.hostname }}.ign'
 
 - name: Create a volume that contains the machine disk image
   import_tasks: create_volume_cow.yml
