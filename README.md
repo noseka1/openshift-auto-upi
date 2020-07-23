@@ -22,6 +22,18 @@ Preparing infrastructure for OpenShift 4 installation by hand is a rather tediou
 
 Note that the infrastructure from the above list provisioned using *openshift-auto-upi* is NOT meant for production use. It is meant to be a temporary fill in for your missing production-grade infrastructure. Using *openshift-auto-upi* to provision any of the infrastructure from the above list is optional.
 
+Some of the features offered by *openshift-auto-upi*:
+
+* Network configuration via DHCP or static IPs
+* User has full control over the `install-config.yaml` file and can customize it according to her/his needs.
+* Ignition config files are protected from being overwritten, see also [Ignition Config Protection](docs/ignition_config_protection.md)
+* Automated download of CoreOS images from Red Hat sites and upload onto the target platform
+* Automated bare metal installation, control of remote machines using BMC
+* Adding nodes to the existing cluster is supported and documented
+* `openshift-auto-upi` won't touch the existing nodes. It doesn't even trust the Ansible modules to not modify the existing nodes. Instead, it skips existing nodes altogether for maximum safety. 
+
+> *openshift-auto-upi* is great for situations where the official IPI installation method is not flexible enough and on the other hand the UPI installation is too tedious.
+
 # Deployment Overview
 
 ![Deployment Diagram](docs/openshift_auto_upi.svg "Deployment Diagram")
