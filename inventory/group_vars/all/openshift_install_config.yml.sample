@@ -1,8 +1,12 @@
 # OpenShift Installer configuration
 openshift_install_config:
-  # Version of OpenShift to be installed.
+  # Choose OpenShift distribution (either ocp or okd):
+  # ocp = Red Hat OpenShift Container Platform, https://www.openshift.com/
+  # okd = Community distribution of Kubernetes, https://www.okd.io/
+  distribution: ocp
+  # Version of OpenShift to be installed (OCP or OKD).
   version: 4.5.3
-  # Version of the CoreOS image.
+  # Version of the CoreOS image (RHCOS or FCOS).
   coreos_version: 4.5.2
   # Unique name of the OpenShift cluster which also becomes a part of cluster's FQDN.
   name: mycluster
