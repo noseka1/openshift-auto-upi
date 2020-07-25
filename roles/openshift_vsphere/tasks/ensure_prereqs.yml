@@ -4,15 +4,14 @@
     state: present
   become: True
 
-- name: Ensure required directories exist
-  file:
-    path: '{{ item }}'
-    state: directory
-  with_items:
-    - '{{ helper.images_dir }}'
+- name: Download the CoreOS image
+  import_role:
+    name: openshift_common
+    tasks_from: download_coreos.yml
+  vars:
+    download_coreos_url: '{{ coreos.vmware_ova_url }}'
+    download_coreos_checksum: '{{ coreos.checksum }}'
 
-- name: Download Red Hat CoreOS OVA template {{ coreos.vmware_ova_url }}
-  get_url:
-    url: '{{ coreos.vmware_ova_url }}'
-    dest: '{{ helper.images_dir }}/{{ coreos.vmware_ova_url | basename }}'
-    checksum: 'sha256:{{ coreos.sha256sum_url }}'
+- name: Set image filename
+  set_fact:
+    vsphere_image_filename: '{{ download_coreos_image_filename }}'

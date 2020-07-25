@@ -22,7 +22,7 @@
     allow_duplicates: False
     disk_provisioning: thin
     networks: '{"VM Network": "{{ vsphere.network_name }}"}'
-    ova: '{{ helper.images_dir }}/{{ coreos.vmware_ova_url | basename }}'
+    ova: '{{ vsphere_image_filename }}'
     power_on: False
     validate_certs: '{{ vsphere.validate_certs }}'
 

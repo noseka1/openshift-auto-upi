@@ -6,25 +6,14 @@
     state: present
   become: True
 
-- name: Ensure required directories exist
-  file:
-    path: '{{ item }}'
-    state: directory
-  with_items:
-    - '{{ helper.images_dir }}'
-
-- name: Download Red Hat CoreOS image for QEMU {{ coreos.qemu_qcow2_url }}
-  get_url:
-    url: '{{ coreos.qemu_qcow2_url }}'
-    dest: '{{ helper.images_dir }}/{{ coreos.qemu_qcow2_url | basename }}'
-    checksum: 'sha256:{{ coreos.sha256sum_url }}'
+- name: Download the CoreOS image
+  import_role:
+    name: openshift_common
+    tasks_from: download_coreos.yml
+  vars:
+    download_coreos_url: '{{ coreos.qemu_qcow2_url }}'
+    download_coreos_checksum: '{{ coreos.checksum }}'
 
 - name: Set image filename
   set_fact:
-    libvirt_image_filename: '{{ helper.images_dir }}/{{ coreos.qemu_qcow2_url | basename | regex_replace("\.gz$", "") }}'
-
-- name: Extract Red Hat CoreOS image for QEMU
-  command: gunzip --keep '{{ helper.images_dir }}/{{ coreos.qemu_qcow2_url | basename }}'
-  args:
-    creates:
-      '{{ libvirt_image_filename }}'
+    libvirt_image_filename: '{{ download_coreos_image_filename }}'

@@ -1,0 +1,38 @@
+- name: Install compression tools
+  yum:
+    name:
+      - gzip
+      - xz
+    state: present
+  become: True
+
+- name: Ensure required directories exist
+  file:
+    path: '{{ item }}'
+    state: directory
+  with_items:
+    - '{{ helper.images_dir }}'
+
+- name: Download CoreOS image from {{ download_coreos_url }}
+  get_url:
+    url: '{{ download_coreos_url }}'
+    dest: '{{ helper.images_dir }}/{{ download_coreos_url | basename }}'
+    checksum: '{{ download_coreos_checksum }}'
+
+- name: Set image filename
+  set_fact:
+    download_coreos_image_filename: '{{ helper.images_dir }}/{{ download_coreos_url | basename | regex_replace("\.gz$", "") | regex_replace("\.xz$", "") }}'
+
+- name: Extract CoreOS image using gunzip
+  command: gunzip --keep '{{ helper.images_dir }}/{{ download_coreos_url | basename }}'
+  args:
+    creates:
+      '{{ download_coreos_image_filename }}'
+  when: download_coreos_url.endswith('gz')
+
+- name: Extract CoreOS image using unxz
+  command: unxz --keep '{{ helper.images_dir }}/{{ download_coreos_url | basename }}'
+  args:
+    creates:
+      '{{ download_coreos_image_filename }}'
+  when: download_coreos_url.endswith('xz')

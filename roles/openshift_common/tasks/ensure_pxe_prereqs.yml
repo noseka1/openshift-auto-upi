@@ -16,11 +16,11 @@
     backup: True
   with_items: '{{ openshift_cluster_hosts }}'
 
-- name: Download CoreOS binaries
+- name: Download CoreOS image for bare metal
   get_url:
     url: '{{ item }}'
     dest: '{{ helper.web_cluster_dir }}/{{ item | basename }}'
-    checksum: 'sha256:{{ coreos.sha256sum_url }}'
+    checksum: '{{ coreos.checksum }}'
   with_items:
     - '{{ coreos.installer_initramfs_url }}'
     - '{{ coreos.installer_kernel_url }}'
