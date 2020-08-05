@@ -5,7 +5,7 @@ libvirt:
   # URI will depend on the configuration of the Libvirt daemon.
   # Examples of remote Libvirt connection URIs:
   # qemu+tcp://192.168.150.1:16509/system
-  # qemu://root@192.168.150.1/system
+  # qemu+ssh://root@192.168.150.1/system
   libvirt_connection_uri: 'qemu:///system'
   domain_template: files/libvirt/domain.xml
   pool_name: default
