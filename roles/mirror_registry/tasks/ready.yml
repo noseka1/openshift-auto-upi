@@ -10,7 +10,7 @@
       element in your install-config.yaml. The self-signed certificate can be found here: {{ helper.mirror_registry_dir }}/certs/domain.crt
 
       Also, remember to use {{ helper.mirror_registry_dir }}/pull-secret.json as your pull secret instead of the original
-      pull secret that you downloaded from the Red Hat site. The new pull secret was updated to contain the credentials for the mirror
-      registry.
+      pull secret that you downloaded from the Red Hat site. The new pull secret includes the original credentials for the Red Hat site as well as
+      the credentials for the mirror registry.
 
 - debug: msg="{{ msg.split('\n') }}"
