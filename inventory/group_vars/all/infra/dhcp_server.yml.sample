@@ -5,3 +5,6 @@ dhcp_server:
     router: 192.168.150.1
     netmask: 255.255.255.0
     dns-server: 192.168.150.2
+    # When using an overlay network (vxlan, gre) between the OpenShift hosts, you will need
+    # to reduce the mtu value. Default mtu is 1500.
+    #mtu: 1450
