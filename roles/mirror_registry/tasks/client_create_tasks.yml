@@ -5,7 +5,7 @@
 
 - name: Create openshift-install client that downloads container images from {{ item.key }}
   command: |
-    oc adm release extract \
+    {{ helper.oc_exe }} adm release extract \
       --registry-config pull-secret.json \
       --command openshift-install \
       --to '{{ helper.mirror_registry_dir }}/clients/{{ item.key }}'
