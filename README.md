@@ -119,6 +119,21 @@ $ git clone https://github.com/noseka1/openshift-auto-upi.git
 $ git checkout <release_tag>
 $ cd openshift-auto-upi
 ```
+## Preparing for OpenShift Installation
+
+Create custom *openshift_install_config.yml* configuration:
+
+```
+$ cp inventory/group_vars/all/openshift_install_config.yml.sample \
+    inventory/group_vars/all/openshift_install_config.yml
+$ vi inventory/group_vars/all/openshift_install_config.yml
+```
+
+Download OpenShift clients using Ansible:
+
+```
+$ ansible-playbook clients.yml
+```
 
 ## Creating Mirror Registry
 
@@ -134,15 +149,7 @@ $ vi inventory/group_vars/all/infra/mirror_registry.yml
 $ ansible-playbook mirror_registry.yml
 ```
 
-## Preparing for OpenShift Installation
-
-Create custom *openshift_install_config.yml* configuration:
-
-```
-$ cp inventory/group_vars/all/openshift_install_config.yml.sample \
-    inventory/group_vars/all/openshift_install_config.yml
-$ vi inventory/group_vars/all/openshift_install_config.yml
-```
+## Defining OpenShift cluster hosts
 
 Create custom *openshift_cluster_hosts.yml* configuration:
 
@@ -150,12 +157,6 @@ Create custom *openshift_cluster_hosts.yml* configuration:
 $ cp inventory/group_vars/all/openshift_cluster_hosts.yml.sample \
     inventory/group_vars/all/openshift_cluster_hosts.yml
 $ vi inventory/group_vars/all/openshift_cluster_hosts.yml
-```
-
-Download OpenShift clients using Ansible:
-
-```
-$ ansible-playbook clients.yml
 ```
 
 ## Installing DHCP Server
