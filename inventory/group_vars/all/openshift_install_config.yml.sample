@@ -5,7 +5,7 @@ openshift_install_config:
   # okd = Community distribution of Kubernetes, https://www.okd.io/
   distribution: ocp
   # Version of OpenShift to be installed (OCP or OKD).
-  version: 4.5.3
+  version: 4.5.4
   # Version of the CoreOS image (RHCOS or FCOS).
   coreos_version: 4.5.2
   # Unique name of the OpenShift cluster which also becomes a part of cluster's FQDN.
