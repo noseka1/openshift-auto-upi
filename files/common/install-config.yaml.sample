@@ -58,8 +58,8 @@ sshKey: '{{ openshift_install_config.ssh_key }}'
 # also wish to configure an additional trust bundle.
 #imageContentSources:
 #- mirrors:
-#  - 192.168.150.2:5001/ocp4/openshift4
+#  - 192.168.150.2:5001/openshift-release-dev/ocp4
 #  source: quay.io/openshift-release-dev/ocp-release
 #- mirrors:
-#  - 192.168.150.2:5001/ocp4/openshift4
+#  - 192.168.150.2:5001/openshift-release-dev/ocp4
 #  source: quay.io/openshift-release-dev/ocp-v4.0-art-dev

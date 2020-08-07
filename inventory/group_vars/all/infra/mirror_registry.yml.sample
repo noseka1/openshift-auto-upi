@@ -26,9 +26,9 @@ mirror_registry:
   # found at: https://quay.io/repository/openshift-release-dev/ocp-release?tab=tags
   mirror_repositories:
     repo1:
-      mirror_from: quay.io/openshift-release-dev/ocp-release:4.3.0-x86_64
+      mirror_from: quay.io/openshift-release-dev/ocp-release:4.5.4-x86_64
       mirror_to: helper.mycluster.example.com:5001/openshift-release-dev/ocp4
-      mirror_to_release: 4.3.0
+      mirror_to_release: 4.5.4-x86_64
   # Which repo to use for the OpenShift installation?
   openshift_install_repo: repo1
   # This is a JSON formatted pull secret that you can obtain at https://cloud.redhat.com
