@@ -11,7 +11,9 @@
       Next steps:
 
       1. You must remove the bootstrap machine from the load balancer at this point. I recommend to
-         simply shut the bootstrap machine down.
+         simply shut the bootstrap machine down. If you decide to delete the bootstrap machine, remember
+         to remove it from the openshift_cluster_hosts list, so that it is not re-created during the
+         next run of openshift-auto-upi.
 
       2. You can check the health of your cluster using:
 
@@ -25,5 +27,13 @@
          You can wait for the cluster installation to complete using:
 
          KUBECONFIG={{ helper.install_conf_dir }}/auth/kubeconfig {{ helper.install_exe }} wait-for install-complete --dir {{ helper.install_conf_dir }}
+
+      4. If you are adding worker nodes, check for pending csrs:
+
+         KUBECONFIG={{ helper.install_conf_dir }}/auth/kubeconfig {{ helper.oc_exe }} get csr
+
+         and approve the csrs using:
+
+         KUBECONFIG={{ helper.install_conf_dir }}/auth/kubeconfig {{ helper.oc_exe }} adm certificate approve <csr>
 
 - debug: msg="{{ msg.split('\n') }}"
