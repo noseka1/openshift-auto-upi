@@ -1,0 +1,6 @@
+- hosts: kvm
+  tasks:
+  - import_role:
+      name: openshift_common
+      tasks_from: delete_hosts.yml
+
