@@ -20,6 +20,13 @@
   command: |
     {{ helper.install_exe }} create manifests --dir '{{ helper.install_conf_dir }}'
 
+- name: Mark control plane as unscheduleable
+  lineinfile:
+    path: '{{ openshift_install_dir }}/manifests/cluster-scheduler-02-config.yml'
+    regexp: '^(\s*mastersSchedulable:)'
+    line: '\1 false'
+    backrefs: True
+
 - name: Create ignition configs # noqa 301
   command: |
     {{ helper.install_exe }} create ignition-configs --dir '{{ helper.install_conf_dir }}'
