@@ -18,6 +18,7 @@
     url: '{{ download_coreos_url }}'
     dest: '{{ helper.images_dir }}/{{ download_coreos_url | basename }}'
     checksum: '{{ download_coreos_checksum }}'
+  retries: 3
 
 - name: Set image filename
   set_fact:

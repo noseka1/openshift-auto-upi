@@ -21,6 +21,7 @@
     url: '{{ item }}'
     dest: '{{ helper.web_cluster_dir }}/{{ item | basename }}'
     checksum: '{{ coreos.checksum }}'
+  retries: 3
   with_items:
     - '{{ coreos.installer_initramfs_url }}'
     - '{{ coreos.installer_kernel_url }}'
