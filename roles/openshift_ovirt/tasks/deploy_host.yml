@@ -14,6 +14,7 @@
     cloud_init_persist: True
     memory: '{{ item.memory_gb }} GiB'
     cpu_cores: '{{ item.num_cpus }}'
+    operating_system: 'rhcos_x64'
     nics:
       - name: nic1
         mac_address: '{{ item.macaddr }}'
