@@ -31,7 +31,7 @@ Some of the features offered by *openshift-auto-upi*:
 * Automated download of CoreOS images from Red Hat sites and upload onto the target platform
 * Automated bare metal installation, control of remote machines using BMC
 * Adding nodes to the existing cluster is supported and documented
-* `openshift-auto-upi` won't touch the existing nodes. It doesn't even trust the Ansible modules to not modify the existing nodes. Instead, it skips existing nodes altogether for maximum safety. 
+* `openshift-auto-upi` won't touch the existing cluster nodes. It doesn't even trust the Ansible modules to not modify the existing nodes. Instead, it skips existing nodes altogether for maximum safety. 
 
 > *openshift-auto-upi* is great for situations where the official IPI installation method is not flexible enough and on the other hand the UPI installation is too tedious.
 
