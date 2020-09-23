@@ -63,14 +63,3 @@ $ virsh net-start openshift
 ```
 $ virsh net-autostart openshift
 ```
-
-# Deleting VMs on Libvirt
-
-Delete the virtual machines to recreate the OpenShift cluster:
-
-```
-$ ansible-playbook delete_libvirt_vms.yml -e 'ansible_host=<kvm hostname or ip address>'
-```
-
-You can also add the KVM hostname or IP address `inventory/helper.ini` instead of specifying extra vars with -e flag.
-
