@@ -1,4 +1,4 @@
-- hosts: kvm
+- hosts: helper
   tasks:
   - import_role:
       name: openshift_common
