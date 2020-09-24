@@ -63,3 +63,22 @@ $ virsh net-start openshift
 ```
 $ virsh net-autostart openshift
 ```
+
+## Enabling remote connection
+
+To configure management access to libvirt via SSH to seperate the helper host from the KVM host, you need to set the `libvirt.libvirt_connection_uri` variable in your `inventory/group_vars/all/infra/libvirt.yml` file so that the helper host is able to connect to the libvirt daemon management socket on the KVM host via SSH to create virtual machines.
+
+```
+libvirt:
+  libvirt_connection_uri: 'qemu+ssh://root@192.168.150.1/system'
+```
+
+But it prompts for the root password after you issue `ansible-playbook openshift_libvirt_[fwcfg|pxe].yml` command and you need to type the password tens of times depending on the number of the OpenShift hosts during the installation. This is because you are trying to connect to libvirt as root user.
+
+To avoid typing the password over and over again, you need to set the public key on the KVM host as root user and the secret key on the helper ost as root user.
+Assuming you are in the helper host and the secret and the public key are on the host, you can arrange the key files by issuing the command:
+
+```
+ssh-copy-id -i ~/.ssh/id_rsa root@<KVM_HOST>
+sudo cp ~/.ssh/id_rsa /root/.ssh/id_rsa
+```
