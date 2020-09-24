@@ -249,6 +249,8 @@ $ ansible-playbook dns_client.yml
 
 # Installing OpenShift
 
+To make the control plane machines unschedulable, see [Making control-plane unschedulable](docs/control_plane_scheduling.md).
+
 ## Installing OpenShift on Bare Metal
 
 Create your `install-config.yaml` file:
