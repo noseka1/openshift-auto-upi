@@ -6,6 +6,9 @@ libvirt:
   # Examples of remote Libvirt connection URIs:
   # qemu+tcp://192.168.150.1:16509/system
   # qemu+ssh://root@192.168.150.1/system
+  # Using qemu+ssh prompts for the root password to connect to the Libvirt daemon,
+  # so if you want to avoid it, place the public key on the KVM host as root user,
+  # and the secret key on the helper host as root user.
   libvirt_connection_uri: 'qemu:///system'
   domain_template: files/libvirt/domain.xml
   pool_name: default
