@@ -24,8 +24,8 @@ You simply add the following task in the `roles/openshift_common/tasks/generate_
 To place the scheduler policy file, create tha manifests directory and place the policy file before running `openshift_baremetal.yml` or `openshift_libvirt_pxe.yml`.
 ```
 export CLUSTER_NAME=$(awk '/name: / {print $2}' ~/openshift-auto-upi/inventory/group_vars/all/openshift_install_config.yml)
-ansible helper -m file -a "path=~/openshift-auto-upi-workspace/${CLUSTER_NAME}/conf/manifests/ state=directory"
-ansible helper -m copy -a "src=./docs/examples/ignition/filetranspiler/bootstrap/opt/openshift/manifests/cluster-scheduler-01-config.yml dest=~/openshift-auto-upi-workspace/${CLUSTER_NAME}/conf/manifests/
+ansible helper -m file -a "path=~./files/ignition/filetranspiler/bootstrap/opt/openshift/manifests state=directory"
+ansible helper -m copy -a "src=./docs/examples/ignition/filetranspiler/bootstrap/opt/openshift/manifests/cluster-scheduler-01-config.yml dest=./files/ignition/filetranspiler/bootstrap/opt/openshift/manifests/cluster-scheduler-01-config.yml"
 ```
 
 In addition, add the `ignition_transform` variable in the bootstrap section to `the openshift_cluster_hosts.yml` file to enable the ignition modification for the boostrap node:
