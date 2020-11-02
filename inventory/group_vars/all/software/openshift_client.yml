@@ -18,6 +18,9 @@ openshift_client_versions:
     4.5.4:
       archive_url:   '{{ ocp_client_url_prefix }}/4.5.4/openshift-client-linux-4.5.4.tar.gz'
       sha256sum_url: '{{ ocp_client_url_prefix }}/4.5.4/sha256sum.txt'
+    4.6.1:
+      archive_url:   '{{ ocp_client_url_prefix }}/4.6.1/openshift-client-linux-4.6.1.tar.gz'
+      sha256sum_url: '{{ ocp_client_url_prefix }}/4.6.1/sha256sum.txt'  
   okd:
     4.5.0-0.okd-2020-07-14-153706-ga:
       archive_url:   '{{ okd_client_url_prefix }}/4.5.0-0.okd-2020-07-14-153706-ga/openshift-client-linux-4.5.0-0.okd-2020-07-14-153706-ga.tar.gz'
