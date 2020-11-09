@@ -39,6 +39,14 @@ coreos_versions:
       qemu_qcow2_url:          '{{ rhcos_url_prefix }}/4.5/4.5.2/rhcos-4.5.2-x86_64-qemu.x86_64.qcow2.gz'
       vmware_ova_url:          '{{ rhcos_url_prefix }}/4.5/4.5.2/rhcos-4.5.2-x86_64-vmware.x86_64.ova'
       checksum:                'sha256:{{ rhcos_url_prefix }}/4.5/4.5.2/sha256sum.txt'
+    4.6.1:
+      installer_initramfs_url: '{{ rhcos_url_prefix }}/4.6/4.6.1/rhcos-4.6.1-x86_64-installer-initramfs.x86_64.img'
+      installer_kernel_url:    '{{ rhcos_url_prefix }}/4.6/4.6.1/rhcos-4.6.1-x86_64-installer-kernel-x86_64'
+      metal_bios_url:          '{{ rhcos_url_prefix }}/4.6/4.6.1/rhcos-4.6.1-x86_64-metal.x86_64.raw.gz'
+      openstack_qcow2_url:     '{{ rhcos_url_prefix }}/4.6/4.6.1/rhcos-4.6.1-x86_64-openstack.x86_64.qcow2.gz'
+      qemu_qcow2_url:          '{{ rhcos_url_prefix }}/4.6/4.6.1/rhcos-4.6.1-x86_64-qemu.x86_64.qcow2.gz'
+      vmware_ova_url:          '{{ rhcos_url_prefix }}/4.6/4.6.1/rhcos-4.6.1-x86_64-vmware.x86_64.ova'
+      checksum:                'sha256:{{ rhcos_url_prefix }}/4.6/4.6.1/sha256sum.txt'  
   okd:
     32.20200629.3.0:
       installer_initramfs_url: '{{ fcos_url_prefix }}/32.20200629.3.0/x86_64/fedora-coreos-32.20200629.3.0-live-initramfs.x86_64.img'
