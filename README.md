@@ -137,9 +137,9 @@ Download OpenShift clients using Ansible:
 $ ansible-playbook clients.yml
 ```
 
-## Creating Mirror Registry
+## Installing in air-gapped (disconnected) environments
 
-If you are installing OpenShift in a restricted network, you will need to create a local mirror registry. This registry will contain all OpenShift container images required for the installation. *openshift-auto-upi* automates the creation of the mirror registry by implementing the steps described in the [Creating a mirror registry](https://docs.openshift.com/container-platform/latest/installing/install_config/installing-restricted-networks-preparations.html). To set up a mirror registry:
+If you are installing OpenShift in a an environment that is not connected to the Internet, you will need to create a local mirror registry. This registry will contain all OpenShift container images required for the installation. *openshift-auto-upi* automates the creation of the mirror registry by implementing the steps described in the [Creating a mirror registry](https://docs.openshift.com/container-platform/latest/installing/install_config/installing-restricted-networks-preparations.html). To set up a mirror registry:
 
 ```
 $ cp inventory/group_vars/all/infra/mirror_registry.yml.sample \
@@ -150,6 +150,9 @@ $ vi inventory/group_vars/all/infra/mirror_registry.yml
 ```
 $ ansible-playbook mirror_registry.yml
 ```
+
+For mirroring operator images and creating custom operator catalog based on the desired operators refer to the [ocp4-offline-operator-mirror](https://github.com/openshift-telco/ocp4-offline-operator-mirror) repository.
+
 
 ## Defining OpenShift cluster hosts
 
