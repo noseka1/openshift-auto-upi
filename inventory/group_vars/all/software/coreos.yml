@@ -64,6 +64,14 @@ coreos_versions:
       qemu_qcow2_url:          '{{ fcos_url_prefix }}/32.20200629.3.0/x86_64/fedora-coreos-32.20200629.3.0-qemu.x86_64.qcow2.xz'
       vmware_ova_url:          '{{ fcos_url_prefix }}/32.20200629.3.0/x86_64/fedora-coreos-32.20200629.3.0-vmware.x86_64.ova'
       checksum:                ''
+    33.20210117.3.2:
+      installer_initramfs_url: '{{ fcos_url_prefix }}/33.20210117.3.2/x86_64/fedora-coreos-33.20210117.3.2-live-initramfs.x86_64.img'
+      installer_kernel_url:    '{{ fcos_url_prefix }}/33.20210117.3.2/x86_64/fedora-coreos-33.20210117.3.2-live-kernel-x86_64'
+      metal_bios_url:          '{{ fcos_url_prefix }}/33.20210117.3.2/x86_64/fedora-coreos-33.20210117.3.2-metal.x86_64.raw.xz'
+      openstack_qcow2_url:     '{{ fcos_url_prefix }}/33.20210117.3.2/x86_64/fedora-coreos-33.20210117.3.2-openstack.x86_64.qcow2.xz'
+      qemu_qcow2_url:          '{{ fcos_url_prefix }}/33.20210117.3.2/x86_64/fedora-coreos-33.20210117.3.2-qemu.x86_64.qcow2.xz'
+      vmware_ova_url:          '{{ fcos_url_prefix }}/33.20210117.3.2/x86_64/fedora-coreos-33.20210117.3.2-vmware.x86_64.ova'
+      checksum:                ''
 
 coreos:
   installer_initramfs_url: '{{ coreos_versions[openshift_install_config.distribution][openshift_install_config.coreos_version].installer_initramfs_url }}'

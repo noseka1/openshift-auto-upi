@@ -28,6 +28,9 @@ openshift_client_versions:
     4.5.0-0.okd-2020-07-14-153706-ga:
       archive_url:   '{{ okd_client_url_prefix }}/4.5.0-0.okd-2020-07-14-153706-ga/openshift-client-linux-4.5.0-0.okd-2020-07-14-153706-ga.tar.gz'
       sha256sum_url: '{{ okd_client_url_prefix }}/4.5.0-0.okd-2020-07-14-153706-ga/sha256sum.txt'
+    4.7.0-0.okd-2021-06-04-191031:
+      archive_url:   '{{ okd_client_url_prefix }}/4.7.0-0.okd-2021-06-04-191031/openshift-client-linux-4.7.0-0.okd-2021-06-04-191031.tar.gz'
+      sha256sum_url: '{{ okd_client_url_prefix }}/4.7.0-0.okd-2021-06-04-191031/sha256sum.txt'
 
 openshift_client:
   archive_url:   '{{ openshift_client_versions[openshift_install_config.distribution][openshift_install_config.version].archive_url }}'
