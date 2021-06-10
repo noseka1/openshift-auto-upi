@@ -19,9 +19,9 @@ networking:
   serviceNetwork:
   - 172.30.0.0/16
 platform:
-  # Bare metal, Libvirt, and oVirt target platforms
+  # Uncomment this if installing to Bare metal, Libvirt, and oVirt target platforms
 #  none: {}
-  # vSphere target platform
+  # Uncomment this if installing to vSphere target platform, remove the commented lines otherwise
 #  vsphere:
 #    vcenter: '{{ vsphere.vcenter_hostname }}'
 #    username: '{{ vsphere.vcenter_username  }}'
