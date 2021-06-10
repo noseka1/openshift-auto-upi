@@ -31,10 +31,20 @@
       hotadd_cpu: False
       hotremove_cpu: False
       hotadd_memory: False
+    wait_for_ip_address: False
+    validate_certs: '{{ vsphere.validate_certs }}'
+    state: present
+
+- name: Attach virtual machine to network {{ vsphere.network_name }}
+  vmware_guest:
+    hostname: '{{ vsphere.vcenter_hostname }}'
+    username: '{{ vsphere.vcenter_username }}'
+    password: '{{ vsphere.vcenter_password }}'
+    datacenter: '{{ vsphere.datacenter_name }}'
+    name: '{{ virtual_machine_names[item.hostname] }}'
     networks:
       - name: '{{ vsphere.network_name }}'
         mac: '{{ item.macaddr }}'
-    wait_for_ip_address: False
     validate_certs: '{{ vsphere.validate_certs }}'
     state: present
 
