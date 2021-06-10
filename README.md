@@ -1,5 +1,7 @@
 # OpenShift Automated User-Provided Infrastructure
 
+> :exclamation: Red Hat support cannot assist with problems with this repo.
+
 Preparing infrastructure for OpenShift 4 installation by hand is a rather tedious job. In order to save the effort, *openshift-auto-upi* provides a set of Ansible scripts that automate the infrastructure creation.
 
 *openshift-auto-upi* is a separate tool, and is not in any way part of the OpenShift product. It enhances the *openshift-installer* by including automation for the following:
