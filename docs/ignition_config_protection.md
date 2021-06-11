@@ -9,12 +9,5 @@ If you want to scrub your ignition configs and start over using a newly generate
 Wipe out the existing cluster configuration:
 
 ```
-$ rm -rf ~/openshift-auto-upi-workspace/<cluster>/conf
-$ rm -rf ~/openshift-auto-upi-workspace/<cluster>/ignition
-```
-
-Delete the timestamp that prevents generating of ignition configs on the next `openshift-auto-upi` run:
-
-```
-$ rm ~/openshift-auto-upi-workspace/<cluster>/timestamps/ignition_created
+$ ansible-playbook delete_install_config.yml
 ```
