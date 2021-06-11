@@ -72,7 +72,10 @@ $ vi inventory/group_vars/all/openshift_install_config.yml
 ```
 Remember to set the variable static_ips.enabled=True in the same file. You are all set! *openshift-auto-upi* will configure your OpenShift nodes using static IPs.
 
-For further information on the design of the Static IPs feature, you can refer to [OpenShift UPI using static IPs](https://www.openshift.com/blog/openshift-upi-using-static-ips).
+Current state of static IP support in `openshift-auto-upi`:
+| Bare metal | Libvirt FwCfg | Libvirt PXE | oVirt | vSphere |
+|:-:|:-:|:-:|:-:|:-:|
+| PXE boot menu | Not supported | PXE boot menu | [Custom design](https://www.openshift.com/blog/openshift-upi-using-static-ips) | Guestinfo variables (requires OCP >= 4.6) |
 
 ## Platform-Specific Documentation
 
