@@ -1,4 +1,7 @@
 #!/bin/bash -x
+
+set -e
+
 IGNITION_DIR={{ helper.install_ignition_dir }}
 
 {% for host in openshift_cluster_hosts %}
