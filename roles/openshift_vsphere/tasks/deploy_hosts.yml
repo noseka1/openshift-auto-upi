@@ -1,18 +1,7 @@
-- name: Retrieve all machines in the folder {{ vsphere.target_folder }}
-  vmware_vm_info:
-    hostname: '{{ vsphere.vcenter_hostname }}'
-    username: '{{ vsphere.vcenter_username }}'
-    password: '{{ vsphere.vcenter_password }}'
-    folder: '/{{ vsphere.datacenter_name }}/vm/{{ vsphere.target_folder }}'
-    vm_type: vm
-    validate_certs: '{{ vsphere.validate_certs }}'
-  register: vsphere_vms
-
-- name: Define existing virtual machines
-  set_fact:
-    vsphere_existing_vms: '{{ vsphere_vms.virtual_machines | json_query("[*].guest_name") }}'
+- name: Define existing vms
+  import_tasks: get_existing_vms.yml
 
 - name: Create virtual machines that don't exist
   include_tasks: deploy_host.yml
   when: virtual_machine_names[item.hostname] not in vsphere_existing_vms
-  with_items: '{{ openshift_cluster_hosts }}'
+  with_items: "{{ openshift_cluster_hosts }}"

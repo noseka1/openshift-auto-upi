@@ -1,0 +1,17 @@
+- name: Power off virtual machine {{ virtual_machine_names[item.hostname] }}
+  vmware_guest:
+    hostname: "{{ vsphere.vcenter_hostname }}"
+    username: "{{ vsphere.vcenter_username }}"
+    password: "{{ vsphere.vcenter_password }}"
+    name: "{{ virtual_machine_names[item.hostname] }}"
+    validate_certs: "{{ vsphere.validate_certs }}"
+    state: poweredoff
+
+- name: Delete virtual machine
+  vmware_guest:
+    hostname: "{{ vsphere.vcenter_hostname }}"
+    username: "{{ vsphere.vcenter_username }}"
+    password: "{{ vsphere.vcenter_password }}"
+    name: "{{ virtual_machine_names[item.hostname] }}"
+    validate_certs: "{{ vsphere.validate_certs }}"
+    state: absent

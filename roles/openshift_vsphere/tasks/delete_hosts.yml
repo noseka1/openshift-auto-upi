@@ -1,0 +1,7 @@
+- name: Define existing vms
+  import_tasks: get_existing_vms.yml
+
+- name: Delete virtual machines that exist
+  include_tasks: delete_host.yml
+  when: virtual_machine_names[item.hostname] in vsphere_existing_vms
+  with_items: "{{ openshift_cluster_hosts }}"

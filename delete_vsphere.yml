@@ -1,0 +1,5 @@
+- hosts: helper
+  tasks:
+    - import_role:
+        name: openshift_vsphere
+        tasks_from: delete_hosts.yml
