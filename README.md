@@ -406,7 +406,7 @@ Refer to the [openshift-auto-upi project board](https://github.com/noseka1/opens
 # References
 
 Projects similar to *openshift-auto-upi*:
-* [ocp4-upi-helpernode](https://github.com/christianh814/ocp4-upi-helpernode)
-* [ocp4-vsphere-upi-automation](https://github.com/vchintal/ocp4-vsphere-upi-automation)
+* [ocp4-helpernode](https://github.com/RedHatOfficial/ocp4-helpernode)
+* [ocp4-vsphere-upi-automation](https://github.com/RedHatOfficial/ocp4-vsphere-upi-automation)
 * [openshift4-rhv-upi](https://github.com/sa-ne/openshift4-rhv-upi)
 * [openshift4-vmware-upi](https://github.com/sa-ne/openshift4-vmware-upi)
