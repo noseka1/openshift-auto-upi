@@ -373,9 +373,15 @@ $ oc get csr
 $ oc adm certificate approve <name>
 ```
 
-# Deleting VMs
+# Reinstalling OpenShift
 
-You can delete the virtual machines before restarting the installaction of the OpenShift cluster.
+Delete the old OpenShift installer configuration:
+
+```
+$ ansible-playbook delete_install_config.yml
+```
+
+Delete virtual machines before restarting the installation of the OpenShift cluster.
 
 ## Deleting VMs on vSphere
 
