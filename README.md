@@ -400,7 +400,9 @@ You can also add the KVM hostname or IP address `inventory/helper.ini` instead o
 $ ansible-playbook delete_libvirt.yml -e 'ansible_host=<kvm hostname or ip address> ansible_connection=ssh'
 ```
 
-# openshift-auto-upi Development
+# Contributing
+
+To contribue please fork this repository, make your changes on the `master` branch and file a pull request.
 
 ## TODO List
 
