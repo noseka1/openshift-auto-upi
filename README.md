@@ -373,11 +373,19 @@ $ oc get csr
 $ oc adm certificate approve <name>
 ```
 
-# Deleting VMs on Libvirt
+# Deleting VMs
 
-Delete the virtual machines to recreate the OpenShift cluster:
+You can delete the virtual machines before restarting the installaction of the OpenShift cluster.
 
-If you want to directly run the playbook in the KVM host but not the helper host, use the -e flag and set the hostname or IP address. 
+## Deleting VMs on vSphere
+
+```
+$ ansible-playbook delete_vsphere.yml
+```
+
+## Deleting VMs on Libvirt
+
+If you want to directly run the playbook on the KVM host but not the helper host, use the -e flag and set the hostname or IP address. 
 You can also add the KVM hostname or IP address `inventory/helper.ini` instead of specifying extra vars with -e flag.
 
 ```
