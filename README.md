@@ -375,6 +375,8 @@ $ oc adm certificate approve <name>
 
 # Reinstalling OpenShift
 
+## Deleting Old OpenShift Installer Configuration
+
 Delete the old OpenShift installer configuration:
 
 ```
