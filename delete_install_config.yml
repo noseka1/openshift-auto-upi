@@ -1,0 +1,10 @@
+- hosts: helper
+  tasks:
+    - name: Scrub the OpenShift installer configuration to prepare for reinstall
+      file:
+        path: '{{ item }}'
+        state: absent
+      with_items:
+        - '{{ helper.install_conf_dir }}'
+        - '{{ helper.install_ignition_dir }}'
+        - '{{ helper.timestamp_ignition_created }}'
