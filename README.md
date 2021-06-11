@@ -83,7 +83,7 @@ Current state of static IP support in `openshift-auto-upi`:
 
 ## Deployment Playbooks
 
-The table below depicts the *openshift-auto-upi* Ansible playbooks that you need to execute in order to deploy OpenShift on select target platform. You want to execute the Ansible playbooks in the order from top to bottom.
+The table below depicts the *openshift-auto-upi* Ansible playbooks that you need to execute in order to deploy OpenShift on select target platform. Execute the Ansible playbooks in the order from top to bottom.
 
 | | Bare metal | Libvirt FwCfg | Libvirt PXE | oVirt | vSphere |
 |-|:-:|:-:|:-:|:-:|:-:|
