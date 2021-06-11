@@ -35,7 +35,7 @@ Some of the features offered by *openshift-auto-upi*:
 * Adding nodes to the existing cluster is supported and documented
 * `openshift-auto-upi` won't touch the existing cluster nodes. It doesn't even trust the Ansible modules to not modify the existing nodes. Instead, it skips existing nodes altogether for maximum safety. 
 
-> *openshift-auto-upi* is great for situations where the official IPI installation method is not flexible enough and on the other hand the UPI installation is too tedious.
+> *openshift-auto-upi* is great for situations where the IPI installation method is not flexible enough and on the other hand the UPI installation is too tedious.
 
 # Deployment Overview
 
