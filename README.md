@@ -77,7 +77,7 @@ Current state of static IP support in `openshift-auto-upi`:
 |:-:|:-:|:-:|:-:|:-:|
 | PXE boot menu | Not supported | PXE boot menu | [Custom design](https://www.openshift.com/blog/openshift-upi-using-static-ips) | Guestinfo variables (requires OCP >= 4.6) |
 
-## Platform-Specific Documentation
+## Platform-specific Documentation
 
 [Installing OpenShift on Libvirt](docs/openshift_libvirt.md)
 
@@ -98,7 +98,7 @@ The table below depicts the *openshift-auto-upi* Ansible playbooks that you need
 
 Following sections describe the installation process in more detail.
  
-# Setting Up Helper Host
+# Setting up Helper Host
 
 There are two options to create a Helper host:
 
