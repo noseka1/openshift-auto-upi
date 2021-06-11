@@ -48,8 +48,18 @@
     validate_certs: '{{ vsphere.validate_certs }}'
     state: present
 
-- name: Configure virtual machine to boot from ISO
-  include_tasks: attach_boot_iso.yml
+- name: Configure static IP
+  vmware_guest:
+    hostname: '{{ vsphere.vcenter_hostname }}'
+    username: '{{ vsphere.vcenter_username }}'
+    password: '{{ vsphere.vcenter_password }}'
+    datacenter: '{{ vsphere.datacenter_name }}'
+    name: '{{ virtual_machine_names[item.hostname] }}'
+    customvalues:
+      - key: guestinfo.afterburn.initrd.network-kargs
+        value: "ip={{ item.ipaddr }}::{{ openshift_install_config.static_ips.parameters.gateway }}:{{ openshift_install_config.static_ips.parameters.netmask }}:{{ item.hostname }}:{{ openshift_install_config.static_ips.parameters.interface }}:none {% for dns in openshift_install_config.static_ips.parameters.nameservers %}nameserver={{ dns }} {% endfor %}"
+    validate_certs: '{{ vsphere.validate_certs }}'
+    state: present
   when: openshift_install_config.static_ips.enabled
 
 - name: Power on virtual machine {{ virtual_machine_names[item.hostname] }}
@@ -60,7 +70,3 @@
     name: '{{ virtual_machine_names[item.hostname] }}'
     validate_certs: '{{ vsphere.validate_certs }}'
     state: poweredon
-
-- name: Detach boot ISO from the virtual machine
-  import_tasks: detach_boot_iso.yml
-  when: openshift_install_config.static_ips.enabled
