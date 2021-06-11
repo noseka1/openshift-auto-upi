@@ -35,7 +35,7 @@ Some of the features offered by *openshift-auto-upi*:
 * Adding nodes to the existing cluster is supported and documented
 * `openshift-auto-upi` won't touch the existing cluster nodes. It doesn't even trust the Ansible modules to not modify the existing nodes. Instead, it skips existing nodes altogether for maximum safety. 
 
-> *openshift-auto-upi* is great for situations where the official IPI installation method is not flexible enough and on the other hand the UPI installation is too tedious.
+> *openshift-auto-upi* is great for situations where the IPI installation method is not flexible enough and on the other hand the UPI installation is too tedious.
 
 # Deployment Overview
 
@@ -72,9 +72,12 @@ $ vi inventory/group_vars/all/openshift_install_config.yml
 ```
 Remember to set the variable static_ips.enabled=True in the same file. You are all set! *openshift-auto-upi* will configure your OpenShift nodes using static IPs.
 
-For further information on the design of the Static IPs feature, you can refer to [OpenShift UPI using static IPs](https://www.openshift.com/blog/openshift-upi-using-static-ips).
+Current state of static IP support in `openshift-auto-upi`:
+| Bare metal | Libvirt FwCfg | Libvirt PXE | oVirt | vSphere |
+|:-:|:-:|:-:|:-:|:-:|
+| PXE boot menu | Not supported | PXE boot menu | [Custom design](https://www.openshift.com/blog/openshift-upi-using-static-ips) | Guestinfo variables (requires OCP >= 4.6) |
 
-## Platform-Specific Documentation
+## Platform-specific Documentation
 
 [Installing OpenShift on Libvirt](docs/openshift_libvirt.md)
 
@@ -95,7 +98,7 @@ The table below depicts the *openshift-auto-upi* Ansible playbooks that you need
 
 Following sections describe the installation process in more detail.
  
-# Setting Up Helper Host
+# Setting up Helper Host
 
 There are two options to create a Helper host:
 
@@ -137,9 +140,9 @@ Download OpenShift clients using Ansible:
 $ ansible-playbook clients.yml
 ```
 
-## Creating Mirror Registry
+## Installing in air-gapped (disconnected) environments
 
-If you are installing OpenShift in a restricted network, you will need to create a local mirror registry. This registry will contain all OpenShift container images required for the installation. *openshift-auto-upi* automates the creation of the mirror registry by implementing the steps described in the [Creating a mirror registry](https://docs.openshift.com/container-platform/latest/installing/install_config/installing-restricted-networks-preparations.html). To set up a mirror registry:
+If you are installing OpenShift in a an environment that is not connected to the Internet, you will need to create a local mirror registry. This registry will contain all OpenShift container images required for the installation. *openshift-auto-upi* automates the creation of the mirror registry by implementing the steps described in the [Creating a mirror registry](https://docs.openshift.com/container-platform/latest/installing/install_config/installing-restricted-networks-preparations.html). To set up a mirror registry:
 
 ```
 $ cp inventory/group_vars/all/infra/mirror_registry.yml.sample \
@@ -150,6 +153,9 @@ $ vi inventory/group_vars/all/infra/mirror_registry.yml
 ```
 $ ansible-playbook mirror_registry.yml
 ```
+
+For mirroring operator images and creating custom operator catalog based on the desired operators refer to the [ocp4-offline-operator-mirror](https://github.com/openshift-telco/ocp4-offline-operator-mirror) repository.
+
 
 ## Defining OpenShift cluster hosts
 
@@ -367,11 +373,19 @@ $ oc get csr
 $ oc adm certificate approve <name>
 ```
 
-# Deleting VMs on Libvirt
+# Deleting VMs
 
-Delete the virtual machines to recreate the OpenShift cluster:
+You can delete the virtual machines before restarting the installaction of the OpenShift cluster.
 
-If you want to directly run the playbook in the KVM host but not the helper host, use the -e flag and set the hostname or IP address. 
+## Deleting VMs on vSphere
+
+```
+$ ansible-playbook delete_vsphere.yml
+```
+
+## Deleting VMs on Libvirt
+
+If you want to directly run the playbook on the KVM host but not the helper host, use the -e flag and set the hostname or IP address. 
 You can also add the KVM hostname or IP address `inventory/helper.ini` instead of specifying extra vars with -e flag.
 
 ```
@@ -392,7 +406,7 @@ Refer to the [openshift-auto-upi project board](https://github.com/noseka1/opens
 # References
 
 Projects similar to *openshift-auto-upi*:
-* [ocp4-upi-helpernode](https://github.com/christianh814/ocp4-upi-helpernode)
-* [ocp4-vsphere-upi-automation](https://github.com/vchintal/ocp4-vsphere-upi-automation)
+* [ocp4-helpernode](https://github.com/RedHatOfficial/ocp4-helpernode)
+* [ocp4-vsphere-upi-automation](https://github.com/RedHatOfficial/ocp4-vsphere-upi-automation)
 * [openshift4-rhv-upi](https://github.com/sa-ne/openshift4-rhv-upi)
 * [openshift4-vmware-upi](https://github.com/sa-ne/openshift4-vmware-upi)

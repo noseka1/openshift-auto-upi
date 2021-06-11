@@ -66,7 +66,7 @@ $ virsh net-autostart openshift
 
 ## Enabling remote connection
 
-To configure management access to libvirt via SSH to seperate the helper host from the KVM host, you need to set the `libvirt.libvirt_connection_uri` variable in your `inventory/group_vars/all/infra/libvirt.yml` file so that the helper host is able to connect to the libvirt daemon management socket on the KVM host via SSH to create virtual machines.
+To configure management access to libvirt via SSH to separate the helper host from the KVM host, you need to set the `libvirt.libvirt_connection_uri` variable in your `inventory/group_vars/all/infra/libvirt.yml` file so that the helper host is able to connect to the libvirt daemon management socket on the KVM host via SSH to create virtual machines.
 
 ```
 libvirt:
