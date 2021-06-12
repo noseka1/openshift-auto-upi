@@ -9,9 +9,9 @@
         password: '{{ ovirt.ovirt_password }}'
         insecure: '{{ not ovirt.validate_certs }}'
 
-    - name: Create virtual machines that don't exist
-      include_tasks: deploy_host.yml
-      when: virtual_machine_names[item.hostname] not in ovirt_existing_vms
+    - name: Delete virtual machines that exist
+      include_tasks: delete_host.yml
+      when: virtual_machine_names[item.hostname] in ovirt_existing_vms
       with_items: '{{ openshift_cluster_hosts }}'
 
   always:

@@ -1,0 +1,28 @@
+- name: Compute virtual machine names
+  import_role:
+    name: openshift_common
+    tasks_from: compute_vm_names.yml
+
+- block:
+    - name: Log in to '{{ ovirt.ovirt_url }}'
+      ovirt_auth:
+        url: '{{ ovirt.ovirt_url }}'
+        username: '{{ ovirt.ovirt_username }}'
+        password: '{{ ovirt.ovirt_password }}'
+        insecure: '{{ not ovirt.validate_certs }}'
+
+    - name: Retrieve all machines in the cluster {{ ovirt.cluster_name }}
+      ovirt_vm_info:
+        auth: '{{ ovirt_auth }}'
+        pattern: 'cluster="{{ ovirt.cluster_name }}"'
+      register: ovirt_vms
+
+    - name: Define existing virtual machines
+      set_fact:
+        ovirt_existing_vms: '{{ ovirt_vms.ovirt_vms | json_query("[*].name") }}'
+
+  always:
+    - name: Always revoke the SSO token, log out from '{{ ovirt.ovirt_url }}'
+      ovirt_auth:
+        state: absent
+        ovirt_auth: '{{ ovirt_auth }}'
