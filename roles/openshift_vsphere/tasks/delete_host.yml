@@ -7,7 +7,7 @@
     validate_certs: "{{ vsphere.validate_certs }}"
     state: poweredoff
 
-- name: Delete virtual machine
+- name: Delete virtual machine {{ virtual_machine_names[item.hostname] }}
   vmware_guest:
     hostname: "{{ vsphere.vcenter_hostname }}"
     username: "{{ vsphere.vcenter_username }}"
