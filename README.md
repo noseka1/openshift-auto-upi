@@ -377,13 +377,13 @@ $ oc adm certificate approve <name>
 
 ## Deleting Old OpenShift Installer Configuration
 
-Delete the old OpenShift installer configuration:
+Delete the old OpenShift installer configuration unless you want to reuse the same ignition configs for the next OpenShift installation. Note that some of the TLS certificates included in the *bootstrap.ign* file expire in 24 hours. After those certificates expire, they can't no longer be used for cluster installation.
 
 ```
 $ ansible-playbook delete_install_config.yml
 ```
 
-Delete virtual machines before restarting the installation of the OpenShift cluster.
+Delete virtual machines before restarting the installation of the OpenShift cluster:
 
 ## Deleting VMs on vSphere
 
