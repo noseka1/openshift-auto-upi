@@ -3,6 +3,7 @@
     auth: '{{ ovirt_auth }}'
     name: '{{ virtual_machine_names[item.hostname] }}'
     cluster: '{{ ovirt.cluster_name }}'
+    force: True
     state: stopped
 
 - name: Delete virtual machine {{ virtual_machine_names[item.hostname] }}
