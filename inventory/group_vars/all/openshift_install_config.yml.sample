@@ -23,9 +23,11 @@ openshift_install_config:
   # for you, which are functions that the cluster does not perform when you use
   # user-provisioned infrastructure.
   worker_replicas: 0
-  # This URL will be accessed by the OpenShift nodes during the bootstrap in order
+  # This URL will be accessed by OpenShift nodes during the bootstrap in order
   # for them to download their ignition files. Make sure that this URL is reachable
-  # from the OpenShift nodes.
+  # from the OpenShift nodes. Note that this URL is only used for bare metal and
+  # Libvirt PXE installations. You can leave it as is for other installation targets as
+  # it won't be used.
   ignition_url_prefix: 'http://192.168.150.2:81/openshift-auto-upi/mycluster'
   # Configure OpenShift hosts using static IPs as opposed to using DHCP.
   # This feature is currently supported for bare metal, libvirt_pxe, oVirt, and vSphere.
