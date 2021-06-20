@@ -9,6 +9,7 @@ rpm_name_map:
       python-pyvmomi: python-pyvmomi
     '8':
       python-jsonpatch: python3-jsonpatch
+      python-ovirt-engine-sdk4: python3-ovirt-engine-sdk4
       python-dns: python3-dns
       libvirt-python: libvirt-python3
       python-pyghmi: python3-pyghmi
@@ -17,6 +18,7 @@ rpm_name_map:
   Fedora:
     default:
       python-jsonpatch: python3-jsonpatch
+      python-ovirt-engine-sdk4: python3-ovirt-engine-sdk4
       python-dns: python3-dns
       libvirt-python: python3-libvirt
       python-pyghmi: python3-pyghmi
