@@ -53,6 +53,12 @@ If installing OpenShift on bare metal, the *pyghmi* library is required on Helpe
 $ subscription-manager repos --enable openstack-15-for-rhel-8-x86_64-rpms
 ```
 
+If installing OpenShift on oVirt (RHV), the Python SDK for oVirt Engine API is required on Helper host. To enable a yum repository which contains the *python3-ovirt-engine-sdk4* rpm package:
+
+```
+$ subscription-manager repos --enable rhv-4-tools-for-rhel-8-x86_64-rpms
+```
+
 If installing OpenShift on vSphere, the *pyvmomi* library is required on Helper host. You can download the *python3-pyvmomi* rpm package from the [Red Hat Customer Portal](https://access.redhat.com).
 
 
