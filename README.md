@@ -391,6 +391,12 @@ Delete virtual machines before restarting the installation of the OpenShift clus
 $ ansible-playbook delete_vsphere.yml
 ```
 
+## Deleting VMs on oVirt
+
+```
+$ ansible-playbook openshift_ovirt.yml
+```
+
 ## Deleting VMs on Libvirt
 
 If you want to directly run the playbook on the KVM host but not the helper host, use the -e flag and set the hostname or IP address. 
