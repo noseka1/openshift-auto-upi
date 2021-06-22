@@ -2,7 +2,7 @@
 
 > :exclamation: Red Hat support cannot assist with problems with this repo.
 
-Installing OpenShift 4 on user-provided-infrastructure by hand is a rather tedious job. In order to save the effort, *openshift-auto-upi* provides a set of Ansible scripts that automate the OpenShift UPI deployment by implementing the steps described in [Installing a cluster on any platform](https://docs.openshift.com/container-platform/4.7/installing/installing_platform_agnostic/installing-platform-agnostic.html).
+Installing OpenShift 4 on user-provided-infrastructure by hand is a rather tedious job. In order to save the effort, *openshift-auto-upi* provides a set of Ansible scripts that automate the OpenShift UPI deployment by implementing the deployment steps described in [Installing a cluster on any platform](https://docs.openshift.com/container-platform/4.7/installing/installing_platform_agnostic/installing-platform-agnostic.html).
 
 > *openshift-auto-upi* is great for situations where the IPI installation method is not flexible enough and on the other hand the UPI installation is too tedious.
 
