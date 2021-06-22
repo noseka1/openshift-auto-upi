@@ -51,7 +51,7 @@ Some of the features offered by *openshift-auto-upi*:
 
 *openshift-auto-upi* assumes that OpenShift hosts are assigned fixed IP addresses. If DHCP is used for network configuration, this is accomplished by pairing the hosts MAC addresses with IP addresses in the DHCP server configuration. DHCP server then always assigns the same IP address to a specific host.
 
-Note that in order to use DHCP and/or PXE server installed on the Helper host, the Helper host and all of the OpenShift hosts have to be provisioned on the same layer 2 network. In the opposite case, it is sufficient to have a working IP route between the Helper host and the OpenShift hosts.
+Note that in order to use DHCP and/or PXE server installed on the Helper host, the Helper host and all of the OpenShift hosts have to be provisioned on the same *layer 2 network*. In the opposite case, it is sufficient to have a working IP route between the Helper host and the OpenShift hosts.
 
 If the DNS server is managed by *openshift-auto-upi*, a DNS name will be created for each OpenShift host. These DNS names follow the scheme:
 ```
