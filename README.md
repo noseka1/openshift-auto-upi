@@ -4,6 +4,8 @@
 
 Preparing infrastructure for OpenShift 4 installation by hand is a rather tedious job. In order to save the effort, *openshift-auto-upi* provides a set of Ansible scripts that automate the infrastructure creation.
 
+> *openshift-auto-upi* is great for situations where the IPI installation method is not flexible enough and on the other hand the UPI installation is too tedious.
+
 *openshift-auto-upi* is a separate tool, and is not in any way part of the OpenShift product. It enhances the *openshift-installer* by including automation for the following:
 
 *openshift-auto-upi* comes with Ansible roles to deploy OpenShift cluster on the following target platforms:
@@ -33,9 +35,7 @@ Some of the features offered by *openshift-auto-upi*:
 * Automated download of CoreOS images from Red Hat sites and upload onto the target platform
 * Automated bare metal installation, control of remote machines using BMC
 * Adding nodes to the existing cluster is supported and documented
-* `openshift-auto-upi` won't touch the existing cluster nodes. It doesn't even trust the Ansible modules to not modify the existing nodes. Instead, it skips existing nodes altogether for maximum safety. 
-
-> *openshift-auto-upi* is great for situations where the IPI installation method is not flexible enough and on the other hand the UPI installation is too tedious.
+* `openshift-auto-upi` won't touch the existing cluster nodes. It doesn't even trust the Ansible modules to not modify the existing nodes. Instead, it skips existing nodes altogether for maximum safety.
 
 # Deployment Overview
 
