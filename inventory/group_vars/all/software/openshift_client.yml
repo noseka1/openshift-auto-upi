@@ -3,35 +3,12 @@ okd_client_url_prefix: 'https://github.com/openshift/okd/releases/download'
 
 openshift_client_versions:
   ocp:
-    4.1.0:
-      archive_url:   '{{ ocp_client_url_prefix }}/4.1.0/openshift-client-linux-4.1.0.tar.gz'
-      sha256sum_url: '{{ ocp_client_url_prefix }}/4.1.0/sha256sum.txt'
-    4.2.0:
-      archive_url:   '{{ ocp_client_url_prefix }}/4.2.0/openshift-client-linux-4.2.0.tar.gz'
-      sha256sum_url: '{{ ocp_client_url_prefix }}/4.2.0/sha256sum.txt'
-    4.3.23:
-      archive_url:   '{{ ocp_client_url_prefix }}/4.3.23/openshift-client-linux-4.3.23.tar.gz'
-      sha256sum_url: '{{ ocp_client_url_prefix }}/4.3.23/sha256sum.txt'
-    4.4.6:
-      archive_url:   '{{ ocp_client_url_prefix }}/4.4.6/openshift-client-linux-4.4.6.tar.gz'
-      sha256sum_url: '{{ ocp_client_url_prefix }}/4.4.6/sha256sum.txt'
-    4.5.4:
-      archive_url:   '{{ ocp_client_url_prefix }}/4.5.4/openshift-client-linux-4.5.4.tar.gz'
-      sha256sum_url: '{{ ocp_client_url_prefix }}/4.5.4/sha256sum.txt'
-    4.6.1:
-      archive_url:   '{{ ocp_client_url_prefix }}/4.6.1/openshift-client-linux-4.6.1.tar.gz'
-      sha256sum_url: '{{ ocp_client_url_prefix }}/4.6.1/sha256sum.txt'
-    4.7.13:
-      archive_url:   '{{ ocp_client_url_prefix }}/4.7.13/openshift-client-linux-4.7.13.tar.gz'
-      sha256sum_url: '{{ ocp_client_url_prefix }}/4.7.13/sha256sum.txt'
+    archive_url:   '{{ ocp_client_url_prefix }}/{{ openshift_install_config.version }}/openshift-client-linux-{{ openshift_install_config.version }}.tar.gz'
+    sha256sum_url: '{{ ocp_client_url_prefix }}/{{ openshift_install_config.version }}/sha256sum.txt'
   okd:
-    4.5.0-0.okd-2020-07-14-153706-ga:
-      archive_url:   '{{ okd_client_url_prefix }}/4.5.0-0.okd-2020-07-14-153706-ga/openshift-client-linux-4.5.0-0.okd-2020-07-14-153706-ga.tar.gz'
-      sha256sum_url: '{{ okd_client_url_prefix }}/4.5.0-0.okd-2020-07-14-153706-ga/sha256sum.txt'
-    4.7.0-0.okd-2021-06-04-191031:
-      archive_url:   '{{ okd_client_url_prefix }}/4.7.0-0.okd-2021-06-04-191031/openshift-client-linux-4.7.0-0.okd-2021-06-04-191031.tar.gz'
-      sha256sum_url: '{{ okd_client_url_prefix }}/4.7.0-0.okd-2021-06-04-191031/sha256sum.txt'
+    archive_url:   '{{ okd_client_url_prefix }}/{{ openshift_install_config.version }}/openshift-client-linux-{{ openshift_install_config.version }}.tar.gz'
+    sha256sum_url: '{{ okd_client_url_prefix }}/{{ openshift_install_config.version }}/sha256sum.txt'
 
 openshift_client:
-  archive_url:   '{{ openshift_client_versions[openshift_install_config.distribution][openshift_install_config.version].archive_url }}'
-  sha256sum_url: '{{ openshift_client_versions[openshift_install_config.distribution][openshift_install_config.version].sha256sum_url }}'
+  archive_url:   '{{ openshift_client_versions[openshift_install_config.distribution].archive_url }}'
+  sha256sum_url: '{{ openshift_client_versions[openshift_install_config.distribution].sha256sum_url }}'
