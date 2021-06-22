@@ -26,7 +26,7 @@ Note that the infrastructure from the above list provisioned using *openshift-au
 
 Some of the features offered by *openshift-auto-upi*:
 
-* Network configuration via DHCP or static IPs
+* Network configuration via DHCP (using fixed IPs) or static network configuration (no DHCP)
 * User has full control over the `install-config.yaml` file and can customize it according to her/his needs.
 * User can customize ignition config files using filetranspiler and jsonpatch, see also [Customizing Ignition Configs](docs/customizing_ignition_configs.md)
 * Ignition config files are protected from being overwritten, see also [Ignition Config Protection](docs/ignition_config_protection.md)
