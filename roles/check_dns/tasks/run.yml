@@ -15,7 +15,6 @@
     {{
       (
         (openshift_cluster_hosts | json_query('[*].hostname')) +
-        (openshift_cluster_hosts | json_query('[*].etcd_hostname')) +
         ['api', 'api-int', '*.apps']
       )
       | map('regex_replace', '^(.*)$', '\1.{{ openshift_install_config.cluster_domain }}')
@@ -35,13 +34,6 @@
       )
       | list
     }}
-
-- name: Look up SRV records
-  set_fact:
-    srv_records: >
-      {{ srv_records | default({}) | combine({ item: query('dig', '{{ query_server }}', '{{ item }}/SRV') }) }}
-  loop:
-    - '_etcd-server-ssl._tcp.{{ openshift_install_config.cluster_domain }}'
 
 - name: Display DNS query results
   set_fact:

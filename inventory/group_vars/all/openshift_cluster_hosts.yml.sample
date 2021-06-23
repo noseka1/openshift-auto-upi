@@ -42,7 +42,6 @@ openshift_cluster_hosts:
       hostname: 192.168.150.120
       port: 623
   - hostname: master1
-    etcd_hostname: etcd-0
     role: master
     ipaddr: 192.168.150.21
     macaddr: 00:1c:14:00:0a:21
