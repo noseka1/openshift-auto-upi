@@ -23,17 +23,17 @@
 
          KUBECONFIG={{ helper.install_conf_dir }}/auth/kubeconfig {{ helper.oc_exe }} get clusterversion
 
-      3. Note that it will take a while for the cluster operators to complete the cluster installation.
-         You can wait for the cluster installation to complete using:
-
-         KUBECONFIG={{ helper.install_conf_dir }}/auth/kubeconfig {{ helper.install_exe }} wait-for install-complete --dir {{ helper.install_conf_dir }}
-
-      4. If you are adding worker nodes, check for pending csrs:
+      3. If you are adding worker nodes, check for pending csrs:
 
          KUBECONFIG={{ helper.install_conf_dir }}/auth/kubeconfig {{ helper.oc_exe }} get csr
 
          and approve the csrs using:
 
          KUBECONFIG={{ helper.install_conf_dir }}/auth/kubeconfig {{ helper.oc_exe }} adm certificate approve <csr>
+
+      4. Note that it will take a while for the cluster operators to complete the cluster installation.
+         You can wait for the cluster installation to complete using:
+
+         KUBECONFIG={{ helper.install_conf_dir }}/auth/kubeconfig {{ helper.install_exe }} wait-for install-complete --dir {{ helper.install_conf_dir }}
 
 - debug: msg="{{ msg.split('\n') }}"
