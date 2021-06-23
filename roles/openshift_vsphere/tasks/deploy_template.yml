@@ -49,4 +49,18 @@
     mac_address: '{{ template_network_info.network_data["0"].mac_address }}'
     state: absent
     validate_certs: '{{ vsphere.validate_certs }}'
-  when: template_network_info.network_data["0"] is defined
+  when: template_network_info.network_data["0"] is defined and template_network_info.network_data["0"].mac_address is defined
+
+- name: Remove the network interface from the {{ vsphere.template_name }} template (deprecated version)
+  vmware_guest_network:
+    hostname: '{{ vsphere.vcenter_hostname }}'
+    username: '{{ vsphere.vcenter_username }}'
+    password: '{{ vsphere.vcenter_password }}'
+    datacenter: '{{ vsphere.datacenter_name }}'
+    cluster: '{{ vsphere.cluster_name }}'
+    name: '{{ vsphere.template_name }}'
+    networks:
+      - label: '{{ template_network_info.network_data["0"].label }}'
+        state: absent
+    validate_certs: '{{ vsphere.validate_certs }}'
+  when: template_network_info.network_data["0"] is defined and template_network_info.network_data["0"].mac_addr is defined
