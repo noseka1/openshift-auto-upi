@@ -7,7 +7,7 @@ openshift_install_config:
   # Version of OpenShift to be installed (OCP or OKD).
   # For available OCP versions, go to https://mirror.openshift.com/pub/openshift-v4/clients/ocp
   # For available OKD versions, go to https://github.com/openshift/okd/releases
-  version: 4.7.13
+  version: 4.7.16
   # Version of the CoreOS image (RHCOS or FCOS).
   # For available RHCOS image versions, go to https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/
   # For available FCOS image versions, go to https://getfedora.org/coreos
