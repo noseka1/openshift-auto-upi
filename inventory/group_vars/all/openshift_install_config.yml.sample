@@ -48,8 +48,7 @@ openshift_install_config:
     parameters:
       gateway: 192.168.150.1
       netmask: 255.255.255.0
-      # On oVirt and libvirt the interface name is most likely "ens3". On vSphere the
-      # interface name is most likely "ens192".
+      # On oVirt and libvirt the interface name is most likely "ens3".
       interface: ens3
       # List of DNS servers
       nameservers:
