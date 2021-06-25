@@ -12,3 +12,7 @@
     name: '{{ virtual_machine_names[item.hostname] }}'
     cluster: '{{ ovirt.cluster_name }}'
     state: absent
+
+- name: Delete virtual machine boot ISO
+  include_tasks: delete_boot_iso.yml
+  when: openshift_install_config.static_ips.enabled

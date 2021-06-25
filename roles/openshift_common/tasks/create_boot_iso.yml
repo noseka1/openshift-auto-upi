@@ -8,9 +8,7 @@
     src: files/boot/grub/grub.cfg
     dest: '{{ helper.images_dir }}/{{ virtual_machine_names[item.hostname] }}-isoroot/boot/grub/grub.cfg'
 
-- name: Set boot ISO filename
-  set_fact:
-    boot_iso_filename: '{{ helper.images_dir }}/{{ virtual_machine_names[item.hostname] }}-boot.iso'
+- import_tasks: define_boot_iso_name.yml
 
 - name: Generate the ISO image
   command: grub2-mkrescue --output {{ boot_iso_filename }} {{ helper.images_dir }}/{{ virtual_machine_names[item.hostname] }}-isoroot

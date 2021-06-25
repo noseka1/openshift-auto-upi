@@ -1,0 +1,9 @@
+- import_role:
+    name: openshift_common
+    tasks_from: define_boot_iso_name.yml
+
+- name: Delete ISO image {{ boot_iso_filename | basename }} in oVirt
+  ovirt_disk:
+    auth: '{{ ovirt_auth }}'
+    name: '{{ boot_iso_filename | basename }}'
+    state: absent

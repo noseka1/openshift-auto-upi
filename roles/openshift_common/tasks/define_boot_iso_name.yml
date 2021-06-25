@@ -1,0 +1,3 @@
+- name: Set boot ISO filename
+  set_fact:
+    boot_iso_filename: '{{ helper.images_dir }}/{{ virtual_machine_names[item.hostname] }}-boot.iso'
