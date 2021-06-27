@@ -75,7 +75,7 @@ Remember to set the variable static_ips.enabled=True in the same file. You are a
 Current state of static IP support in `openshift-auto-upi`:
 | Bare metal | Libvirt FwCfg | Libvirt PXE | oVirt | vSphere |
 |:-:|:-:|:-:|:-:|:-:|
-| PXE boot menu | Not supported | PXE boot menu | [Custom design](https://www.openshift.com/blog/openshift-upi-using-static-ips) | Guestinfo variables (requires OCP >= 4.6) |
+| PXE boot menu (requires DHCP for initial node provisioning) | Not supported | PXE boot menu (requires DHCP for initial node provisioning) | [Custom design](https://www.openshift.com/blog/openshift-upi-using-static-ips) | Guestinfo variables (requires OCP >= 4.6) |
 
 ## Platform-specific Documentation
 
