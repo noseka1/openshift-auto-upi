@@ -1,0 +1,14 @@
+- name: Compute virtual machine names
+  import_role:
+    name: openshift_common
+    tasks_from: compute_vm_names.yml
+
+- name: Retrieve all existing machines
+  virt:
+    uri: '{{ libvirt.libvirt_connection_uri }}'
+    command: list_vms
+  register: libvirt_vms
+
+- name: Define existing virtual machines
+  set_fact:
+    libvirt_existing_vms: '{{ libvirt_vms.list_vms }}'

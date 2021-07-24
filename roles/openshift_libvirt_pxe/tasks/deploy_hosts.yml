@@ -1,12 +1,7 @@
-- name: Retrieve all existing machines
-  virt:
-    uri: '{{ libvirt.libvirt_connection_uri }}'
-    command: list_vms
-  register: libvirt_vms
-
-- name: Define existing virtual machines
-  set_fact:
-    libvirt_existing_vms: '{{ libvirt_vms.list_vms }}'
+- name: Define existing vms
+  import_role:
+    name: openshift_libvirt_common
+    tasks_from: get_existing_vms.yml
 
 - name: Don't pass ignition data in the firmware config
   set_fact:
