@@ -1,6 +1,5 @@
 - hosts: helper
   tasks:
   - import_role:
-      name: openshift_common
+      name: openshift_libvirt_common
       tasks_from: delete_hosts.yml
-

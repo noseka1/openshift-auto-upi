@@ -1,0 +1,23 @@
+- name: Query the virtual machine {{ virtual_machine_names[item.hostname] }}
+  virt:
+    name: '{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
+    command: info
+  register: libvirt_info
+  become: True
+
+- name: Shutdown the virtual machine {{ virtual_machine_names[item.hostname] }}
+  virt:
+    name: '{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
+    command: destroy
+  when: libvirt_info[virtual_machine_names[item.hostname]].state == 'running'
+  become: True
+
+- name: Terminate the virtual machine {{ virtual_machine_names[item.hostname] }}
+  virt:
+    name: '{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
+    command: undefine
+  become: True
+
+- name: Delete virtual machine volumes
+  command: virsh vol-delete --pool '{{ libvirt.pool_name }}' '{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
+  become: True
