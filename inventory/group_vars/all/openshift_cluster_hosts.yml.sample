@@ -16,7 +16,8 @@
 # app nodes. Master nodes host OpenShift APIs and controllers, infra nodes host ingress load
 # balancer pods and image registry. App nodes run application workloads.
 #
-# A minimum test cluster requires one master node and one infra node.
+# As of OCP >= 4.8, a minimum cluster requires one master node. For OCP < 4.8, a minimum cluster
+# required one master node and one infra node.
 #
 # Note that the BMC configuration is only needed for bare metal installations. If not installing
 # on bare metal, feel free to remove the bmc related configuration from this file.
