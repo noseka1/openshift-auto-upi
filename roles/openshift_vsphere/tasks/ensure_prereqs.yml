@@ -4,13 +4,18 @@
     state: present
   become: True
 
+- name: Read CoreOS stream
+  import_role:
+    name: openshift_common
+    tasks_from: read_coreos_stream.yml
+
 - name: Download the CoreOS image
   import_role:
     name: openshift_common
     tasks_from: download_coreos.yml
   vars:
     download_coreos_url: '{{ coreos.vmware_ova_url }}'
-    download_coreos_checksum: '{{ coreos.checksum }}'
+    download_coreos_checksum: '{{ coreos.vmware_ova_checksum }}'
 
 - name: Set image filename
   set_fact:

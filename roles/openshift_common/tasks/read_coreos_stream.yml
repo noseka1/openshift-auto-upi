@@ -1,0 +1,33 @@
+- name: Fetch CoreOS stream metadata
+  command: '{{ helper.install_exe }} coreos print-stream-json'
+  changed_when: False
+  ignore_errors: True
+  register: coreos_stream_metadata
+
+- fail:
+    msg: 'Please use openshift-auto-upi version <= 1.8 for installing OpenShift < 4.8. This openshift-auto-upi version only supports OpenShift >= 4.8.'
+  when: coreos_stream_metadata.rc != 0 and 'unknown command' in coreos_stream_metadata.stderr
+
+- fail:
+    msg: 'Failed command: {{ helper.install_exe }} coreos print-stream-json'
+  when: coreos_stream_metadata.rc != 0
+
+- name: Parse CoreOS stream metadata json
+  set_fact:
+    coreos_stream_metadata_json: '{{ coreos_stream_metadata.stdout | from_json }}'
+
+- name: Set CoreOS stream info
+  set_fact:
+    coreos:
+      installer_initramfs_url:      '{{ coreos_stream_metadata_json.architectures.x86_64.artifacts.metal.formats.pxe.initramfs.location }}'
+      installer_initramfs_checksum: '{{ coreos_stream_metadata_json.architectures.x86_64.artifacts.metal.formats.pxe.initramfs.sha256 }}'
+      installer_kernel_url:         '{{ coreos_stream_metadata_json.architectures.x86_64.artifacts.metal.formats.pxe.kernel.location }}'
+      installer_kernel_checksum:    '{{ coreos_stream_metadata_json.architectures.x86_64.artifacts.metal.formats.pxe.kernel.sha256 }}'
+      metal_bios_url:               '{{ coreos_stream_metadata_json.architectures.x86_64.artifacts.metal.formats["raw.gz"].disk.location }}'
+      metal_bios_checksum:          '{{ coreos_stream_metadata_json.architectures.x86_64.artifacts.metal.formats["raw.gz"].disk.sha256 }}'
+      openstack_qcow2_url:          '{{ coreos_stream_metadata_json.architectures.x86_64.artifacts.openstack.formats["qcow2.gz"].disk.location }}'
+      openstack_qcow2_checksum:     '{{ coreos_stream_metadata_json.architectures.x86_64.artifacts.openstack.formats["qcow2.gz"].disk.sha256 }}'
+      qemu_qcow2_url:               '{{ coreos_stream_metadata_json.architectures.x86_64.artifacts.qemu.formats["qcow2.gz"].disk.location }}'
+      qemu_qcow2_checksum:          '{{ coreos_stream_metadata_json.architectures.x86_64.artifacts.qemu.formats["qcow2.gz"].disk.sha256 }}'
+      vmware_ova_url:               '{{ coreos_stream_metadata_json.architectures.x86_64.artifacts.vmware.formats.ova.disk.location }}'
+      vmware_ova_checksum:          '{{ coreos_stream_metadata_json.architectures.x86_64.artifacts.vmware.formats.ova.disk.sha256 }}'
