@@ -1,12 +1,13 @@
 # Configuration of OpenShift nodes
 #
-# Each OpenShift node is assigned one of the following roles:
+# Each OpenShift node is assigned one or more of the following roles:
 # - bootstrap
 # - master
 # - infra
 # - app
-# The role assignment is required in order to create correct DNS records in dnsmasq
-# and also to configure haproxy load balancer properly.
+# The role assignment is required in order to configure haproxy load balancer properly. A single
+# node can play multiple roles. For example, if you are installing a single-node-cluster the
+# single cluster node should be assigned both master and infra roles.
 #
 # The difference between infra and app nodes:
 # The haproxy load balancer will be configured to forward *.apps ingress traffic to infra nodes
@@ -25,7 +26,7 @@
 # They will be ignored if deploying on bare metal.
 openshift_cluster_hosts:
   - hostname: bootstrap
-    role: bootstrap
+    roles: [ bootstrap ]
     ipaddr: 192.168.150.20
     macaddr: 00:1c:14:00:0a:20
     num_cpus: 4
@@ -43,7 +44,7 @@ openshift_cluster_hosts:
       hostname: 192.168.150.120
       port: 623
   - hostname: master1
-    role: master
+    roles: [ master ]
     ipaddr: 192.168.150.21
     macaddr: 00:1c:14:00:0a:21
     num_cpus: 8
@@ -59,7 +60,7 @@ openshift_cluster_hosts:
       hostname: 192.168.150.121
       port: 623
   - hostname: infra1
-    role: infra
+    roles: [ infra ]
     ipaddr: 192.168.150.22
     macaddr: 00:1c:14:00:0a:22
     num_cpus: 8
@@ -75,7 +76,7 @@ openshift_cluster_hosts:
       hostname: 192.168.150.122
       port: 623
   - hostname: app1
-    role: app
+    roles: [ app ]
     ipaddr: 192.168.150.23
     macaddr: 00:1c:14:00:0a:23
     num_cpus: 8

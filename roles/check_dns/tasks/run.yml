@@ -24,16 +24,9 @@
 - name: Look up PTR records
   set_fact:
     ptr_records: >
-      {{ ptr_records | default({}) | combine({ item: query('dig', '{{ query_server }}', '{{ item }}/PTR') }) }}
-  loop: >
-    {{
-      (
-        (openshift_cluster_hosts | json_query("[?role=='master'].ipaddr")) +
-        (openshift_cluster_hosts | json_query("[?role=='infra'].ipaddr")) +
-        (openshift_cluster_hosts | json_query("[?role=='app'].ipaddr"))
-      )
-      | list
-    }}
+      {{ ptr_records | default({}) | combine({ item.ipaddr: query('dig', '{{ query_server }}', '{{ item.ipaddr }}/PTR') }) }}
+  loop: '{{ openshift_cluster_hosts }}'
+  when: "'master' in item.roles or 'infra' in item.roles or 'app' in item.roles"
 
 - name: Display DNS query results
   set_fact:
@@ -50,12 +43,6 @@
 
       {% for item in ptr_records %}
       {{ "%15s"| format(item) }} = {{ ptr_records[item] }}
-      {% endfor %}
-
-      SRV Records:
-
-      {% for item in srv_records %}
-      {{ "%64s"| format(item) }} = {{ srv_records[item] }}
       {% endfor %}
 
 - debug: msg="{{ msg.split('\n') }}"
