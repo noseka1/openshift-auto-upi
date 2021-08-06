@@ -4,7 +4,8 @@
       The installer and the mirror registry for the restricted network installation are now ready.
 
       Refer to the instructions at the end of the {{ helper.mirror_registry_dir }}/mirror_sync.{{ mirror_registry.openshift_install_repo }}.stdout.txt file
-      on how to configure your install-config.yaml (add the imageContentSources element) to pull images from the mirror registry.
+      on how to configure your install-config.yaml (add the imageContentSources element) to pull images from the mirror registry. Update your
+      install-config.yaml accordingly.
 
       If your mirror registry uses a self-signed certificate, you must add that certificate to the additionalTrustBundle
       element in your install-config.yaml. The self-signed certificate can be found here: {{ helper.mirror_registry_dir }}/certs/domain.crt
