@@ -2,3 +2,6 @@ dns_server:
   loadbalancer_wildcard: 192.168.150.2
   loadbalancer_api: 192.168.150.2
   loadbalancer_api_int: 192.168.150.2
+  # Add custom domain records to DNS
+  #additional_host_lines:
+  #  - 192.168.150.2 registry.mycluster.example.com

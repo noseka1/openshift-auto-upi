@@ -4,3 +4,9 @@
 
 {{ dns_server.loadbalancer_api }} api.{{ openshift_install_config.cluster_domain }}
 {{ dns_server.loadbalancer_api_int }} api-int.{{ openshift_install_config.cluster_domain }}
+
+{% if dns_server.additional_host_lines is defined %}
+{% for item in dns_server.additional_host_lines %}
+{{ item }}
+{% endfor %}
+{% endif %}
