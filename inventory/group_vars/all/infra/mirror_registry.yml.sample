@@ -4,10 +4,10 @@ mirror_registry:
       # Enter a hostname or an IP address of the host where the registry is going to be located.
       # If using hostname, ensure that your hostname is in DNS and that it resolves to the expected
       # IP address.
-      common_name: helper.mycluster.example.com
+      common_name: registry.mycluster.example.com
       subject_alt_name:
-        - DNS:helper.mycluster.example.com
-      # Alternatively, you can use an IP address for the helper host instead of the DNS hostname.
+        - DNS:registry.mycluster.example.com
+      # Alternatively, you can use an IP address for the registry host instead of the DNS hostname.
       #common_name: 192.168.150.1
       #subject_alt_name:
       #  - IP:192.168.150.1
@@ -18,16 +18,16 @@ mirror_registry:
   # After the start, registry will be listening on 0.0.0.0:<listen_port>
   # Using port 5001 to avoid conflict with haproxy that uses port 5000 already.
   listen_port: 5001
-  # Registry hostname or IP address that is reachable from remote hosts as well as from the helper host itself
-  # (typically equals to the common name on the registry's TLS certificate)
-  connect_host: helper.mycluster.example.com
+  # Registry hostname or IP address that is reachable from OpenShift cluster hosts as well as from the helper
+  # host itself (typically equals to the common name on the registry's TLS certificate)
+  connect_host: registry.mycluster.example.com
   connect_port: 5001
   # List of container image repositories to add to your mirror registry. Available repository tags can be
   # found at: https://quay.io/repository/openshift-release-dev/ocp-release?tab=tags
   mirror_repositories:
     repo1:
       mirror_from: quay.io/openshift-release-dev/ocp-release:4.7.16-x86_64
-      mirror_to: helper.mycluster.example.com:5001/openshift-release-dev/ocp4
+      mirror_to: registry.mycluster.example.com:5001/openshift-release-dev/ocp4
       mirror_to_release: 4.7.16-x86_64
   # From the above list of mirror_repositories, which repo do you want to use for the OpenShift installation?
   openshift_install_repo: repo1
