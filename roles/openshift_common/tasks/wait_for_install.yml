@@ -1,0 +1,4 @@
+- name: Waiting since {{ lookup("pipe", "date +%r") }} for the intallation to complete
+  command: |
+    {{ helper.install_exe }} wait-for install-complete --dir '{{ helper.install_conf_dir }}'
+  changed_when: False

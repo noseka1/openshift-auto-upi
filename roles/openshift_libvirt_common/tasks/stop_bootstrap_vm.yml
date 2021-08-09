@@ -1,0 +1,8 @@
+- name: Shut down boostrap virtual machine
+  virt:
+    uri: '{{ libvirt.libvirt_connection_uri }}'
+    name: '{{ item.hostname }}.{{ openshift_install_config.cluster_domain }}'
+    state: shutdown
+  with_items: '{{ openshift_cluster_hosts }}'
+  when: '"bootstrap" in item.roles'
+  become: True
