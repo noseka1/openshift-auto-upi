@@ -2,3 +2,11 @@
   command: |
     {{ helper.install_exe }} wait-for install-complete --dir '{{ helper.install_conf_dir }}'
   changed_when: False
+
+- name: Installation complete
+  set_fact:
+    msg: |
+      *** INSTALLATION COMPLETE ***
+
+      See the instructions above for how to connect to your OpenShift {{ openshift_install_config.version }} cluster.
+- debug: msg="{{ msg.split('\n') }}"
