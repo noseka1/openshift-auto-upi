@@ -23,3 +23,11 @@
   import_role:
     name: openshift_common
     tasks_from: wait_for_bootstrap.yml
+
+- name: Stop bootstrap virtual machine
+  import_tasks: stop_bootstrap_vm.yml
+
+- name: Wait for the installation to complete
+  import_role:
+    name: openshift_common
+    tasks_from: wait_for_install.yml
