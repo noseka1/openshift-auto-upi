@@ -36,6 +36,9 @@
     <video>
       <model type="cirrus"/>
     </video>
+    <rng model='virtio'>
+      <backend model='random'>/dev/random</backend>
+    </rng>
   </devices>
 {% if libvirt_pass_ignition_via_fwcfg %}
   <qemu:commandline>
