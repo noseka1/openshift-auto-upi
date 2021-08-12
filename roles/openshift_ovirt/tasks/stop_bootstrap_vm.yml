@@ -1,0 +1,23 @@
+- block:
+    - name: Log in to '{{ ovirt.ovirt_url }}'
+      ovirt_auth:
+        url: '{{ ovirt.ovirt_url }}'
+        username: '{{ ovirt.ovirt_username }}'
+        password: '{{ ovirt.ovirt_password }}'
+        insecure: '{{ not ovirt.validate_certs }}'
+
+    - name: Shut down bootstrap virtual machine
+      ovirt_vm:
+        auth: '{{ ovirt_auth }}'
+        name: '{{ virtual_machine_names[item.hostname] }}'
+        cluster: '{{ ovirt.cluster_name }}'
+        force: True
+        state: stopped
+      with_items: '{{ openshift_cluster_hosts }}'
+      when: '"bootstrap" in item.roles'
+
+  always:
+    - name: Always revoke the SSO token, log out from '{{ ovirt.ovirt_url }}'
+      ovirt_auth:
+        state: absent
+        ovirt_auth: '{{ ovirt_auth }}'
