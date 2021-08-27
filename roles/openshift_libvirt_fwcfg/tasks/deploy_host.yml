@@ -1,5 +1,7 @@
 - name: Remove a volume that holds ignition data
-  import_tasks: delete_volume.yml
+  import_role:
+    name: openshift_libvirt_common
+    tasks_from: delete_volume.yml
   vars:
     libvirt_volume_name: '{{ virtual_machine_names[item.hostname] }}-ign'
 
