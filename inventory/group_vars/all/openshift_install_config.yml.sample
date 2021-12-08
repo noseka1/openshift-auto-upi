@@ -7,7 +7,7 @@ openshift_install_config:
   # Version of OpenShift to be installed (OCP or OKD).
   # For available OCP versions, go to https://mirror.openshift.com/pub/openshift-v4/clients/ocp
   # For available OKD versions, go to https://github.com/openshift/okd/releases
-  version: 4.7.16
+  version: 4.9.9
   # Unique name of the OpenShift cluster which also becomes a part of cluster's FQDN.
   name: mycluster
   # Base domain which is appended to the cluster's name to form a cluster FQDN.
