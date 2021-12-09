@@ -209,7 +209,7 @@ $ ansible-playbook dns_server.yml
 
 ## Installing PXE Server
 
-PXE server can be used for booting OpenShift hosts when installing on bare metal, vSphere or libvirt target platform.
+PXE server is used for booting OpenShift hosts when installing on bare metal. It can also be used for bare metal-like OpenShift installation on other target platforms like Libvirt, oVirt, and vSphere.
 
 Note that *dnsmasq.yml* configuration file is shared between the DHCP, DNS, and PXE servers.
 
