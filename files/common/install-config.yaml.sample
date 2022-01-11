@@ -18,6 +18,8 @@ networking:
   networkType: OVNKubernetes
   serviceNetwork:
   - 172.30.0.0/16
+  machineNetwork:
+  - 10.0.0.0/16
 platform:
   # Uncomment this if installing to Bare metal, Libvirt, and oVirt target platforms
 #  none: {}
