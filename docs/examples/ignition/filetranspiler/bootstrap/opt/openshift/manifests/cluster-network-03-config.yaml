@@ -4,7 +4,14 @@ metadata:
   name: cluster
 spec:
   defaultNetwork:
-    type: OpenShiftSDN
-    openshiftSDNConfig:
+    type: OVNKubernetes
+    ovnKubernetesConfig:
+      # Enable hybrid networking that is required by Windows nodes
+      # https://docs.openshift.com/container-platform/4.10/networking/ovn_kubernetes_network_provider/configuring-hybrid-networking.html#configuring-hybrid-ovnkubernetes
+      hybridOverlayConfig:
+        hybridClusterNetwork:
+        - cidr: 10.132.0.0/14
+          hostPrefix: 23
+        hybridOverlayVXLANPort: 9898
       # lower the mtu for OpenShift Virtualization
       mtu: 1400
