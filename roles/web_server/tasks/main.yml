@@ -41,4 +41,5 @@
     owner: '{{ ansible_real_user_id | int }}'
     group: '{{ ansible_real_group_id | int }}'
     state: directory
+    mode: 0755
   become: True

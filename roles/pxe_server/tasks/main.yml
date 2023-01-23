@@ -27,6 +27,7 @@
   file:
     path: '{{ item }}'
     state: directory
+    mode: 0755
   with_items:
     - '{{ helper.tftp_dir }}'
   become: True
@@ -37,6 +38,7 @@
     owner: '{{ ansible_real_user_id | int }}'
     group: '{{ ansible_real_group_id | int }}'
     state: directory
+    mode: 0755
   become: True
 
 - name: Install syslinux
