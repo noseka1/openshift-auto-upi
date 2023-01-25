@@ -4,6 +4,7 @@
     owner: '{{ ansible_real_user_id | int }}'
     group: '{{ ansible_real_group_id | int }}'
     state: directory
+    mode: 0755
   with_items:
     - '{{ helper.web_cluster_dir }}'
   become: True
@@ -24,6 +25,7 @@
     url: '{{ item.url }}'
     dest: '{{ helper.web_cluster_dir }}/{{ item.url | basename }}'
     checksum: 'sha256:{{ item.checksum }}'
+    mode: 0644
   retries: 3
   with_items:
     - url: '{{ coreos.installer_initramfs_url }}'
@@ -37,6 +39,7 @@
   file:
     path: '{{ item }}'
     state: directory
+    mode: 0755
   with_items:
     - '{{ helper.tftp_dir }}'
   become: True
@@ -47,6 +50,7 @@
     owner: '{{ ansible_real_user_id | int }}'
     group: '{{ ansible_real_group_id | int }}'
     state: directory
+    mode: 0755
   with_items:
     - '{{ helper.tftp_cluster_dir }}'
   become: True
@@ -55,9 +59,11 @@
   file:
     dest: '{{ helper.tftp_cluster_dir }}/pxelinux.cfg'
     state: directory
+    mode: 0755
 
 - name: Create pxelinux.cfg configs
   template:
     src: files/boot/pxe/pxelinux.cfg/menu.cfg
     dest: '{{ helper.tftp_cluster_dir }}/pxelinux.cfg/01-{{ item.macaddr | regex_replace(":", "-") }}'
+    mode: 0644
   with_items: '{{ openshift_cluster_hosts }}'
