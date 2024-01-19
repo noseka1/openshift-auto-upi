@@ -1,0 +1,29 @@
+ # Use this playbook as a tool with other automation to gather the Cluster
+ # node names and the number of nodes in the cluster.
+ # This is usefull for other automation that is waiting for the cluster
+ # provisioning to complete.
+ #
+ # Here's output using the sample inventoy
+ #          "HOSTNAMES": {
+ #           "app1": "app1.mycluster.example.com",
+ #           "bootstrap": "bootstrap.mycluster.example.com",
+ #           "infra1": "infra1.mycluster.example.com",
+ #           "master1": "master1.mycluster.example.com"
+ #       }
+ #   },
+ #   {
+ #       "HOSTNAME COUNT": "4"
+
+ #
+- hosts: helper
+  tasks:
+    - import_role:
+        name: openshift_common
+        tasks_from: compute_vm_names.yml
+
+    - name: Display node names
+      debug:
+        msg:
+          - HOSTNAMES: "{{ virtual_machine_names }}"
+          - HOSTNAME COUNT: "{{ virtual_machine_names | length }}"
+
