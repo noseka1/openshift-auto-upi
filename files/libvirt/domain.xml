@@ -18,9 +18,9 @@
   </clock>
   <devices>
     <disk type='volume' device='disk'>
-      <driver name='qemu' type='qcow2'/>
+      <driver name='qemu' type='qcow2' discard='unmap'/>
       <source pool='{{ libvirt.pool_name }}' volume='{{ virtual_machine_names[item.hostname] }}' />
-      <target bus="sata" dev="sda"/>
+      <target bus="virtio" dev="vda"/>
       <boot order='1'/>
     </disk>
     <interface type='network'>
@@ -32,10 +32,16 @@
     <input type='mouse' bus='ps2'/>
     <input type='keyboard' bus='ps2'/>
     <serial type="pty"/>
+    <console type="pty"/>
+    <channel type="unix">
+      <source mode="bind"/>
+      <target type="virtio" name="org.qemu.guest_agent.0"/>
+    </channel>
     <graphics type="vnc" autoport="yes" keymap="en-us" listen="127.0.0.1"/>
     <video>
-      <model type="cirrus"/>
+      <model type="virtio"/>
     </video>
+    <memballoon model="virtio"/>
     <rng model='virtio'>
       <backend model='random'>/dev/random</backend>
     </rng>
